@@ -7,7 +7,7 @@ description = "A rust library for editing aoe2scenorio files from AoE2 DE."
 homepage = "https://github.com/ptazithos/AoE2Probe"
 repository = "https://github.com/ptazithos/AoE2Probe"
 readme = "README.md"
-keywords = ["gamedev", "age of empires 2", "parser"]
+keywords = ["gamedev", "AoE2DE", "parser"]
 categories = ["game-development", "parsing"]
 
 exclude = [
