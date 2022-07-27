@@ -10,6 +10,11 @@ readme = "README.md"
 keywords = ["gamedev", "age of empires 2", "parser"]
 categories = ["game-development", "parsing"]
 
+exclude = [
+    "resources",
+    "examples",
+]
+
 
 [dependencies]
 log = "0.4.17"
