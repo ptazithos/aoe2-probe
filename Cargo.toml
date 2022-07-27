@@ -1,0 +1,23 @@
+[package]
+name = "aoe2-probe"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+description = "A rust library for editing aoe2scenorio files from AoE2 DE."
+homepage = "https://github.com/ptazithos/AoE2Probe"
+repository = "https://github.com/ptazithos/AoE2Probe"
+readme = "README.md"
+keywords = ["gamedev", "age of empires 2", "parser"]
+categories = ["game-development", "parsing"]
+
+
+[dependencies]
+log = "0.4.17"
+miniz_oxide ="0.5.3"
+
+[dev-dependencies]
+env_logger = "0.9.0"
+
+[[example]]
+name = "read_write"
+path = "examples/read_write.rs"
