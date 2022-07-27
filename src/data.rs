@@ -6,7 +6,10 @@ pub struct PrefixString<T: StringPrefix + Copy + Serializable + fmt::Debug> {
     pub raw: String,
 }
 
-impl<T: StringPrefix + Copy + Serializable + fmt::Debug> PrefixString<T> {
+impl<T> PrefixString<T>
+where
+    T: StringPrefix + Copy + Serializable + fmt::Debug,
+{
     pub fn new(prefix_length: T, raw: &str) -> PrefixString<T> {
         PrefixString {
             prefix: prefix_length,
@@ -19,7 +22,10 @@ impl<T: StringPrefix + Copy + Serializable + fmt::Debug> PrefixString<T> {
     }
 }
 
-impl<T: StringPrefix + Copy + Serializable + fmt::Debug> Serializable for PrefixString<T> {
+impl<T> Serializable for PrefixString<T>
+where
+    T: StringPrefix + Copy + Serializable + fmt::Debug,
+{
     fn to_bytes(&self) -> Vec<u8> {
         let mut buffer = Vec::<u8>::new();
         buffer.append(&mut self.prefix.to_bytes());
@@ -28,7 +34,10 @@ impl<T: StringPrefix + Copy + Serializable + fmt::Debug> Serializable for Prefix
     }
 }
 
-impl<T: StringPrefix + Copy + Serializable + fmt::Debug> fmt::Debug for PrefixString<T> {
+impl<T> fmt::Debug for PrefixString<T>
+where
+    T: StringPrefix + Copy + Serializable + fmt::Debug,
+{
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt.debug_struct("BitMapInfoIsh")
             .field("len", &self.prefix_length())
