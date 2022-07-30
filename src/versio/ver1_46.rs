@@ -10,19 +10,19 @@ use super::{
 use crate::{data::PrefixString, generator::IncrementalGenerator, serializer::Serializer};
 
 pub struct Versio {
-    file_header: FileHeader,
-    data_header: DataHeader,
-    messages: Messages,
-    cinematics: Cinematics,
-    background_image: BackgroundImage,
-    player_data_two: PlayerDataTwo,
-    global_victory: GlobalVictory,
-    diplomacy: Diplomacy,
-    options: Options,
-    map: Map,
-    units: Units,
-    triggers: Triggers,
-    files: Files,
+    file_header: Box<dyn FileHeaderIsh>,
+    data_header: Box<dyn DataHeaderIsh>,
+    messages: Box<dyn MessagesIsh>,
+    cinematics: Box<dyn CinematicsIsh>,
+    background_image: Box<dyn BackgroundImageIsh>,
+    player_data_two: Box<dyn PlayerDataTwoIsh>,
+    global_victory: Box<dyn GlobalVictoryIsh>,
+    diplomacy: Box<dyn DiplomacyIsh>,
+    options: Box<dyn OptionsIsh>,
+    map: Box<dyn MapIsh>,
+    units: Box<dyn UnitsIsh>,
+    triggers: Box<dyn TriggersIsh>,
+    files: Box<dyn FilesIsh>,
 }
 
 impl Versio {
@@ -36,125 +36,125 @@ impl Versio {
         let mut uncompressed = IncrementalGenerator::init(res_bytes);
 
         Versio {
-            file_header: file_header,
-            data_header: DataHeader::from_buffer(&mut uncompressed),
-            messages: Messages::from_buffer(&mut uncompressed),
-            cinematics: Cinematics::from_buffer(&mut uncompressed),
-            background_image: BackgroundImage::from_buffer(&mut uncompressed),
-            player_data_two: PlayerDataTwo::from_buffer(&mut uncompressed),
-            global_victory: GlobalVictory::from_buffer(&mut uncompressed),
-            diplomacy: Diplomacy::from_buffer(&mut uncompressed),
-            options: Options::from_buffer(&mut uncompressed),
-            map: Map::from_buffer(&mut uncompressed),
-            units: Units::from_buffer(&mut uncompressed),
-            triggers: Triggers::from_buffer(&mut uncompressed),
-            files: Files::from_buffer(&mut uncompressed),
+            file_header: Box::new(file_header),
+            data_header: Box::new(DataHeader::from_buffer(&mut uncompressed)),
+            messages: Box::new(Messages::from_buffer(&mut uncompressed)),
+            cinematics: Box::new(Cinematics::from_buffer(&mut uncompressed)),
+            background_image: Box::new(BackgroundImage::from_buffer(&mut uncompressed)),
+            player_data_two: Box::new(PlayerDataTwo::from_buffer(&mut uncompressed)),
+            global_victory: Box::new(GlobalVictory::from_buffer(&mut uncompressed)),
+            diplomacy: Box::new(Diplomacy::from_buffer(&mut uncompressed)),
+            options: Box::new(Options::from_buffer(&mut uncompressed)),
+            map: Box::new(Map::from_buffer(&mut uncompressed)),
+            units: Box::new(Units::from_buffer(&mut uncompressed)),
+            triggers: Box::new(Triggers::from_buffer(&mut uncompressed)),
+            files: Box::new(Files::from_buffer(&mut uncompressed)),
         }
     }
 }
 
 impl VersioIsh for Versio {
-    fn file_header<'a>(&self) -> &(dyn FileHeaderIsh + 'a) {
+    fn file_header(&self) -> &Box<dyn FileHeaderIsh> {
         &self.file_header
     }
 
-    fn file_header_mut<'a>(&mut self) -> &mut (dyn FileHeaderIsh + 'a) {
+    fn file_header_mut(&mut self) -> &mut Box<dyn FileHeaderIsh> {
         &mut self.file_header
     }
 
-    fn data_header<'a>(&self) -> &(dyn DataHeaderIsh + 'a) {
+    fn data_header(&self) -> &Box<dyn DataHeaderIsh> {
         &self.data_header
     }
 
-    fn data_header_mut<'a>(&mut self) -> &mut (dyn DataHeaderIsh + 'a) {
+    fn data_header_mut(&mut self) -> &mut Box<dyn DataHeaderIsh> {
         &mut self.data_header
     }
 
-    fn messages<'a>(&self) -> &(dyn MessagesIsh + 'a) {
+    fn messages(&self) -> &Box<dyn MessagesIsh> {
         &self.messages
     }
 
-    fn messages_mut<'a>(&mut self) -> &mut (dyn MessagesIsh + 'a) {
+    fn messages_mut(&mut self) -> &mut Box<dyn MessagesIsh> {
         &mut self.messages
     }
 
-    fn cinematics<'a>(&self) -> &(dyn CinematicsIsh + 'a) {
+    fn cinematics(&self) -> &Box<dyn CinematicsIsh> {
         &self.cinematics
     }
 
-    fn cinematics_mut<'a>(&mut self) -> &mut (dyn CinematicsIsh + 'a) {
+    fn cinematics_mut(&mut self) -> &mut Box<dyn CinematicsIsh> {
         &mut self.cinematics
     }
 
-    fn background_image<'a>(&self) -> &(dyn BackgroundImageIsh + 'a) {
+    fn background_image(&self) -> &Box<dyn BackgroundImageIsh> {
         &self.background_image
     }
 
-    fn background_image_mut<'a>(&mut self) -> &mut (dyn BackgroundImageIsh + 'a) {
+    fn background_image_mut(&mut self) -> &mut Box<dyn BackgroundImageIsh> {
         &mut self.background_image
     }
 
-    fn player_data_two<'a>(&self) -> &(dyn PlayerDataTwoIsh + 'a) {
+    fn player_data_two(&self) -> &Box<dyn PlayerDataTwoIsh> {
         &self.player_data_two
     }
 
-    fn player_data_two_mut<'a>(&mut self) -> &mut (dyn PlayerDataTwoIsh + 'a) {
+    fn player_data_two_mut(&mut self) -> &mut Box<dyn PlayerDataTwoIsh> {
         &mut self.player_data_two
     }
 
-    fn global_victory<'a>(&self) -> &(dyn GlobalVictoryIsh + 'a) {
+    fn global_victory(&self) -> &Box<dyn GlobalVictoryIsh> {
         &self.global_victory
     }
 
-    fn global_victory_mut<'a>(&mut self) -> &mut (dyn GlobalVictoryIsh + 'a) {
+    fn global_victory_mut(&mut self) -> &mut Box<dyn GlobalVictoryIsh> {
         &mut self.global_victory
     }
 
-    fn diplomacy<'a>(&self) -> &(dyn DiplomacyIsh + 'a) {
+    fn diplomacy(&self) -> &Box<dyn DiplomacyIsh> {
         &self.diplomacy
     }
 
-    fn diplomacy_mut<'a>(&mut self) -> &mut (dyn DiplomacyIsh + 'a) {
+    fn diplomacy_mut(&mut self) -> &mut Box<dyn DiplomacyIsh> {
         &mut self.diplomacy
     }
 
-    fn options<'a>(&self) -> &(dyn OptionsIsh + 'a) {
+    fn options(&self) -> &Box<dyn OptionsIsh> {
         &self.options
     }
 
-    fn options_mut<'a>(&mut self) -> &mut (dyn OptionsIsh + 'a) {
+    fn options_mut(&mut self) -> &mut Box<dyn OptionsIsh> {
         &mut self.options
     }
 
-    fn map<'a>(&self) -> &(dyn MapIsh + 'a) {
+    fn map(&self) -> &Box<dyn MapIsh> {
         &self.map
     }
 
-    fn map_mut<'a>(&mut self) -> &mut (dyn MapIsh + 'a) {
+    fn map_mut(&mut self) -> &mut Box<dyn MapIsh> {
         &mut self.map
     }
 
-    fn units<'a>(&self) -> &(dyn UnitsIsh + 'a) {
+    fn units(&self) -> &Box<dyn UnitsIsh> {
         &self.units
     }
 
-    fn units_mut<'a>(&mut self) -> &mut (dyn UnitsIsh + 'a) {
+    fn units_mut(&mut self) -> &mut Box<dyn UnitsIsh> {
         &mut self.units
     }
 
-    fn triggers<'a>(&self) -> &(dyn TriggersIsh + 'a) {
+    fn triggers(&self) -> &Box<dyn TriggersIsh> {
         &self.triggers
     }
 
-    fn triggers_mut<'a>(&mut self) -> &mut (dyn TriggersIsh + 'a) {
+    fn triggers_mut(&mut self) -> &mut Box<dyn TriggersIsh> {
         &mut self.triggers
     }
 
-    fn files<'a>(&self) -> &(dyn FilesIsh + 'a) {
+    fn files(&self) -> &Box<dyn FilesIsh> {
         &self.files
     }
 
-    fn files_mut<'a>(&mut self) -> &mut (dyn FilesIsh + 'a) {
+    fn files_mut(&mut self) -> &mut Box<dyn FilesIsh> {
         &mut self.files
     }
 
@@ -770,7 +770,7 @@ pub struct BackgroundImage {
     bitmap_width: u32,
     bitmap_height: u32,
     picture_orientation: i16,
-    bitmap_info: BitMapInfo,
+    bitmap_info: Box<dyn BitMapInfoIsh>,
 }
 
 impl BackgroundImage {
@@ -781,7 +781,7 @@ impl BackgroundImage {
             bitmap_width: generator.get_unsigned_int_32(),
             bitmap_height: generator.get_unsigned_int_32(),
             picture_orientation: generator.get_signed_int_16(),
-            bitmap_info: BitMapInfo::from_buffer(generator),
+            bitmap_info: Box::new(BitMapInfo::from_buffer(generator)),
         }
     }
 }
@@ -827,11 +827,11 @@ impl BackgroundImageIsh for BackgroundImage {
         self.picture_orientation = orientation;
     }
 
-    fn bitmap_info<'a>(&self) -> &(dyn BitMapInfoIsh + 'a) {
+    fn bitmap_info(&self) -> &Box<dyn BitMapInfoIsh> {
         &self.bitmap_info
     }
 
-    fn bitmap_info_mut<'a>(&mut self) -> &mut (dyn BitMapInfoIsh + 'a) {
+    fn bitmap_info_mut(&mut self) -> &mut Box<dyn BitMapInfoIsh> {
         &mut self.bitmap_info
     }
 
