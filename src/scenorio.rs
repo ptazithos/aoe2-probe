@@ -1,15 +1,18 @@
 use crate::generator::IncrementalGenerator;
 use crate::versio::ver1_46;
 use crate::versio::VersioIsh;
+use std::cell::RefCell;
+
 use std::fs::OpenOptions;
 use std::io::Write;
+use std::rc::Rc;
 use std::{
     fs::{self, File},
     io::Read,
 };
 
 pub struct Scenorio {
-    versio: Box<dyn VersioIsh>,
+    versio: Rc<RefCell<dyn VersioIsh>>,
 }
 
 impl Scenorio {
@@ -27,7 +30,7 @@ impl Scenorio {
             _ => panic!("Unsupport version!"),
         };
         Scenorio {
-            versio: Box::new(versio),
+            versio: Rc::new(RefCell::new(versio)),
         }
     }
 
@@ -41,13 +44,13 @@ impl Scenorio {
             _ => panic!("Unsupport version!"),
         };
         Scenorio {
-            versio: Box::new(versio),
+            versio: Rc::new(RefCell::new(versio)),
         }
     }
 
     pub fn to_file(&self, file_full_path: &str) {
         let mut buffer = Vec::<u8>::new();
-        self.versio.to_buffer(&mut buffer);
+        self.versio.borrow().to_buffer(&mut buffer);
 
         let path = std::path::Path::new(file_full_path);
         let prefix = path.parent().unwrap();
@@ -66,11 +69,7 @@ impl Scenorio {
         std::str::from_utf8(&buffer[0..4]).unwrap().to_string()
     }
 
-    pub fn versio(&self) -> &Box<dyn VersioIsh> {
-        &self.versio
-    }
-
-    pub fn versio_mut(&mut self) -> &mut Box<dyn VersioIsh> {
-        &mut self.versio
+    pub fn versio(&self) -> Rc<RefCell<dyn VersioIsh>> {
+        self.versio.clone()
     }
 }
