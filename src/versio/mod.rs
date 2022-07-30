@@ -5,44 +5,44 @@ use crate::data::PrefixString;
 pub mod ver1_46;
 
 pub trait VersioIsh {
-    fn file_header<'a>(&self) -> &(dyn FileHeaderIsh + 'a);
-    fn file_header_mut<'a>(&mut self) -> &mut (dyn FileHeaderIsh + 'a);
+    fn file_header(&self) -> &Box<dyn FileHeaderIsh>;
+    fn file_header_mut(&mut self) -> &mut Box<dyn FileHeaderIsh>;
 
-    fn data_header<'a>(&self) -> &(dyn DataHeaderIsh + 'a);
-    fn data_header_mut<'a>(&mut self) -> &mut (dyn DataHeaderIsh + 'a);
+    fn data_header(&self) -> &Box<dyn DataHeaderIsh>;
+    fn data_header_mut(&mut self) -> &mut Box<dyn DataHeaderIsh>;
 
-    fn messages<'a>(&self) -> &(dyn MessagesIsh + 'a);
-    fn messages_mut<'a>(&mut self) -> &mut (dyn MessagesIsh + 'a);
+    fn messages(&self) -> &Box<dyn MessagesIsh>;
+    fn messages_mut(&mut self) -> &mut Box<dyn MessagesIsh>;
 
-    fn cinematics<'a>(&self) -> &(dyn CinematicsIsh + 'a);
-    fn cinematics_mut<'a>(&mut self) -> &mut (dyn CinematicsIsh + 'a);
+    fn cinematics(&self) -> &Box<dyn CinematicsIsh>;
+    fn cinematics_mut(&mut self) -> &mut Box<dyn CinematicsIsh>;
 
-    fn background_image<'a>(&self) -> &(dyn BackgroundImageIsh + 'a);
-    fn background_image_mut<'a>(&mut self) -> &mut (dyn BackgroundImageIsh + 'a);
+    fn background_image(&self) -> &Box<dyn BackgroundImageIsh>;
+    fn background_image_mut(&mut self) -> &mut Box<dyn BackgroundImageIsh>;
 
-    fn player_data_two<'a>(&self) -> &(dyn PlayerDataTwoIsh + 'a);
-    fn player_data_two_mut<'a>(&mut self) -> &mut (dyn PlayerDataTwoIsh + 'a);
+    fn player_data_two(&self) -> &Box<dyn PlayerDataTwoIsh>;
+    fn player_data_two_mut(&mut self) -> &mut Box<dyn PlayerDataTwoIsh>;
 
-    fn global_victory<'a>(&self) -> &(dyn GlobalVictoryIsh + 'a);
-    fn global_victory_mut<'a>(&mut self) -> &mut (dyn GlobalVictoryIsh + 'a);
+    fn global_victory(&self) -> &Box<dyn GlobalVictoryIsh>;
+    fn global_victory_mut(&mut self) -> &mut Box<dyn GlobalVictoryIsh>;
 
-    fn diplomacy<'a>(&self) -> &(dyn DiplomacyIsh + 'a);
-    fn diplomacy_mut<'a>(&mut self) -> &mut (dyn DiplomacyIsh + 'a);
+    fn diplomacy(&self) -> &Box<dyn DiplomacyIsh>;
+    fn diplomacy_mut(&mut self) -> &mut Box<dyn DiplomacyIsh>;
 
-    fn options<'a>(&self) -> &(dyn OptionsIsh + 'a);
-    fn options_mut<'a>(&mut self) -> &mut (dyn OptionsIsh + 'a);
+    fn options(&self) -> &Box<dyn OptionsIsh>;
+    fn options_mut(&mut self) -> &mut Box<dyn OptionsIsh>;
 
-    fn map<'a>(&self) -> &(dyn MapIsh + 'a);
-    fn map_mut<'a>(&mut self) -> &mut (dyn MapIsh + 'a);
+    fn map(&self) -> &Box<dyn MapIsh>;
+    fn map_mut(&mut self) -> &mut Box<dyn MapIsh>;
 
-    fn units<'a>(&self) -> &(dyn UnitsIsh + 'a);
-    fn units_mut<'a>(&mut self) -> &mut (dyn UnitsIsh + 'a);
+    fn units(&self) -> &Box<dyn UnitsIsh>;
+    fn units_mut(&mut self) -> &mut Box<dyn UnitsIsh>;
 
-    fn triggers<'a>(&self) -> &(dyn TriggersIsh + 'a);
-    fn triggers_mut<'a>(&mut self) -> &mut (dyn TriggersIsh + 'a);
+    fn triggers(&self) -> &Box<dyn TriggersIsh>;
+    fn triggers_mut(&mut self) -> &mut Box<dyn TriggersIsh>;
 
-    fn files<'a>(&self) -> &(dyn FilesIsh + 'a);
-    fn files_mut<'a>(&mut self) -> &mut (dyn FilesIsh + 'a);
+    fn files(&self) -> &Box<dyn FilesIsh>;
+    fn files_mut(&mut self) -> &mut Box<dyn FilesIsh>;
 
     fn to_buffer(&self, buffer: &mut Vec<u8>);
 }
@@ -263,8 +263,8 @@ pub trait BackgroundImageIsh {
     fn set_bitmap_height(&mut self, height: u32);
     fn picture_orientation(&self) -> i16;
     fn set_picture_orientation(&mut self, orientation: i16);
-    fn bitmap_info<'a>(&self) -> &(dyn BitMapInfoIsh + 'a);
-    fn bitmap_info_mut<'a>(&mut self) -> &mut (dyn BitMapInfoIsh + 'a);
+    fn bitmap_info(&self) -> &Box<dyn BitMapInfoIsh>;
+    fn bitmap_info_mut(&mut self) -> &mut Box<dyn BitMapInfoIsh>;
 
     fn to_buffer(&self, buffer: &mut Vec<u8>);
 }
