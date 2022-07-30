@@ -1,8 +1,10 @@
 use crate::generator::IncrementalGenerator;
 use crate::versio::ver1_46;
 use crate::versio::VersioIsh;
+use std::cell::Ref;
 use std::cell::RefCell;
 
+use std::cell::RefMut;
 use std::fs::OpenOptions;
 use std::io::Write;
 use std::rc::Rc;
@@ -11,11 +13,11 @@ use std::{
     io::Read,
 };
 
-pub struct Scenorio {
-    versio: Rc<RefCell<dyn VersioIsh>>,
+pub struct Scenorio<'a> {
+    versio: Rc<RefCell<dyn VersioIsh + 'a>>,
 }
 
-impl Scenorio {
+impl<'a> Scenorio<'a> {
     pub fn from_file(filename: &str) -> Self {
         let mut file = File::open(&filename).expect("File not found");
         let metadata = fs::metadata(&filename).expect("Unable to read metadata");
@@ -69,7 +71,11 @@ impl Scenorio {
         std::str::from_utf8(&buffer[0..4]).unwrap().to_string()
     }
 
-    pub fn versio(&self) -> Rc<RefCell<dyn VersioIsh>> {
-        self.versio.clone()
+    pub fn versio(&self) -> Ref<dyn VersioIsh + 'a> {
+        self.versio.borrow()
+    }
+
+    pub fn versio_mut(&self) -> RefMut<dyn VersioIsh + 'a> {
+        self.versio.borrow_mut()
     }
 }
