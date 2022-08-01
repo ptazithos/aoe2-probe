@@ -1,4 +1,7 @@
-pub mod basic;
+mod builder;
 pub mod serde;
+pub mod versio;
+pub mod wrap;
 
-pub use basic::Versio;
+pub use builder::VersioBuilder;
+pub use versio::Versio;

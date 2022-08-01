@@ -24,5 +24,5 @@ miniz_oxide ="0.5.3"
 env_logger = "0.9.0"
 
 [[example]]
-name = "read_write"
-path = "examples/read_write.rs"
+name = "template"
+path = "examples/template.rs"

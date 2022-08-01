@@ -1,6 +1,6 @@
 use std::{collections::HashMap, ops::Index};
 
-use crate::element::Versio;
+use crate::element::{serde::Serialize, Versio};
 
 #[derive(Clone)]
 pub struct LinkedHashMap {
@@ -53,20 +53,22 @@ impl LinkedHashMap {
     pub fn iter(&self) -> SeqIter {
         SeqIter {
             index: 0,
+            key: &self.keys()[0],
             ele: self,
         }
     }
 }
 
-impl Index<String> for LinkedHashMap {
+impl Index<&str> for LinkedHashMap {
     type Output = Versio;
-    fn index(&self, index: String) -> &Self::Output {
-        &self.raw_hashmap[&index]
+    fn index(&self, index: &str) -> &Self::Output {
+        &self.raw_hashmap[&index.to_string()]
     }
 }
 
 pub struct SeqIter<'a> {
     index: usize,
+    key: &'a String,
     ele: &'a LinkedHashMap,
 }
 
@@ -78,10 +80,18 @@ impl<'a> Iterator for SeqIter<'a> {
         let keys = self.ele.keys();
         if index < keys.len() {
             self.index += 1;
-            let key = keys[index].clone();
-            Some(&self.ele[key])
+            let key = &keys[index];
+            let res = &self.ele[key];
+            self.key = key;
+            Some(res)
         } else {
             None
         }
+    }
+}
+
+impl Serialize for LinkedHashMap {
+    fn to_le_vec(&self) -> Vec<u8> {
+        self.iter().map(|ele| ele.to_le_vec()).flatten().collect()
     }
 }
