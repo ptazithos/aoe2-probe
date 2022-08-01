@@ -1,11 +1,11 @@
 use std::{collections::HashMap, ops::Index};
 
-use crate::element::{serde::Serialize, Versio};
+use crate::element::{serde::Serialize, Token};
 
 #[derive(Clone)]
 pub struct LinkedHashMap {
     raw_list: Vec<String>,
-    raw_hashmap: HashMap<String, Versio>,
+    raw_hashmap: HashMap<String, Token>,
 }
 
 impl LinkedHashMap {
@@ -23,7 +23,7 @@ impl LinkedHashMap {
         }
     }
 
-    pub fn push_back(&mut self, key_str: &str, value: Versio) -> bool {
+    pub fn push_back(&mut self, key_str: &str, value: Token) -> bool {
         let key = key_str.to_string();
 
         if self.raw_hashmap.contains_key(&key) {
@@ -35,7 +35,7 @@ impl LinkedHashMap {
         return true;
     }
 
-    pub fn update(&mut self, key_str: &str, value: Versio) -> bool {
+    pub fn update(&mut self, key_str: &str, value: Token) -> bool {
         let key = key_str.to_string();
 
         if !self.raw_hashmap.contains_key(&key) {
@@ -60,7 +60,7 @@ impl LinkedHashMap {
 }
 
 impl Index<&str> for LinkedHashMap {
-    type Output = Versio;
+    type Output = Token;
     fn index(&self, index: &str) -> &Self::Output {
         &self.raw_hashmap[&index.to_string()]
     }
@@ -73,7 +73,7 @@ pub struct SeqIter<'a> {
 }
 
 impl<'a> Iterator for SeqIter<'a> {
-    type Item = &'a Versio;
+    type Item = &'a Token;
 
     fn next(&mut self) -> Option<Self::Item> {
         let index = self.index;
