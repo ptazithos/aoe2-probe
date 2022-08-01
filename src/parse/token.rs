@@ -1,4 +1,4 @@
-use crate::utils::{LinkedHashMap, PrefixString};
+use crate::utils::{Chars, DynString, LinkedHashMap, string::{Short, Long}};
 
 use super::serde::Serialize;
 
@@ -15,8 +15,11 @@ pub enum Token {
     Float32(f32),
     Float64(f64),
 
-    Str16(PrefixString<u16>),
-    Str32(PrefixString<u32>),
+    Char4(Chars<Short>),
+    Char256(Chars<Long>),
+
+    Str16(DynString<u16>),
+    Str32(DynString<u32>),
 
     Union(LinkedHashMap),
 }
@@ -74,14 +77,14 @@ impl Token {
         }
     }
 
-    pub fn try_str16(&self) -> &PrefixString<u16> {
+    pub fn try_str16(&self) -> &DynString<u16> {
         match self {
             Token::Str16(value) => value,
             _ => panic!("Not a f64 element!"),
         }
     }
 
-    pub fn try_str32(&self) -> &PrefixString<u32> {
+    pub fn try_str32(&self) -> &DynString<u32> {
         match self {
             Token::Str32(value) => value,
             _ => panic!("Not a f64 element!"),
@@ -109,6 +112,9 @@ impl Serialize for Token {
 
             Token::Float32(value) => value.to_le_bytes().to_vec(),
             Token::Float64(value) => value.to_le_bytes().to_vec(),
+
+            Token::Char4(str) => str.clone().to_le_vec(),
+            Token::Char256(str) => str.clone().to_le_vec(),
 
             Token::Str16(string) => string.to_le_vec(),
             Token::Str32(string) => string.to_le_vec(),

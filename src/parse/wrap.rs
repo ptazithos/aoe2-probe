@@ -1,4 +1,7 @@
-use crate::utils::{LinkedHashMap, PrefixString};
+use crate::utils::{
+    string::{Long, Short},
+    Chars, DynString, LinkedHashMap,
+};
 
 use super::Token;
 
@@ -54,13 +57,25 @@ impl Wrappable for f64 {
     }
 }
 
-impl Wrappable for PrefixString<u16> {
+impl Wrappable for Chars<Short> {
+    fn wrap(self) -> Token {
+        Token::Char4(self)
+    }
+}
+
+impl Wrappable for Chars<Long> {
+    fn wrap(self) -> Token {
+        Token::Char256(self)
+    }
+}
+
+impl Wrappable for DynString<u16> {
     fn wrap(self) -> Token {
         Token::Str16(self.clone())
     }
 }
 
-impl Wrappable for PrefixString<u32> {
+impl Wrappable for DynString<u32> {
     fn wrap(self) -> Token {
         Token::Str32(self.clone())
     }
