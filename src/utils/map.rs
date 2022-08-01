@@ -1,6 +1,6 @@
 use std::{collections::HashMap, ops::Index};
 
-use crate::element::{serde::Serialize, Token};
+use crate::parse::{serde::Serialize, Token};
 
 #[derive(Clone)]
 pub struct LinkedHashMap {

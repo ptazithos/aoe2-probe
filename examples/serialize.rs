@@ -1,5 +1,5 @@
-use aoe2_probe::element::serde::Serialize;
-use aoe2_probe::element::Token;
+use aoe2_probe::parse::serde::Serialize;
+use aoe2_probe::parse::Token;
 use aoe2_probe::utils::{LinkedHashMap, PrefixString};
 
 fn main() {

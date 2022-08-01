@@ -1,6 +1,6 @@
-use aoe2_probe::element::serde::Serialize;
-use aoe2_probe::element::wrap::Wrappable;
-use aoe2_probe::element::{Token, TokenBuilder};
+use aoe2_probe::parse::serde::Serialize;
+use aoe2_probe::parse::wrap::Wrappable;
+use aoe2_probe::parse::{Token, TokenBuilder};
 use aoe2_probe::io::Source;
 use aoe2_probe::utils::{LinkedHashMap, PrefixString};
 
