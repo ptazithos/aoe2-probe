@@ -1,5 +1,7 @@
 mod map;
-mod string;
+pub mod string;
 
 pub use map::LinkedHashMap;
-pub use string::PrefixString;
+pub use string::Chars;
+pub use string::DynString;
+
