@@ -86,3 +86,9 @@ impl Wrappable for LinkedHashMap {
         Token::Union(self)
     }
 }
+
+impl Wrappable for Vec<Token> {
+    fn wrap(self) -> Token {
+        Token::Vector(self)
+    }
+}

@@ -1,7 +1,7 @@
 use super::serde::Deserialize;
 use crate::io::Source;
-use crate::utils::string::{Short, Long};
-use crate::utils::{DynString, LinkedHashMap, Chars};
+use crate::utils::string::{Long, Short};
+use crate::utils::{Chars, DynString, LinkedHashMap};
 
 use super::wrap::Wrappable;
 use super::Token;
@@ -24,13 +24,21 @@ impl TokenBuilder {
             Token::Str16(_) => DynString::<u16>::from_le_vec(source).wrap(),
             Token::Str32(_) => DynString::<u32>::from_le_vec(source).wrap(),
             Token::Union(map) => {
-                let mut root = LinkedHashMap::new();
+                let mut mock = LinkedHashMap::new();
                 let keys = map.keys();
                 for (index, token) in map.iter().enumerate() {
                     let key = &keys[index];
-                    root.push_back(key, TokenBuilder::create_from_template(token, source));
+                    mock.push_back(key, TokenBuilder::create_from_template(token, source));
                 }
-                root.wrap()
+                mock.wrap()
+            }
+            Token::Vector(vec) => {
+                let mut mock = Vec::<Token>::new();
+                for token in vec {
+                    mock.push(Self::create_from_template(token, source))
+                }
+
+                mock.wrap()
             }
         }
     }
