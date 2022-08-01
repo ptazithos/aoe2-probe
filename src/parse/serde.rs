@@ -1,5 +1,7 @@
 use crate::io::Source;
 
+use super::Token;
+
 const BYTE_LEN_FOR_8: usize = 1;
 const BYTE_LEN_FOR_16: usize = 2;
 const BYTE_LEN_FOR_32: usize = 4;
@@ -18,6 +20,15 @@ impl Serialize for u16 {
 impl Serialize for u32 {
     fn to_le_vec(&self) -> Vec<u8> {
         self.to_le_bytes().to_vec()
+    }
+}
+
+impl Serialize for Vec<Token> {
+    fn to_le_vec(&self) -> Vec<u8> {
+        self.iter()
+            .map(|token| token.to_le_vec())
+            .flatten()
+            .collect()
     }
 }
 

@@ -92,6 +92,6 @@ impl<'a> Iterator for SeqIter<'a> {
 
 impl Serialize for LinkedHashMap {
     fn to_le_vec(&self) -> Vec<u8> {
-        self.iter().map(|ele| ele.to_le_vec()).flatten().collect()
+        self.iter().map(|token| token.to_le_vec()).flatten().collect()
     }
 }

@@ -1,4 +1,7 @@
-use crate::utils::{Chars, DynString, LinkedHashMap, string::{Short, Long}};
+use crate::utils::{
+    string::{Long, Short},
+    Chars, DynString, LinkedHashMap,
+};
 
 use super::serde::Serialize;
 
@@ -22,6 +25,7 @@ pub enum Token {
     Str32(DynString<u32>),
 
     Union(LinkedHashMap),
+    Vector(Vec<Token>),
 }
 
 impl Token {
@@ -94,7 +98,14 @@ impl Token {
     pub fn try_map(&self) -> &LinkedHashMap {
         match self {
             Token::Union(value) => value,
-            _ => panic!("Not a f64 element!"),
+            _ => panic!("Not a union element!"),
+        }
+    }
+
+    pub fn try_vec(&self) -> &Vec<Token> {
+        match self {
+            Token::Vector(value) => value,
+            _ => panic!("Not a vec element!"),
         }
     }
 }
@@ -120,6 +131,7 @@ impl Serialize for Token {
             Token::Str32(string) => string.to_le_vec(),
 
             Token::Union(union) => union.to_le_vec(),
+            Token::Vector(vec) => vec.to_le_vec(),
         }
     }
 }
