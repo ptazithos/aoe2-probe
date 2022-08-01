@@ -133,6 +133,10 @@ where
         }
         self.raw = content.to_string();
     }
+
+    pub fn tag(&self) -> &T {
+        &self.tag
+    }
 }
 
 impl<T> Deserialize for Chars<T>
