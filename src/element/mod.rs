@@ -1,7 +1,7 @@
 mod builder;
 pub mod serde;
-pub mod versio;
+pub mod token;
 pub mod wrap;
 
-pub use builder::VersioBuilder;
-pub use versio::Versio;
+pub use builder::TokenBuilder;
+pub use token::Token;

@@ -3,7 +3,7 @@ use crate::utils::{LinkedHashMap, PrefixString};
 use super::serde::Serialize;
 
 #[derive(Clone)]
-pub enum Versio {
+pub enum Token {
     UInt8(u8),
     UInt16(u16),
     UInt32(u32),
@@ -21,99 +21,99 @@ pub enum Versio {
     Union(LinkedHashMap),
 }
 
-impl Versio {
+impl Token {
     pub fn try_u8(&self) -> u8 {
         match self {
-            Versio::UInt8(value) => *value,
+            Token::UInt8(value) => *value,
             _ => panic!("Not a u8 element!"),
         }
     }
     pub fn try_u16(&self) -> u16 {
         match self {
-            Versio::UInt16(value) => *value,
+            Token::UInt16(value) => *value,
             _ => panic!("Not a u16 element!"),
         }
     }
     pub fn try_u32(&self) -> u32 {
         match self {
-            Versio::UInt32(value) => *value,
+            Token::UInt32(value) => *value,
             _ => panic!("Not a u32 element!"),
         }
     }
 
     pub fn try_i8(&self) -> i8 {
         match self {
-            Versio::Int8(value) => *value,
+            Token::Int8(value) => *value,
             _ => panic!("Not a u8 element!"),
         }
     }
     pub fn try_i16(&self) -> i16 {
         match self {
-            Versio::Int16(value) => *value,
+            Token::Int16(value) => *value,
             _ => panic!("Not a u16 element!"),
         }
     }
     pub fn try_i32(&self) -> i32 {
         match self {
-            Versio::Int32(value) => *value,
+            Token::Int32(value) => *value,
             _ => panic!("Not a u32 element!"),
         }
     }
 
     pub fn try_f32(&self) -> f32 {
         match self {
-            Versio::Float32(value) => *value,
+            Token::Float32(value) => *value,
             _ => panic!("Not a f32 element!"),
         }
     }
 
     pub fn try_f64(&self) -> f64 {
         match self {
-            Versio::Float64(value) => *value,
+            Token::Float64(value) => *value,
             _ => panic!("Not a f64 element!"),
         }
     }
 
     pub fn try_str16(&self) -> &PrefixString<u16> {
         match self {
-            Versio::Str16(value) => value,
+            Token::Str16(value) => value,
             _ => panic!("Not a f64 element!"),
         }
     }
 
     pub fn try_str32(&self) -> &PrefixString<u32> {
         match self {
-            Versio::Str32(value) => value,
+            Token::Str32(value) => value,
             _ => panic!("Not a f64 element!"),
         }
     }
 
     pub fn try_map(&self) -> &LinkedHashMap {
         match self {
-            Versio::Union(value) => value,
+            Token::Union(value) => value,
             _ => panic!("Not a f64 element!"),
         }
     }
 }
 
-impl Serialize for Versio {
+impl Serialize for Token {
     fn to_le_vec(&self) -> Vec<u8> {
         match self {
-            Versio::UInt8(value) => value.to_le_bytes().to_vec(),
-            Versio::UInt16(value) => value.to_le_vec(),
-            Versio::UInt32(value) => value.to_le_vec(),
+            Token::UInt8(value) => value.to_le_bytes().to_vec(),
+            Token::UInt16(value) => value.to_le_vec(),
+            Token::UInt32(value) => value.to_le_vec(),
 
-            Versio::Int8(value) => value.to_le_bytes().to_vec(),
-            Versio::Int16(value) => value.to_le_bytes().to_vec(),
-            Versio::Int32(value) => value.to_le_bytes().to_vec(),
+            Token::Int8(value) => value.to_le_bytes().to_vec(),
+            Token::Int16(value) => value.to_le_bytes().to_vec(),
+            Token::Int32(value) => value.to_le_bytes().to_vec(),
 
-            Versio::Float32(value) => value.to_le_bytes().to_vec(),
-            Versio::Float64(value) => value.to_le_bytes().to_vec(),
+            Token::Float32(value) => value.to_le_bytes().to_vec(),
+            Token::Float64(value) => value.to_le_bytes().to_vec(),
 
-            Versio::Str16(string) => string.to_le_vec(),
-            Versio::Str32(string) => string.to_le_vec(),
+            Token::Str16(string) => string.to_le_vec(),
+            Token::Str32(string) => string.to_le_vec(),
 
-            Versio::Union(union) => union.to_le_vec(),
+            Token::Union(union) => union.to_le_vec(),
         }
     }
 }
