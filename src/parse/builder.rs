@@ -1,7 +1,6 @@
 use super::serde::Deserialize;
 use crate::io::Source;
-use crate::utils::string::{Long, Short};
-use crate::utils::{Chars, DynString, LinkedHashMap};
+use crate::utils::{C4,C256, DynString, LinkedHashMap};
 
 use super::wrap::Wrappable;
 use super::Token;
@@ -19,8 +18,8 @@ impl TokenBuilder {
             Token::Int32(_) => i32::from_le_vec(source).wrap(),
             Token::Float32(_) => f32::from_le_vec(source).wrap(),
             Token::Float64(_) => f64::from_le_vec(source).wrap(),
-            Token::Char4(_) => Chars::<Short>::from_le_vec(source).wrap(),
-            Token::Char256(_) => Chars::<Long>::from_le_vec(source).wrap(),
+            Token::Char4(_) => C4::from_le_vec(source).wrap(),
+            Token::Char256(_) => C256::from_le_vec(source).wrap(),
             Token::Str16(_) => DynString::<u16>::from_le_vec(source).wrap(),
             Token::Str32(_) => DynString::<u32>::from_le_vec(source).wrap(),
             Token::Union(map) => {

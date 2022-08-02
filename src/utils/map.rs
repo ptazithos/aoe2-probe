@@ -53,7 +53,6 @@ impl LinkedHashMap {
     pub fn iter(&self) -> SeqIter {
         SeqIter {
             index: 0,
-            key: &self.keys()[0],
             ele: self,
         }
     }
@@ -68,7 +67,6 @@ impl Index<&str> for LinkedHashMap {
 
 pub struct SeqIter<'a> {
     index: usize,
-    key: &'a String,
     ele: &'a LinkedHashMap,
 }
 
@@ -82,7 +80,6 @@ impl<'a> Iterator for SeqIter<'a> {
             self.index += 1;
             let key = &keys[index];
             let res = &self.ele[key];
-            self.key = key;
             Some(res)
         } else {
             None
@@ -101,8 +98,13 @@ impl Serialize for LinkedHashMap {
 
 impl fmt::Debug for LinkedHashMap {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_struct("LinkedHashMap")
-            .field("raw", &self.raw_hashmap)
+        f.write_str("LinkedHashMap")?;
+        f.debug_map()
+            .entries(
+                self.iter()
+                    .enumerate()
+                    .map(|(index, token)| (&self.keys()[index], token)),
+            )
             .finish()
     }
 }

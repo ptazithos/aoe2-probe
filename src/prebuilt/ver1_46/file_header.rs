@@ -1,6 +1,6 @@
 use crate::{
     parse::{wrap::Wrappable, Token},
-    utils::{string::Short, Chars, DynString, LinkedHashMap},
+    utils::{DynString, LinkedHashMap, C4},
 };
 
 pub struct FileHeader {}
@@ -9,7 +9,7 @@ pub struct FileHeader {}
 impl FileHeader {
     pub fn template() -> Token {
         let mut root = LinkedHashMap::new();
-        root.push_back("version", Chars::<Short>::new("1.46").wrap());
+        root.push_back("version", C4::new("1.46").wrap());
         root.push_back("header_length", (0 as u32).wrap());
         root.push_back("savable", (6 as i32).wrap());
         root.push_back("timestamp_of_last_save", (1610675127 as u32).wrap());

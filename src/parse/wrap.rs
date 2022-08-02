@@ -1,7 +1,4 @@
-use crate::utils::{
-    string::{Long, Short},
-    Chars, DynString, LinkedHashMap,
-};
+use crate::utils::{DynString, LinkedHashMap, C256, C4};
 
 use super::Token;
 
@@ -57,13 +54,13 @@ impl Wrappable for f64 {
     }
 }
 
-impl Wrappable for Chars<Short> {
+impl Wrappable for C4 {
     fn wrap(self) -> Token {
         Token::Char4(self)
     }
 }
 
-impl Wrappable for Chars<Long> {
+impl Wrappable for C256 {
     fn wrap(self) -> Token {
         Token::Char256(self)
     }

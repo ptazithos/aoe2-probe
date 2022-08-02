@@ -74,111 +74,6 @@ impl Deserialize for DynString<u32> {
     }
 }
 
-pub trait Countable {
-    fn new() -> Self;
-    fn count() -> usize;
-}
-
-#[derive(Clone, Debug)]
-pub struct Short {}
-impl Countable for Short {
-    fn new() -> Self {
-        Short {}
-    }
-
-    fn count() -> usize {
-        4
-    }
-}
-
-#[derive(Clone, Debug)]
-pub struct Long {}
-impl Countable for Long {
-    fn new() -> Self {
-        Long {}
-    }
-
-    fn count() -> usize {
-        256
-    }
-}
-
-#[derive(Clone)]
-pub struct Chars<T: Countable> {
-    capacity: usize,
-    raw: String,
-    tag: T,
-}
-
-impl<T> Chars<T>
-where
-    T: Countable,
-{
-    pub fn new(content: &str) -> Self {
-        if content.len() > T::count() {
-            panic!("Out of the fixed capacity!")
-        }
-        Chars {
-            capacity: T::count(),
-            raw: content.to_string(),
-            tag: T::new(),
-        }
-    }
-
-    pub fn content(&self) -> &String {
-        &self.raw
-    }
-
-    pub fn set_content(&mut self, content: &str) {
-        if content.len() > self.capacity {
-            panic!("Out of the fixed capacity!")
-        }
-        self.raw = content.to_string();
-    }
-
-    pub fn tag(&self) -> &T {
-        &self.tag
-    }
-}
-
-impl<T> Deserialize for Chars<T>
-where
-    T: Countable,
-{
-    fn from_le_vec(source: &mut Source) -> Self {
-        let capacity = T::count();
-        let raw = String::from_utf8_lossy(&source.get_vec(capacity as usize)[..]).to_string();
-
-        Chars::<T>::new(&raw)
-    }
-}
-
-impl<T> Serialize for Chars<T>
-where
-    T: Countable,
-{
-    fn to_le_vec(&self) -> Vec<u8> {
-        let content = self.raw.clone().into_bytes();
-        let mut container = vec![0; self.capacity];
-        for (index, _) in content.iter().enumerate() {
-            container[index] = content[index];
-        }
-        container
-    }
-}
-
-impl<T> fmt::Debug for Chars<T>
-where
-    T: Countable,
-{
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_struct("Chars")
-            .field("capacity", &self.capacity)
-            .field("raw", &self.raw.trim_matches(char::from(0)))
-            .finish()
-    }
-}
-
 pub trait Numeric: Copy + Serialize {
     fn to_usize(&self) -> usize;
     fn from_usize(num: usize) -> Self;
@@ -200,5 +95,104 @@ impl Numeric for u32 {
 
     fn from_usize(num: usize) -> Self {
         num as u32
+    }
+}
+
+#[derive(Clone, Debug)]
+pub struct C4 {
+    raw: String,
+}
+
+impl C4 {
+    pub fn new(content: &str) -> Self {
+        if content.len() > 4 {
+            panic!("Out of the fixed capacity!")
+        }
+
+        C4 {
+            raw: content.to_string(),
+        }
+    }
+
+    pub fn content(&self) -> &String {
+        &self.raw
+    }
+
+    pub fn set_content(&mut self, content: &str) {
+        if content.len() > 4 {
+            panic!("Out of the fixed capacity!")
+        }
+        self.raw = content.to_string();
+    }
+}
+
+impl Deserialize for C4 {
+    fn from_le_vec(source: &mut Source) -> Self {
+        let raw = String::from_utf8_lossy(&source.get_vec(4 as usize)[..]).to_string();
+
+        C4::new(&raw)
+    }
+}
+
+impl Serialize for C4 {
+    fn to_le_vec(&self) -> Vec<u8> {
+        let content = self.raw.clone().into_bytes();
+        let mut container = vec![0; 4];
+        for (index, _) in content.iter().enumerate() {
+            container[index] = content[index];
+        }
+        container
+    }
+}
+
+#[derive(Clone)]
+pub struct C256 {
+    raw: String,
+}
+
+impl C256 {
+    pub fn new(content: &str) -> Self {
+        if content.len() > 256 {
+            panic!("Out of the fixed capacity!")
+        }
+
+        C256 {
+            raw: content.to_string(),
+        }
+    }
+
+    pub fn content(&self) -> &String {
+        &self.raw
+    }
+
+    pub fn set_content(&mut self, content: &str) {
+        if content.len() > 256 {
+            panic!("Out of the fixed capacity!")
+        }
+        self.raw = content.to_string();
+    }
+}
+
+impl Deserialize for C256 {
+    fn from_le_vec(source: &mut Source) -> Self {
+        let raw = String::from_utf8_lossy(&source.get_vec(256 as usize)[..]).to_string();
+        C256::new(&raw)
+    }
+}
+
+impl Serialize for C256 {
+    fn to_le_vec(&self) -> Vec<u8> {
+        let content = self.raw.clone().into_bytes();
+        let mut container = vec![0; 256];
+        for (index, _) in content.iter().enumerate() {
+            container[index] = content[index];
+        }
+        container
+    }
+}
+
+impl fmt::Debug for C256 {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.raw.trim_matches(char::from(0)))
     }
 }
