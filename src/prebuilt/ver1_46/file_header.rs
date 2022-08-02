@@ -8,7 +8,7 @@ pub struct FileHeader {}
 #[allow(dead_code)]
 impl FileHeader {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::new();
+        let mut root = LinkedHashMap::with_capacity(12);
         root.push_back("version", C4::new("1.46").wrap());
         root.push_back("header_length", (0 as u32).wrap());
         root.push_back("savable", (6 as i32).wrap());
