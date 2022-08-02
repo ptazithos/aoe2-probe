@@ -3,11 +3,11 @@ use crate::{
     utils::{string::Short, Chars, DynString, LinkedHashMap},
 };
 
-pub struct Template {}
+pub struct FileHeader {}
 
 #[allow(dead_code)]
-impl Template {
-    fn file_header() -> Token {
+impl FileHeader {
+    pub fn template() -> Token {
         let mut root = LinkedHashMap::new();
         root.push_back("version", Chars::<Short>::new("1.46").wrap());
         root.push_back("header_length", (0 as u32).wrap());

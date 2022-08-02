@@ -29,7 +29,8 @@ impl Source {
     }
 
     pub fn get_rest_vec(&mut self) -> Vec<u8> {
-        self.pos = self.len;
-        self.raw[self.pos..].to_vec()
+        let rest = self.raw[self.pos..].to_vec();
+        self.pos = self.len + 1;
+        rest
     }
 }
