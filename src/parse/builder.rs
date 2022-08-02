@@ -1,6 +1,6 @@
 use super::serde::Deserialize;
 use crate::io::Source;
-use crate::utils::{C4,C256, DynString, LinkedHashMap};
+use crate::utils::{DynString, LinkedHashMap, C256, C4};
 
 use super::Token;
 
@@ -24,9 +24,54 @@ impl TokenBuilder {
             Token::Union(map) => {
                 let mut mock = LinkedHashMap::new();
                 let keys = map.keys();
+                let patchs = &map.patchs;
                 for (index, token) in map.iter().enumerate() {
                     let key = &keys[index];
-                    mock.push_back(key, TokenBuilder::create_from_template(token, source));
+                    let mut template = token.clone();
+                    if patchs.contains_key(key) {
+                        let patch = &patchs[key];
+                        match patch.dep_type {
+                            crate::utils::map::DepType::Exist => {
+                                let flag = patch
+                                    .source
+                                    .iter()
+                                    .map(|key| mock[key].try_u32() > 0)
+                                    .fold(true, |sum, val| sum & val);
+
+                                if !flag {
+                                    template.try_vec().clear();
+                                }
+                            }
+                            crate::utils::map::DepType::Calculate => match patch.manipulation {
+                                crate::utils::map::Manipulation::Equal => {
+                                    let dep_key = &patch.source[0];
+                                    let num = mock[dep_key].try_u32();
+                                    let vec = template.try_vec();
+                                    let unit = vec[0].clone();
+                                    vec.clear();
+                                    for _ in 0..num {
+                                        vec.push(unit.clone());
+                                    }
+                                }
+                                crate::utils::map::Manipulation::Multiple => {
+                                    let rkey = &patch.source[0];
+                                    let lkey = &patch.source[1];
+
+                                    let rnum = mock[rkey].try_u32();
+                                    let lnum = mock[lkey].try_u32();
+
+                                    let vec = template.try_vec();
+                                    let unit = vec[0].clone();
+                                    vec.clear();
+
+                                    for _ in 0..lnum * rnum {
+                                        vec.push(unit.clone());
+                                    }
+                                }
+                            },
+                        }
+                    }
+                    mock.push_back(key, TokenBuilder::create_from_template(&template, source));
                 }
                 mock.into()
             }

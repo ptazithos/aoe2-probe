@@ -113,7 +113,7 @@ impl Token {
         }
     }
 
-    pub fn try_vec(&self) -> &Vec<Token> {
+    pub fn try_vec(&mut self) -> &mut Vec<Token> {
         match self {
             Token::Vector(value) => value,
             _ => panic!("Not a vec element!"),
