@@ -1,7 +1,4 @@
-use crate::utils::{
-    string::{Long, Short},
-    Chars, DynString, LinkedHashMap,
-};
+use crate::utils::{DynString, LinkedHashMap, C256, C4};
 
 use super::serde::Serialize;
 
@@ -18,8 +15,8 @@ pub enum Token {
     Float32(f32),
     Float64(f64),
 
-    Char4(Chars<Short>),
-    Char256(Chars<Long>),
+    Char4(C4),
+    Char256(C256),
 
     Str16(DynString<u16>),
     Str32(DynString<u32>),
@@ -81,14 +78,14 @@ impl Token {
         }
     }
 
-    pub fn try_c4(&self) -> &Chars<Short> {
+    pub fn try_c4(&self) -> &C4 {
         match self {
             Token::Char4(value) => value,
             _ => panic!("Not a c4 element!"),
         }
     }
 
-    pub fn try_c256(&self) -> &Chars<Long> {
+    pub fn try_c256(&self) -> &C256 {
         match self {
             Token::Char256(value) => value,
             _ => panic!("Not a c256 element!"),
