@@ -1,6 +1,9 @@
 use crate::{parse::Token, utils::LinkedHashMap};
 
-use super::{background::Background, Cinematics, DataHeader, FileHeader, Message};
+use super::{
+    Background, Cinematics, DataHeader, Diplomacy, FileHeader, GlobalVictory, Message, Options,
+    PlayerDataTwo,
+};
 
 pub struct Versio {}
 
@@ -13,7 +16,10 @@ impl Versio {
         root.push_back("message", Message::template());
         root.push_back("cinematics", Cinematics::template());
         root.push_back("backgroud_image", Background::template());
-
+        root.push_back("player_data_two", PlayerDataTwo::template());
+        root.push_back("global_victory", GlobalVictory::template());
+        root.push_back("diplomacy", Diplomacy::template());
+        root.push_back("options", Options::template());
         root.into()
     }
 }

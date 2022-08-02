@@ -3,9 +3,29 @@ use std::{collections::HashMap, fmt, ops::Index};
 use crate::parse::{serde::Serialize, Token};
 
 #[derive(Clone)]
+pub enum DepType {
+    Exist,
+    Calculate,
+}
+
+#[derive(Clone)]
+pub enum Manipulation {
+    Equal,
+    Multiple,
+}
+
+#[derive(Clone)]
+pub struct NumericPatch {
+    pub source: Vec<String>,
+    pub dep_type: DepType,
+    pub manipulation: Manipulation,
+}
+
+#[derive(Clone)]
 pub struct LinkedHashMap {
     raw_list: Vec<String>,
     raw_hashmap: HashMap<String, Token>,
+    pub patchs: HashMap<String, NumericPatch>,
 }
 
 impl LinkedHashMap {
@@ -13,6 +33,7 @@ impl LinkedHashMap {
         LinkedHashMap {
             raw_list: Vec::new(),
             raw_hashmap: HashMap::new(),
+            patchs: HashMap::new(),
         }
     }
 
@@ -20,6 +41,7 @@ impl LinkedHashMap {
         LinkedHashMap {
             raw_list: Vec::with_capacity(capacity),
             raw_hashmap: HashMap::with_capacity(capacity),
+            patchs: HashMap::new(),
         }
     }
 
