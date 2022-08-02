@@ -119,6 +119,24 @@ impl Token {
             _ => panic!("Not a vec element!"),
         }
     }
+
+    pub fn try_compatible_u64(&self) -> u64 {
+        match self {
+            Token::UInt8(num) => *num as u64,
+            Token::UInt16(num) => *num as u64,
+            Token::UInt32(num) => *num as u64,
+            Token::Float32(num) => {
+                if *num == 2.0 {
+                    1
+                } else {
+                    0
+                }
+            }
+            Token::Float64(num) => *num as u64,
+            Token::Vector(vec) => vec[0].try_compatible_u64(),
+            _ => panic!("Not compatible value!"),
+        }
+    }
 }
 
 impl Serialize for Token {

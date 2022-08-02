@@ -35,7 +35,7 @@ impl TokenBuilder {
                                 let flag = patch
                                     .source
                                     .iter()
-                                    .map(|key| mock[key].try_u32() > 0)
+                                    .map(|key| mock[key].try_compatible_u64() > 0)
                                     .fold(true, |sum, val| sum & val);
 
                                 if !flag {
@@ -45,7 +45,7 @@ impl TokenBuilder {
                             crate::utils::map::DepType::Calculate => match patch.manipulation {
                                 crate::utils::map::Manipulation::Equal => {
                                     let dep_key = &patch.source[0];
-                                    let num = mock[dep_key].try_u32();
+                                    let num = mock[dep_key].try_compatible_u64();
                                     let vec = template.try_vec();
                                     let unit = vec[0].clone();
                                     vec.clear();
@@ -57,8 +57,8 @@ impl TokenBuilder {
                                     let rkey = &patch.source[0];
                                     let lkey = &patch.source[1];
 
-                                    let rnum = mock[rkey].try_u32();
-                                    let lnum = mock[lkey].try_u32();
+                                    let rnum = mock[rkey].try_compatible_u64();
+                                    let lnum = mock[lkey].try_compatible_u64();
 
                                     let vec = template.try_vec();
                                     let unit = vec[0].clone();
