@@ -1,9 +1,11 @@
+use std::fmt;
+
 use crate::{
     io::Source,
     parse::serde::{Deserialize, Serialize},
 };
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct DynString<T: Numeric> {
     capacity: T,
     raw: String,
@@ -43,13 +45,13 @@ where
     fn to_le_vec(&self) -> Vec<u8> {
         let mut vec = Vec::<u8>::new();
         let mut prefix = self.capacity.to_le_vec();
-        let mut content = self.raw.clone().into_bytes();
+        let content = self.raw.clone().into_bytes();
         let mut container = vec![0; self.capacity.to_usize()];
         for (index, _) in content.iter().enumerate() {
             container[index] = content[index];
         }
         vec.append(&mut prefix);
-        vec.append(&mut content);
+        vec.append(&mut container);
         vec
     }
 }
@@ -77,7 +79,7 @@ pub trait Countable {
     fn count() -> usize;
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Short {}
 impl Countable for Short {
     fn new() -> Self {
@@ -89,7 +91,7 @@ impl Countable for Short {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Long {}
 impl Countable for Long {
     fn new() -> Self {
@@ -162,6 +164,18 @@ where
             container[index] = content[index];
         }
         container
+    }
+}
+
+impl<T> fmt::Debug for Chars<T>
+where
+    T: Countable,
+{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Chars")
+            .field("capacity", &self.capacity)
+            .field("raw", &self.raw.trim_matches(char::from(0)))
+            .finish()
     }
 }
 

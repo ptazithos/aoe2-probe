@@ -26,15 +26,15 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug example 'template'",
+            "name": "Debug example 'scenorio'",
             "cargo": {
                 "args": [
                     "build",
-                    "--example=template",
+                    "--example=scenorio",
                     "--package=aoe2-probe"
                 ],
                 "filter": {
-                    "name": "template",
+                    "name": "scenorio",
                     "kind": "example"
                 }
             },
@@ -44,16 +44,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in example 'template'",
+            "name": "Debug unit tests in example 'scenorio'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--example=template",
+                    "--example=scenorio",
                     "--package=aoe2-probe"
                 ],
                 "filter": {
-                    "name": "template",
+                    "name": "scenorio",
                     "kind": "example"
                 }
             },
@@ -91,6 +91,43 @@
                 ],
                 "filter": {
                     "name": "serialize",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'template'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=template",
+                    "--package=aoe2-probe"
+                ],
+                "filter": {
+                    "name": "template",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'template'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=template",
+                    "--package=aoe2-probe"
+                ],
+                "filter": {
+                    "name": "template",
                     "kind": "example"
                 }
             },

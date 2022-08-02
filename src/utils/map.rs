@@ -1,4 +1,4 @@
-use std::{collections::HashMap, ops::Index};
+use std::{collections::HashMap, fmt, ops::Index};
 
 use crate::parse::{serde::Serialize, Token};
 
@@ -92,6 +92,17 @@ impl<'a> Iterator for SeqIter<'a> {
 
 impl Serialize for LinkedHashMap {
     fn to_le_vec(&self) -> Vec<u8> {
-        self.iter().map(|token| token.to_le_vec()).flatten().collect()
+        self.iter()
+            .map(|token| token.to_le_vec())
+            .flatten()
+            .collect()
+    }
+}
+
+impl fmt::Debug for LinkedHashMap {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("LinkedHashMap")
+            .field("raw", &self.raw_hashmap)
+            .finish()
     }
 }

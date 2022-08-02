@@ -23,6 +23,17 @@ miniz_oxide ="0.5.3"
 [dev-dependencies]
 env_logger = "0.9.0"
 
+
+[[example]]
+name = "scenorio"
+path = "examples/scenorio.rs"
+
+[[example]]
+name = "serialize"
+path = "examples/serialize.rs"
+
 [[example]]
 name = "template"
 path = "examples/template.rs"
+
+

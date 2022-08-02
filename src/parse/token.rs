@@ -5,7 +5,7 @@ use crate::utils::{
 
 use super::serde::Serialize;
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub enum Token {
     UInt8(u8),
     UInt16(u16),
@@ -78,6 +78,20 @@ impl Token {
         match self {
             Token::Float64(value) => *value,
             _ => panic!("Not a f64 element!"),
+        }
+    }
+
+    pub fn try_c4(&self) -> &Chars<Short> {
+        match self {
+            Token::Char4(value) => value,
+            _ => panic!("Not a c4 element!"),
+        }
+    }
+
+    pub fn try_c256(&self) -> &Chars<Long> {
+        match self {
+            Token::Char256(value) => value,
+            _ => panic!("Not a c256 element!"),
         }
     }
 
