@@ -23,7 +23,7 @@ impl LinkedHashMap {
         }
     }
 
-    pub fn push_back(&mut self, key_str: &str, value: Token) -> bool {
+    pub fn push_back<T: Into<Token>>(&mut self, key_str: &str, value: T) -> bool {
         let key = key_str.to_string();
 
         if self.raw_hashmap.contains_key(&key) {
@@ -31,18 +31,18 @@ impl LinkedHashMap {
         }
 
         self.raw_list.push(key.clone());
-        self.raw_hashmap.insert(key, value);
+        self.raw_hashmap.insert(key, value.into());
         return true;
     }
 
-    pub fn update(&mut self, key_str: &str, value: Token) -> bool {
+    pub fn update<T: Into<Token>>(&mut self, key_str: &str, value: T) -> bool {
         let key = key_str.to_string();
 
         if !self.raw_hashmap.contains_key(&key) {
             return false;
         }
 
-        self.raw_hashmap.insert(key, value);
+        self.raw_hashmap.insert(key, value.into());
         return true;
     }
 
