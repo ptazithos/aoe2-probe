@@ -1,8 +1,8 @@
 use crate::{parse::Token, utils::LinkedHashMap};
 
 use super::{
-    Background, Cinematics, DataHeader, Diplomacy, FileHeader, GlobalVictory, Message, Options,
-    PlayerDataTwo,
+    Background, Cinematics, DataHeader, Diplomacy, FileHeader, GlobalVictory, Map, Message,
+    Options, PlayerDataTwo,
 };
 
 pub struct Versio {}
@@ -20,6 +20,7 @@ impl Versio {
         root.push_back("global_victory", GlobalVictory::template());
         root.push_back("diplomacy", Diplomacy::template());
         root.push_back("options", Options::template());
+        root.push_back("map", Map::template());
         root.into()
     }
 }
