@@ -1,7 +1,4 @@
-use crate::{
-    parse::{wrap::Wrappable, Token},
-    utils::LinkedHashMap,
-};
+use crate::{parse::Token, utils::LinkedHashMap};
 
 use super::{Cinematics, DataHeader, FileHeader, Message};
 
@@ -16,6 +13,6 @@ impl Versio {
         root.push_back("message", Message::template());
         root.push_back("cinematics", Cinematics::template());
 
-        root.wrap()
+        root.into()
     }
 }
