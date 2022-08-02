@@ -1,4 +1,6 @@
-use crate::utils::{DynString, LinkedHashMap, C256, C4};
+use crate::utils::{
+    C4, C256, DynString, LinkedHashMap,
+};
 
 use super::Token;
 
