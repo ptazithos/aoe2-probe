@@ -64,13 +64,13 @@ impl Into<Token> for C256 {
 
 impl Into<Token> for DynString<u16> {
     fn into(self) -> Token {
-        Token::Str16(self.clone())
+        Token::Str16(self)
     }
 }
 
 impl Into<Token> for DynString<u32> {
     fn into(self) -> Token {
-        Token::Str32(self.clone())
+        Token::Str32(self)
     }
 }
 

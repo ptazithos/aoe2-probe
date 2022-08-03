@@ -27,7 +27,7 @@ where
             panic!("Content is over capacity!")
         }
         DynString {
-            capacity: capacity,
+            capacity,
             raw: raw.to_string(),
         }
     }
@@ -135,7 +135,7 @@ impl C4 {
 
 impl Deserialize for C4 {
     fn from_le_vec(source: &mut Source) -> Self {
-        let raw = String::from_utf8_lossy(&source.get_vec(4 as usize)[..]).to_string();
+        let raw = String::from_utf8_lossy(&source.get_vec(4_usize)[..]).to_string();
 
         C4::new(&raw)
     }
@@ -182,7 +182,7 @@ impl C256 {
 
 impl Deserialize for C256 {
     fn from_le_vec(source: &mut Source) -> Self {
-        let raw = String::from_utf8_lossy(&source.get_vec(256 as usize)[..]).to_string();
+        let raw = String::from_utf8_lossy(&source.get_vec(256_usize)[..]).to_string();
         C256::new(&raw)
     }
 }

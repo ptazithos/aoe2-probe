@@ -25,10 +25,7 @@ impl Serialize for u32 {
 
 impl Serialize for Vec<Token> {
     fn to_le_vec(&self) -> Vec<u8> {
-        self.iter()
-            .map(|token| token.to_le_vec())
-            .flatten()
-            .collect()
+        self.iter().flat_map(|token| token.to_le_vec()).collect()
     }
 }
 

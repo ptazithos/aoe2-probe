@@ -25,7 +25,7 @@ pub struct NumericPatch {
     pub manipulation: Manipulation,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub struct LinkedHashMap {
     raw_list: Vec<String>,
     raw_hashmap: HashMap<String, Token>,
@@ -58,7 +58,7 @@ impl LinkedHashMap {
 
         self.raw_list.push(key.clone());
         self.raw_hashmap.insert(key, value.into());
-        return true;
+        true
     }
 
     pub fn update<T: Into<Token>>(&mut self, key_str: &str, value: T) -> bool {
@@ -69,7 +69,7 @@ impl LinkedHashMap {
         }
 
         self.raw_hashmap.insert(key, value.into());
-        return true;
+        true
     }
 
     pub fn keys(&self) -> &Vec<String> {
@@ -121,10 +121,7 @@ impl<'a> Iterator for SeqIter<'a> {
 
 impl Serialize for LinkedHashMap {
     fn to_le_vec(&self) -> Vec<u8> {
-        self.iter()
-            .map(|token| token.to_le_vec())
-            .flatten()
-            .collect()
+        self.iter().flat_map(|token| token.to_le_vec()).collect()
     }
 }
 
