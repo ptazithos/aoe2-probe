@@ -1,3 +1,5 @@
+[![Crates.io](https://img.shields.io/crates/v/aoe2-probe.svg)](https://crates.io/crates/aoe2-probe)
+[![GPL-3.0 licensed](https://img.shields.io/badge/license-GPL-blue.svg)](./LICENSE)
 ## What is aoe2-probe?
 This is a rust library for editing aoe2scenorio files from AoE2 DE.
 
