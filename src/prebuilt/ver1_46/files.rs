@@ -10,8 +10,11 @@ pub struct Files {}
 impl Files {
     pub fn template() -> Token {
         let mut root = LinkedHashMap::with_capacity(7);
-        root.push_back("script_file_path", DynString::new(0 as u16, ""));
-        root.push_back("script_file_content", DynString::new(0 as u32, ""));
+        root.push_back("script_file_path", DynString::with_capacity(0 as u16, ""));
+        root.push_back(
+            "script_file_content",
+            DynString::with_capacity(0 as u32, ""),
+        );
         root.push_back("ai_files_present", 0 as u32);
         root.push_back("unknown", vec![(0 as u8).into(); 4]);
         root.push_back("number_of_ai_files", vec![(0 as u32).into()]);

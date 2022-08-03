@@ -20,9 +20,12 @@ impl Trigger {
         root.push_back("display_on_screen", 0 as u8);
         root.push_back("unknown", vec![(0 as u8).into(); 5]);
         root.push_back("mute_objectives", 0 as u8);
-        root.push_back("trigger_description", DynString::new(0 as u32, ""));
-        root.push_back("trigger_name", DynString::new(0 as u32, ""));
-        root.push_back("short_description", DynString::new(0 as u32, ""));
+        root.push_back(
+            "trigger_description",
+            DynString::with_capacity(0 as u32, ""),
+        );
+        root.push_back("trigger_name", DynString::with_capacity(0 as u32, ""));
+        root.push_back("short_description", DynString::with_capacity(0 as u32, ""));
         root.push_back("number_of_effects", 0 as i32);
         root.push_back("effect_data", vec![Effect::template(); 1]);
         root.patchs.insert(

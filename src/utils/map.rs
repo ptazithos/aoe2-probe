@@ -1,4 +1,8 @@
-use std::{collections::HashMap, fmt, ops::Index};
+use std::{
+    collections::HashMap,
+    fmt,
+    ops::{Index, IndexMut},
+};
 
 use crate::parse::{serde::Serialize, Token};
 
@@ -84,6 +88,12 @@ impl Index<&str> for LinkedHashMap {
     type Output = Token;
     fn index(&self, index: &str) -> &Self::Output {
         &self.raw_hashmap[&index.to_string()]
+    }
+}
+
+impl IndexMut<&str> for LinkedHashMap {
+    fn index_mut(&mut self, index: &str) -> &mut Self::Output {
+        self.raw_hashmap.get_mut(&index.to_string()).unwrap()
     }
 }
 

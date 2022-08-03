@@ -62,8 +62,8 @@ impl Effect {
         root.push_back("reset_timer", -1 as i32);
         root.push_back("object_state", -1 as i32);
         root.push_back("action_type", -1 as i32);
-        root.push_back("message", DynString::new(0 as u32, ""));
-        root.push_back("sound_name", DynString::new(0 as u32, ""));
+        root.push_back("message", DynString::with_capacity(0 as u32, ""));
+        root.push_back("sound_name", DynString::with_capacity(0 as u32, ""));
         root.push_back("selected_object_ids", vec![(0 as i32).into()]);
         root.patchs.insert(
             "selected_object_ids".to_string(),

@@ -8,7 +8,7 @@ pub struct PlayerDataFour {}
 impl PlayerDataFour {
     pub fn template() -> Token {
         let mut root = LinkedHashMap::with_capacity(18);
-        root.push_back("constant_name", DynString::new(0 as u16, ""));
+        root.push_back("constant_name", DynString::with_capacity(0 as u16, ""));
         root.push_back("editor_camera_x", 72.0 as f32);
         root.push_back("editor_camera_y", 72.0 as f32);
         root.push_back("initial_camera_x", 72 as i16);

@@ -14,12 +14,12 @@ impl Message {
         root.push_back("loss", 4294967294 as u32);
         root.push_back("history", 4294967294 as u32);
         root.push_back("scouts", 4294967294 as u32);
-        root.push_back("ascii_instructions", DynString::new(0 as u16, ""));
-        root.push_back("ascii_hints", DynString::new(0 as u16, ""));
-        root.push_back("ascii_victory", DynString::new(0 as u16, ""));
-        root.push_back("ascii_loss", DynString::new(0 as u16, ""));
-        root.push_back("ascii_history", DynString::new(0 as u16, ""));
-        root.push_back("ascii_scouts", DynString::new(0 as u16, ""));
+        root.push_back("ascii_instructions", DynString::with_capacity(0 as u16, ""));
+        root.push_back("ascii_hints", DynString::with_capacity(0 as u16, ""));
+        root.push_back("ascii_victory", DynString::with_capacity(0 as u16, ""));
+        root.push_back("ascii_loss", DynString::with_capacity(0 as u16, ""));
+        root.push_back("ascii_history", DynString::with_capacity(0 as u16, ""));
+        root.push_back("ascii_scouts", DynString::with_capacity(0 as u16, ""));
 
         root.into()
     }

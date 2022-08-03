@@ -40,4 +40,8 @@ path = "examples/template.rs"
 name = "print_info"
 path = "examples/print_info.rs"
 
+[[example]]
+name = "update_attr"
+path = "examples/update_attr.rs"
+
 

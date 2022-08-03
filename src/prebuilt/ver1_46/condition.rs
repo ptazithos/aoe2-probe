@@ -37,7 +37,7 @@ impl Condition {
         root.push_back("timer_id", -1 as i32);
         root.push_back("victory_timer_type", -1 as i32);
         root.push_back("include_changeable_weapon_objects", -1 as i32);
-        root.push_back("xs_function", DynString::new(0 as u32, ""));
+        root.push_back("xs_function", DynString::with_capacity(0 as u32, ""));
 
         root.into()
     }
