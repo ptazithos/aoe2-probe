@@ -11,11 +11,14 @@ impl Map {
     pub fn template() -> Token {
         let mut root = LinkedHashMap::with_capacity(19);
         root.push_back("starter_1", 0 as u16);
-        root.push_back("water_definition", DynString::new(0 as u16, ""));
+        root.push_back("water_definition", DynString::with_capacity(0 as u16, ""));
         root.push_back("starter_2", 0 as u16);
-        root.push_back("map_color_mood", DynString::new(5 as u16, "Empty"));
+        root.push_back(
+            "map_color_mood",
+            DynString::with_capacity(5 as u16, "Empty"),
+        );
         root.push_back("starter_3", 0 as u16);
-        root.push_back("script_name", DynString::new(5 as u16, ""));
+        root.push_back("script_name", DynString::with_capacity(5 as u16, ""));
         root.push_back("collide_and_correct", 0 as u8);
         root.push_back("villager_force_drop", 0 as u8);
         root.push_back("unknown_1", vec![(255 as u8).into(); 128]);

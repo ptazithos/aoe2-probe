@@ -15,7 +15,14 @@ impl<T> DynString<T>
 where
     T: Numeric,
 {
-    pub fn new(capacity: T, raw: &str) -> Self {
+    pub fn new(raw: &str) -> Self {
+        DynString {
+            capacity: T::from_usize(raw.len()),
+            raw: raw.to_string(),
+        }
+    }
+
+    pub fn with_capacity(capacity: T, raw: &str) -> Self {
         if capacity.to_usize() < raw.len() {
             panic!("Content is over capacity!")
         }
@@ -61,7 +68,7 @@ impl Deserialize for DynString<u16> {
         let capacity = u16::from_le_vec(source);
         let raw = String::from_utf8_lossy(&source.get_vec(capacity as usize)[..]).to_string();
 
-        DynString::new(capacity, &raw)
+        DynString::with_capacity(capacity, &raw)
     }
 }
 
@@ -70,7 +77,7 @@ impl Deserialize for DynString<u32> {
         let capacity = u32::from_le_vec(source);
         let raw = String::from_utf8_lossy(&source.get_vec(capacity as usize)[..]).to_string();
 
-        DynString::new(capacity, &raw)
+        DynString::with_capacity(capacity, &raw)
     }
 }
 

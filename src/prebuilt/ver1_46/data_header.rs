@@ -20,7 +20,7 @@ impl DataHeader {
         root.push_back("player_data_1", vec![PlayerDataOne::template(); 16]);
         root.push_back("per_player_lock_civilization", vec![(0 as u32).into(); 16]);
         root.push_back("unknown", vec![(0 as u8).into(); 9]);
-        root.push_back("filename", DynString::new(7 as u16, "Unknown"));
+        root.push_back("filename", DynString::with_capacity(7 as u16, "Unknown"));
 
         root.into()
     }
