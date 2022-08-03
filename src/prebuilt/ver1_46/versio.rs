@@ -1,8 +1,8 @@
 use crate::{parse::Token, utils::LinkedHashMap};
 
 use super::{
-    Background, Cinematics, DataHeader, Diplomacy, FileHeader, GlobalVictory, Map, Message,
-    Options, PlayerDataTwo, Units,
+    Background, Cinematics, DataHeader, Diplomacy, FileHeader, Files, GlobalVictory, Map, Message,
+    Options, PlayerDataTwo, Triggers, Units,
 };
 
 pub struct Versio {}
@@ -22,6 +22,8 @@ impl Versio {
         root.push_back("options", Options::template());
         root.push_back("map", Map::template());
         root.push_back("units", Units::template());
+        root.push_back("triggers", Triggers::template());
+        root.push_back("files", Files::template());
         root.into()
     }
 }
