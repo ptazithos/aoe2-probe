@@ -6,12 +6,12 @@ This is a rust library for editing aoe2scenorio files from AoE2 DE.
 * Due to the zlib implementation difference,  the exported file cannot be as same as the imported file, while the content of files is constant(Don't worry, AoE2 DE still understand it).Backing up the original is always recommended.
 
 ## Design Goals
-* Full ability to access every bit in aoe2scenorio files.
-* Editing every bit with a reliable correctness check.
-* Provides constant API compatibility across game versions.
+* Full ability to access every byte in aoe2scenorio files.
+* Editing every bit with a reliable correctness check. todo!()
+* Provides constant API compatibility across game versions. todo!()
 
 ## Getting Started
-Under directory **./examples/**, you can find several simple showcases.
+Under the directory **./examples/**, you can find several simple showcases.
 
 **Import and export files:**
 ```rust
@@ -27,7 +27,7 @@ scenorio.to_file("./resources/temp.aoe2scenario");
 ```rust
 use aoe2_probe::scenorio::Scenorio;
 
-//versio's structure definition can be found in folder /src/prebuilt/ver1_46/versio.rs
+//versio's structure definition can be found in the folder /src/prebuilt/ver1_46/versio.rs
 let mut scenorio = Scenorio::from_file("./resources/chapter_1.aoe2scenario");
 let file_header = scenorio.versio.try_mut_map()["file_header"].try_mut_map();
 let creator = file_header["creator_name"].try_mut_str32();
@@ -35,7 +35,7 @@ let creator = file_header["creator_name"].try_mut_str32();
 creator.set_content("Arian");
 ```
 
-**Define a customize structure:**
+**customize a structure:**
 ```rust
 //Define a socre record
 let mut root = LinkedHashMap::new();
