@@ -287,3 +287,87 @@ impl Serialize for Token {
         }
     }
 }
+
+impl From<u8> for Token {
+    fn from(uint8: u8) -> Self {
+        Token::UInt8(uint8)
+    }
+}
+
+impl From<u16> for Token {
+    fn from(uint16: u16) -> Self {
+        Token::UInt16(uint16)
+    }
+}
+
+impl From<u32> for Token {
+    fn from(uint32: u32) -> Self {
+        Token::UInt32(uint32)
+    }
+}
+
+impl From<i8> for Token {
+    fn from(int8: i8) -> Self {
+        Token::Int8(int8)
+    }
+}
+
+impl From<i16> for Token {
+    fn from(int16: i16) -> Self {
+        Token::Int16(int16)
+    }
+}
+
+impl From<i32> for Token {
+    fn from(int32: i32) -> Self {
+        Token::Int32(int32)
+    }
+}
+
+impl From<f32> for Token {
+    fn from(float32: f32) -> Self {
+        Token::Float32(float32)
+    }
+}
+
+impl From<f64> for Token {
+    fn from(float64: f64) -> Self {
+        Token::Float64(float64)
+    }
+}
+
+impl From<C4> for Token {
+    fn from(char4: C4) -> Self {
+        Token::Char4(char4)
+    }
+}
+
+impl From<C256> for Token {
+    fn from(char256: C256) -> Self {
+        Token::Char256(char256)
+    }
+}
+
+impl From<DynString<u16>> for Token {
+    fn from(str16: DynString<u16>) -> Self {
+        Token::Str16(str16)
+    }
+}
+
+impl From<DynString<u32>> for Token {
+    fn from(str32: DynString<u32>) -> Self {
+        Token::Str32(str32)
+    }
+}
+
+impl From<LinkedHashMap> for Token {
+    fn from(map: LinkedHashMap) -> Self {
+        Token::Union(map)
+    }
+}
+
+impl From<Vec<Token>> for Token {
+    fn from(vec: Vec<Token>) -> Self {
+        Token::Vector(vec)
+    }
+}
