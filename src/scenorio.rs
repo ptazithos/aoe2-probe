@@ -19,7 +19,7 @@ impl Scenorio {
         let mut file = File::open(&filename).expect("File not found");
         let metadata = fs::metadata(&filename).expect("Unable to read metadata");
         let mut buffer = vec![0; metadata.len() as usize];
-        file.read(&mut buffer).expect("buffer overflow");
+        file.read_exact(&mut buffer).expect("buffer overflow");
 
         Self::from_le_vec(buffer)
     }
@@ -83,7 +83,7 @@ impl Scenorio {
         file.write_all(&buffer).unwrap();
     }
 
-    fn get_scenorio_version(buffer: &Vec<u8>) -> String {
+    fn get_scenorio_version(buffer: &[u8]) -> String {
         std::str::from_utf8(&buffer[0..4]).unwrap().to_string()
     }
 }
