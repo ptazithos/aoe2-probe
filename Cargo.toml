@@ -36,4 +36,8 @@ path = "examples/serialize.rs"
 name = "template"
 path = "examples/template.rs"
 
+[[example]]
+name = "print_info"
+path = "examples/print_info.rs"
+
 
