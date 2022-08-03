@@ -1,4 +1,3 @@
-# **A much much better new implementation will come soon! Don't use main branch at this moment please.**
 ## What is aoe2-probe?
 This is a rust library for editing aoe2scenorio files from AoE2 DE.
 
