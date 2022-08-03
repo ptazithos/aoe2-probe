@@ -113,7 +113,14 @@ impl Token {
         }
     }
 
-    pub fn try_vec(&mut self) -> &mut Vec<Token> {
+    pub fn try_vec(&self) -> &Vec<Token> {
+        match self {
+            Token::Vector(value) => value,
+            _ => panic!("Not a vec element!"),
+        }
+    }
+
+    pub fn try_mut_vec(&mut self) -> &mut Vec<Token> {
         match self {
             Token::Vector(value) => value,
             _ => panic!("Not a vec element!"),
@@ -125,6 +132,27 @@ impl Token {
             Token::UInt8(num) => *num as u64,
             Token::UInt16(num) => *num as u64,
             Token::UInt32(num) => *num as u64,
+            Token::Int8(num) => {
+                if *num >= 0 {
+                    *num as u64
+                } else {
+                    0
+                }
+            }
+            Token::Int16(num) => {
+                if *num >= 0 {
+                    *num as u64
+                } else {
+                    0
+                }
+            }
+            Token::Int32(num) => {
+                if *num >= 0 {
+                    *num as u64
+                } else {
+                    0
+                }
+            }
             Token::Float32(num) => {
                 if *num == 2.0 {
                     1
