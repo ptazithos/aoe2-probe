@@ -256,7 +256,13 @@ impl Token {
                 }
             }
             Token::Float64(num) => *num as u64,
-            Token::Vector(vec) => vec[0].try_compatible_u64(),
+            Token::Vector(vec) => {
+                if vec.len() > 0 {
+                    vec[0].try_compatible_u64()
+                } else {
+                    0
+                }
+            }
             _ => panic!("Not compatible value!"),
         }
     }

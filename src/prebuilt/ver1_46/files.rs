@@ -19,7 +19,7 @@ impl Files {
             "number_of_ai_files".to_string(),
             NumericPatch {
                 source: vec!["ai_files_present".to_string()],
-                dep_type: DepType::Exist,
+                dep_type: DepType::Calculate,
                 manipulation: Manipulation::Equal,
             },
         );
