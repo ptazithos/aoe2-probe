@@ -13,7 +13,7 @@ categories = ["game-development", "parsing"]
 exclude = [
     "resources",
     "examples",
-    ".github"
+    ".circleci"
 ]
 
 
