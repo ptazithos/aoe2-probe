@@ -1,4 +1,4 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/ptazithos/aoe2-probe/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/ptazithos/aoe2-probe/tree/main)
+[![CircleCI](https://img.shields.io/circleci/build/github/ptazithos/aoe2-probe/main)](https://dl.circleci.com/status-badge/redirect/gh/ptazithos/aoe2-probe/tree/main)
 [![Crates.io](https://img.shields.io/crates/v/aoe2-probe.svg)](https://crates.io/crates/aoe2-probe)
 [![GPL-3.0 licensed](https://img.shields.io/badge/license-GPL-blue.svg)](./LICENSE)
 ## What is aoe2-probe?
