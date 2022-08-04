@@ -1,0 +1,22 @@
+version: 2.1
+
+
+jobs:
+  lint-test-build:
+    docker:
+      - image: cimg/rust:1.62.0
+    steps:
+      - checkout
+      - run: cargo --version
+      - run: cargo clippy
+      - run: cargo test
+      - run: cargo build --verbose
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - lint-test-build
+
+
+
