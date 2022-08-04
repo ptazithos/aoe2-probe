@@ -13,6 +13,7 @@ jobs:
     docker:
       - image: cimg/rust:1.62.0
     steps:
+      - checkout
       - run: cargo --version
       - run: cargo test
 
