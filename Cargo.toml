@@ -45,4 +45,8 @@ path = "examples/print_info.rs"
 name = "update_attr"
 path = "examples/update_attr.rs"
 
+[[example]]
+name = "type_check"
+path = "examples/type_check.rs"
+
 
