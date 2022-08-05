@@ -1,7 +1,6 @@
 pub mod io;
 pub mod parse;
 pub mod prebuilt;
-pub mod proxy;
 mod scenorio;
 pub mod utils;
 
