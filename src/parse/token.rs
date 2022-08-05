@@ -1,3 +1,5 @@
+use std::collections::VecDeque;
+
 use crate::utils::{DynString, LinkedHashMap, C256, C4};
 
 use super::serde::Serialize;
@@ -26,6 +28,24 @@ pub enum Token {
 }
 
 impl Token {
+    pub fn get_by_path(&self, path: &str) -> &Token {
+        let keys: Vec<&str> = path.split('/').filter(|str| str.len() > 0).collect();
+        let mut value = self;
+        for key in keys {
+            value = &value.try_map()[key];
+        }
+        value
+    }
+
+    pub fn get_by_path_mut(&mut self, path: &str) -> &mut Token {
+        let keys: Vec<&str> = path.split('/').filter(|str| str.len() > 0).collect();
+        let mut value = self;
+        for key in keys {
+            value = &mut value.try_mut_map()[key];
+        }
+        value
+    }
+
     pub fn try_u8(&self) -> &u8 {
         match self {
             Token::UInt8(value) => value,
