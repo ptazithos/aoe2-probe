@@ -32,10 +32,10 @@ use aoe2_probe::scenorio::Scenorio;
 
 //versio's structure definition can be found in the folder /src/prebuilt/ver1_46/versio.rs
 let mut scenorio = Scenorio::from_file("./resources/chapter_1.aoe2scenario");
-let file_header = scenorio.versio.try_mut_map()["file_header"].try_mut_map();
-let creator = file_header["creator_name"].try_mut_str32();
+
+let author = scenorio.versio.get_by_path_mut("/file_header/creator_name");
 //Update the creator name.
-creator.set_content("Arian");
+author.try_mut_str32().set_content("Arian");
 ```
 
 **customize a structure:**
