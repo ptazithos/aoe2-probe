@@ -20,11 +20,11 @@ fn main() {
     //value compare
     println!(
         "uint16_token's value doesn't equal to another_uint16_token? Answer {}",
-        uin16_token.try_u16() == another_uint16_token.try_u16()
+        uin16_token.try_u16() != another_uint16_token.try_u16()
     );
 
     println!(
         "uint16_token's value equals to uint8_token? Answer {}",
-        *uin16_token.try_u16() != (*uin8_token.try_u8() as u16)
+        *uin16_token.try_u16() == (*uin8_token.try_u8() as u16)
     );
 }
