@@ -1,4 +1,4 @@
-use aoe2_probe::scenorio::Scenorio;
+use aoe2_probe::Scenorio;
 
 fn main() {
     let scenorio = Scenorio::from_file("./resources/chapter_1.aoe2scenario");

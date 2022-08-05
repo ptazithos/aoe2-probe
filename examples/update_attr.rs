@@ -1,4 +1,4 @@
-use aoe2_probe::scenorio::Scenorio;
+use aoe2_probe::Scenorio;
 
 fn main() {
     //This example scenario file contains several texts encoded by utf8-cn, enable this locate if you want to see more details.
