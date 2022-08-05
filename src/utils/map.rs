@@ -72,6 +72,10 @@ impl LinkedHashMap {
         true
     }
 
+    pub fn contains(&self, key: &str) -> bool {
+        self.raw_list.contains(&key.to_string())
+    }
+
     pub fn keys(&self) -> &Vec<String> {
         &self.raw_list
     }

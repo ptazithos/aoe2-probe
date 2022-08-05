@@ -26,6 +26,90 @@ pub enum Token {
 }
 
 impl Token {
+    pub fn is_uint8(&self) -> bool {
+        match self {
+            Token::UInt8(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_uint16(&self) -> bool {
+        match self {
+            Token::UInt16(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_uint32(&self) -> bool {
+        match self {
+            Token::UInt32(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_int8(&self) -> bool {
+        match self {
+            Token::Int8(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_int16(&self) -> bool {
+        match self {
+            Token::Int16(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_int32(&self) -> bool {
+        match self {
+            Token::Int32(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_float32(&self) -> bool {
+        match self {
+            Token::Float32(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_float64(&self) -> bool {
+        match self {
+            Token::Float64(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_char4(&self) -> bool {
+        match self {
+            Token::Char4(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_char256(&self) -> bool {
+        match self {
+            Token::Char256(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_union(&self) -> bool {
+        match self {
+            Token::Union(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_vector(&self) -> bool {
+        match self {
+            Token::Vector(_) => true,
+            _ => false,
+        }
+    }
+
     pub fn try_u8(&self) -> &u8 {
         match self {
             Token::UInt8(value) => value,
