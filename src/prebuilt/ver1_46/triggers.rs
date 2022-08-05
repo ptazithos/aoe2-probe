@@ -9,7 +9,7 @@ impl Triggers {
         let mut root = LinkedHashMap::with_capacity(9);
         root.push_back("trigger_version", 2.6_f64);
         root.push_back("trigger_instruction_start", 0_i8);
-        root.push_back("number_of_triggers", 0_i32);
+        root.push_back("number_of_triggers", 0_u32);
         root.push_back("trigger_data", vec![Trigger::template()]);
         root.patchs.insert(
             "trigger_data".to_string(),
