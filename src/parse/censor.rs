@@ -4,7 +4,7 @@ pub struct Censor {}
 
 impl Censor {
     pub fn is_template(root: &Token, template: &Token, depth: usize) -> bool {
-        if depth <= 0 {
+        if depth == 0 {
             return true;
         }
         match root {

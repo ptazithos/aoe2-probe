@@ -4,6 +4,7 @@ use crate::{
     io::Source,
     parse::{serde::Serialize, Token, TokenBuilder},
     prebuilt::ver1_46,
+    proxy::TriggersProxy,
 };
 use std::{
     fs::{self, File, OpenOptions},
@@ -12,6 +13,7 @@ use std::{
 
 pub struct Scenorio {
     pub versio: Token,
+    version: String,
 }
 
 impl Scenorio {
@@ -44,6 +46,7 @@ impl Scenorio {
                         &ver1_46::Versio::template(),
                         &mut source,
                     ),
+                    version,
                 }
             }
             _ => panic!("Unsupport version!"),
@@ -81,6 +84,10 @@ impl Scenorio {
             .unwrap();
 
         file.write_all(&buffer).unwrap();
+    }
+
+    pub fn triggers_proxy(&mut self) -> TriggersProxy {
+        TriggersProxy::new(&self.version, &mut self.versio)
     }
 
     fn get_scenorio_version(buffer: &[u8]) -> String {
