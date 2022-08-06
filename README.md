@@ -40,7 +40,7 @@ author.try_mut_str32().set_content("Arian");
 
 **customize a structure:**
 ```rust
-//Define a socre record
+//Define a score record
 let mut root = LinkedHashMap::new();
 root.push_back("score", Token::Int16(100));
 root.push_back("name", Token::Str32(DynString::with_capacity(12, "anonymous")));
@@ -52,7 +52,7 @@ root.to_le_vec();
 root.from_le_vec();
 ```
 
-Run exampes with the following command:
+Run examples with the following command:
 ```shell
 cargo run --example read_write
 ```
@@ -65,6 +65,7 @@ println!("{:?}", &scenario.versio())
 |Version|Support|
 |----|----|
 |ver.1.46|Support|
+|ver.1.47|Experimental|
 
 Currently, only version 1.46 and newer will be firstly supported.
 
@@ -74,6 +75,6 @@ Currently, only version 1.46 and newer will be firstly supported.
 * [env_logger](https://github.com/env-logger-rs/env_logger/): Implements a logger that can be configured via environment variables.
 
 ## Acknowledgment
-This library is inpired by [AoE2ScenarioParser](https://github.com/KSneijders/AoE2ScenarioParser) and [Trigger Craft](https://github.com/MegaDusknoir/AoE2TriggerCraft)
+This library is inspired by [AoE2ScenarioParser](https://github.com/KSneijders/AoE2ScenarioParser) and [Trigger Craft](https://github.com/MegaDusknoir/AoE2TriggerCraft)
 
 

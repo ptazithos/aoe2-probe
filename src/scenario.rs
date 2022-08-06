@@ -3,7 +3,7 @@ use miniz_oxide::{deflate::compress_to_vec, inflate::decompress_to_vec};
 use crate::{
     io::Source,
     parse::{serde::Serialize, Token, TokenBuilder},
-    prebuilt::ver1_46,
+    prebuilt::{ver1_46, ver1_47},
     proxy::TriggersProxy,
 };
 use std::{
@@ -44,6 +44,25 @@ impl Scenario {
                 Scenario {
                     versio: TokenBuilder::create_from_template(
                         &ver1_46::Versio::template(),
+                        &mut source,
+                    ),
+                    version,
+                }
+            }
+            "1.47" => {
+                let header = TokenBuilder::create_from_template(
+                    &ver1_46::FileHeader::template(),
+                    &mut source,
+                );
+
+                let mut uncompressed = header.to_le_vec();
+                let content = decompress_to_vec(&source.get_rest_vec()).unwrap();
+                uncompressed.extend(content);
+
+                let mut source = Source::new(uncompressed);
+                Scenario {
+                    versio: TokenBuilder::create_from_template(
+                        &ver1_47::Versio::template(),
                         &mut source,
                     ),
                     version,
