@@ -1,7 +1,7 @@
-use aoe2_probe::Scenorio;
+use aoe2_probe::Scenario;
 
 fn main() {
-    let scenorio = Scenorio::from_file("./resources/chapter_1.aoe2scenario");
-    println!("{:?}", &scenorio.versio);
-    scenorio.to_file("./resources/temp.aoe2scenario");
+    let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    println!("{:?}", &scenario.versio);
+    scenario.to_file("./resources/temp.aoe2scenario");
 }

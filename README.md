@@ -2,14 +2,14 @@
 [![Crates.io](https://img.shields.io/crates/v/aoe2-probe.svg)](https://crates.io/crates/aoe2-probe)
 [![GPL-3.0 licensed](https://img.shields.io/badge/license-GPLv3-brightgreen.svg)](./LICENSE)
 ## What is aoe2-probe?
-This is a rust library for editing aoe2scenorio files from AoE2 DE.
+This is a rust library for editing aoe2scenario files from AoE2 DE.
 
 ## WARNING
 * aoe2-probe is currently in the very early stage. APIs may change dramatically in following updates. Please don't use this project in serious development.
 * Due to the zlib implementation difference,  the exported file cannot be as same as the imported file, while the content of files is constant(Don't worry, AoE2 DE still understand it).Backing up the original is always recommended.
 
 ## Design Goals
-* Full ability to access every byte in aoe2scenorio files.
+* Full ability to access every byte in aoe2scenario files.
 * Editing every bit with a reliable correctness check. todo!()
 * Provides constant API compatibility across game versions. todo!()
 
@@ -18,22 +18,22 @@ Under the directory **./examples/**, you can find several simple showcases.
 
 **Import and export files:**
 ```rust
-use aoe2_probe::scenorio::Scenorio;
+use aoe2_probe::scenario::Scenario;
 
-//Reading scenorio content from the .aoe2scenorio file
-let scenorio = Scenorio::from_file("./resources/chapter_1.aoe2scenario");
-//saving content to a new .aoe2scenorio file
-scenorio.to_file("./resources/temp.aoe2scenario");
+//Reading scenario content from the .aoe2scenario file
+let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+//saving content to a new .aoe2scenario file
+scenario.to_file("./resources/temp.aoe2scenario");
 ```
 
 **Update attributes:**
 ```rust
-use aoe2_probe::scenorio::Scenorio;
+use aoe2_probe::scenario::Scenario;
 
 //versio's structure definition can be found in the folder /src/prebuilt/ver1_46/versio.rs
-let mut scenorio = Scenorio::from_file("./resources/chapter_1.aoe2scenario");
+let mut scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
 
-let author = scenorio.versio.get_by_path_mut("/file_header/creator_name");
+let author = scenario.versio.get_by_path_mut("/file_header/creator_name");
 //Update the creator name.
 author.try_mut_str32().set_content("Arian");
 ```
@@ -58,8 +58,8 @@ cargo run --example read_write
 ```
 Every member of **versio** and itself implements fmt::Debug trait. Print them if you want to know more.
 ```rust
-let scenorio = Scenorio::from_file("./resources/chapter_1.aoe2scenario");
-println!("{:?}", &scenorio.versio())
+let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+println!("{:?}", &scenario.versio())
 ```
 ## Supports
 |Version|Support|

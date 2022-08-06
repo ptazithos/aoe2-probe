@@ -1,8 +1,8 @@
-use aoe2_probe::{parse::Censor, ver1_46::Versio, Scenorio};
+use aoe2_probe::{parse::Censor, ver1_46::Versio, Scenario};
 
 fn main() {
-    let scenorio = Scenorio::from_file("./resources/chapter_1.aoe2scenario");
-    let versio = &scenorio.versio;
+    let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    let versio = &scenario.versio;
     let mut template = Versio::template();
 
     template.try_mut_map().update("file_header", 1_u32);

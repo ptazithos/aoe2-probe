@@ -1,9 +1,9 @@
 [package]
 name = "aoe2-probe"
-version = "0.2.4"
+version = "0.2.5"
 edition = "2021"
 license = "GPL-3.0-or-later"
-description = "A rust library for editing aoe2scenorio files from AoE2 DE."
+description = "A rust library for editing aoe2scenario files from AoE2 DE."
 homepage = "https://github.com/ptazithos/aoe2-probe"
 repository = "https://github.com/ptazithos/aoe2-probe"
 readme = "README.md"

@@ -11,12 +11,12 @@ use std::{
     io::{Read, Write},
 };
 
-pub struct Scenorio {
+pub struct Scenario {
     pub versio: Token,
     version: String,
 }
 
-impl Scenorio {
+impl Scenario {
     pub fn from_file(filename: &str) -> Self {
         let mut file = File::open(&filename).expect("File not found");
         let metadata = fs::metadata(&filename).expect("Unable to read metadata");
@@ -27,7 +27,7 @@ impl Scenorio {
     }
 
     pub fn from_le_vec(buffer: Vec<u8>) -> Self {
-        let version = Self::get_scenorio_version(&buffer);
+        let version = Self::get_scenario_version(&buffer);
         let mut source = Source::new(buffer);
         match version.as_str() {
             "1.46" => {
@@ -41,7 +41,7 @@ impl Scenorio {
                 uncompressed.extend(content);
 
                 let mut source = Source::new(uncompressed);
-                Scenorio {
+                Scenario {
                     versio: TokenBuilder::create_from_template(
                         &ver1_46::Versio::template(),
                         &mut source,
@@ -90,7 +90,7 @@ impl Scenorio {
         TriggersProxy::new(&self.version, &mut self.versio)
     }
 
-    fn get_scenorio_version(buffer: &[u8]) -> String {
+    fn get_scenario_version(buffer: &[u8]) -> String {
         std::str::from_utf8(&buffer[0..4]).unwrap().to_string()
     }
 }
