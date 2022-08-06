@@ -1,5 +1,6 @@
 use crate::{
     parse::{Censor, Token},
+    prebuilt::ver1_47,
     ver1_46,
 };
 
@@ -22,13 +23,24 @@ impl<'a> TriggersProxy<'a> {
                     versio: token,
                 }
             }
+            "1.47" => {
+                let template = ver1_47::Versio::template();
+                if !Censor::is_template(token, &template, 2) {
+                    panic!("The given versio doesn't have a correct format");
+                }
+
+                TriggersProxy {
+                    version: ver.to_string(),
+                    versio: token,
+                }
+            }
             _ => panic!("Unsupported version!"),
         }
     }
 
     pub fn push(&mut self, value: Token) {
         match self.version.as_str() {
-            "1.46" => {
+            "1.46" | "1.47" => {
                 let template = ver1_46::Trigger::template();
                 if !Censor::is_template(&value, &template, 2) {
                     panic!("The given trigger doesn't have a correct format");
@@ -59,7 +71,7 @@ impl<'a> TriggersProxy<'a> {
 
     pub fn insert(&mut self, display_index: usize, execute_index: usize, value: Token) {
         match self.version.as_str() {
-            "1.46" => {
+            "1.46" | "1.47" => {
                 let trigger_display_order_array = self
                     .versio
                     .get_by_path_mut("/triggers/trigger_display_order_array")
@@ -105,7 +117,7 @@ impl<'a> TriggersProxy<'a> {
 
     fn set_trigger_count(&mut self, count: u32) {
         match self.version.as_str() {
-            "1.46" => {
+            "1.46" | "1.47" => {
                 let trigger_count = self
                     .versio
                     .get_by_path_mut("/file_header/trigger_count")
