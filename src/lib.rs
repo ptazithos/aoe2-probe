@@ -2,9 +2,9 @@ pub mod io;
 pub mod parse;
 pub mod prebuilt;
 mod proxy;
-mod scenorio;
+mod scenario;
 
 pub mod utils;
 pub use io::Source;
 pub use prebuilt::ver1_46;
-pub use scenorio::Scenorio;
+pub use scenario::Scenario;
