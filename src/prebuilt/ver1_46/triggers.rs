@@ -11,7 +11,7 @@ impl Triggers {
         root.push_back("trigger_instruction_start", 0_i8);
         root.push_back("number_of_triggers", 0_u32);
         root.push_back("trigger_data", vec![Trigger::template()]);
-        root.patchs.insert(
+        root.patches.insert(
             "trigger_data".to_string(),
             NumericPatch {
                 source: vec!["number_of_triggers".to_string()],
@@ -20,7 +20,7 @@ impl Triggers {
             },
         );
         root.push_back("trigger_display_order_array", vec![0_u32.into()]);
-        root.patchs.insert(
+        root.patches.insert(
             "trigger_display_order_array".to_string(),
             NumericPatch {
                 source: vec!["number_of_triggers".to_string()],
@@ -32,7 +32,7 @@ impl Triggers {
         root.push_back("unknown_bytes", vec![0_u8.into(); 1028]);
         root.push_back("number_of_variables", 0_u32);
         root.push_back("variable_data", vec![Variable::template()]);
-        root.patchs.insert(
+        root.patches.insert(
             "variable_data".to_string(),
             NumericPatch {
                 source: vec!["number_of_variables".to_string()],

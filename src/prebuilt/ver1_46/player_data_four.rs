@@ -29,7 +29,7 @@ impl PlayerDataFour {
                 3_u8.into(),
             ],
         );
-        root.patchs.insert(
+        root.patches.insert(
             "diplomacy_for_interaction".to_string(),
             NumericPatch {
                 source: vec!["player_count_for_diplomacy".to_string()],
@@ -57,7 +57,7 @@ impl PlayerDataFour {
         root.push_back("victory_version", 2.0_f32);
         root.push_back("unknown_1", 0_u16);
         root.push_back("unknown_2", vec![0_u8.into(); 7]);
-        root.patchs.insert(
+        root.patches.insert(
             "unknown_2".to_string(),
             NumericPatch {
                 source: vec!["victory_version".to_string()],
@@ -71,7 +71,7 @@ impl PlayerDataFour {
             vec![vec![0_u8.into(); 44].into(); 1],
         );
 
-        root.patchs.insert(
+        root.patches.insert(
             "unknown_structure_grand_theft_empires".to_string(),
             NumericPatch {
                 source: vec!["unknown_1".to_string()],
@@ -81,7 +81,7 @@ impl PlayerDataFour {
         );
 
         root.push_back("unknown_3", vec![0_u8.into(); 1]);
-        root.patchs.insert(
+        root.patches.insert(
             "unknown_3".to_string(),
             NumericPatch {
                 source: vec!["victory_version".to_string()],
@@ -97,7 +97,7 @@ impl PlayerDataFour {
             vec![vec![0_u8.into(); 32].into(); 1],
         );
 
-        root.patchs.insert(
+        root.patches.insert(
             "unknown_structure_ww_campaign_2".to_string(),
             NumericPatch {
                 source: vec!["unknown_3".to_string()],

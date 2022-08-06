@@ -65,7 +65,7 @@ impl Effect {
         root.push_back("message", DynString::with_capacity(0_u32, ""));
         root.push_back("sound_name", DynString::with_capacity(0_u32, ""));
         root.push_back("selected_object_ids", vec![0_i32.into()]);
-        root.patchs.insert(
+        root.patches.insert(
             "selected_object_ids".to_string(),
             NumericPatch {
                 source: vec!["number_of_units_selected".to_string()],

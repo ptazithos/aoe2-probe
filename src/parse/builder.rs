@@ -24,12 +24,12 @@ impl TokenBuilder {
             Token::Union(map) => {
                 let mut mock = LinkedHashMap::new();
                 let keys = map.keys();
-                let patchs = &map.patchs;
+                let patches = &map.patches;
                 for (index, token) in map.iter().enumerate() {
                     let key = &keys[index];
                     let mut template = token.clone();
-                    if patchs.contains_key(key) {
-                        let patch = &patchs[key];
+                    if patches.contains_key(key) {
+                        let patch = &patches[key];
                         match patch.dep_type {
                             crate::utils::map::DepType::Exist => {
                                 let flag = patch

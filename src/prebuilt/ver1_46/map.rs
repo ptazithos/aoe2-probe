@@ -32,7 +32,7 @@ impl Map {
         root.push_back("map_width", 120_u32);
         root.push_back("map_height", 120_u32);
         root.push_back("terrain_data", vec![Terrain::template(); 1]);
-        root.patchs.insert(
+        root.patches.insert(
             "terrain_data".to_string(),
             NumericPatch {
                 source: vec!["map_width".to_string(), "map_height".to_string()],

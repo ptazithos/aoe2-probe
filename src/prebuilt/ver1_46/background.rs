@@ -17,7 +17,7 @@ impl Background {
         root.push_back("picture_orientation", 0_i16);
 
         root.push_back("bitmap_info", vec![BitmapInfo::template()]);
-        root.patchs.insert(
+        root.patches.insert(
             "bitmap_info".to_string(),
             NumericPatch {
                 source: vec!["bitmap_width".to_string(), "bitmap_height".to_string()],

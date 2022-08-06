@@ -22,7 +22,7 @@ impl<'a> TriggersProxy<'a> {
                     versio: token,
                 }
             }
-            _ => panic!("Unsupport version!"),
+            _ => panic!("Unsupported version!"),
         }
     }
 
@@ -53,7 +53,7 @@ impl<'a> TriggersProxy<'a> {
 
                 self.set_trigger_count(*trigger_count + 1);
             }
-            _ => panic!("Unsupport version!"),
+            _ => panic!("Unsupported version!"),
         };
     }
 
@@ -99,7 +99,7 @@ impl<'a> TriggersProxy<'a> {
 
                 self.set_trigger_count(*trigger_count + 1);
             }
-            _ => panic!("Unsupport version!"),
+            _ => panic!("Unsupported version!"),
         }
     }
 
@@ -124,7 +124,7 @@ impl<'a> TriggersProxy<'a> {
                     .try_mut_u32();
                 *number_of_triggers = count;
             }
-            _ => panic!("Unsupport version!"),
+            _ => panic!("Unsupported version!"),
         }
     }
 }

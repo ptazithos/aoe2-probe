@@ -25,7 +25,7 @@ impl Trigger {
         root.push_back("short_description", DynString::with_capacity(0_u32, ""));
         root.push_back("number_of_effects", 0_i32);
         root.push_back("effect_data", vec![Effect::template(); 1]);
-        root.patchs.insert(
+        root.patches.insert(
             "effect_data".to_string(),
             NumericPatch {
                 source: vec!["number_of_effects".to_string()],
@@ -34,7 +34,7 @@ impl Trigger {
             },
         );
         root.push_back("effect_display_order_array", vec![0_i32.into()]);
-        root.patchs.insert(
+        root.patches.insert(
             "effect_display_order_array".to_string(),
             NumericPatch {
                 source: vec!["number_of_effects".to_string()],
@@ -45,7 +45,7 @@ impl Trigger {
 
         root.push_back("number_of_conditions", 0_i32);
         root.push_back("condition_data", vec![Condition::template(); 1]);
-        root.patchs.insert(
+        root.patches.insert(
             "condition_data".to_string(),
             NumericPatch {
                 source: vec!["number_of_conditions".to_string()],
@@ -55,7 +55,7 @@ impl Trigger {
         );
 
         root.push_back("condition_display_order_array", vec![0_i32.into()]);
-        root.patchs.insert(
+        root.patches.insert(
             "condition_display_order_array".to_string(),
             NumericPatch {
                 source: vec!["number_of_conditions".to_string()],
