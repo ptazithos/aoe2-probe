@@ -29,7 +29,7 @@ pub struct NumericPatch {
 pub struct LinkedHashMap {
     raw_list: Vec<String>,
     raw_hashmap: HashMap<String, Token>,
-    pub patchs: HashMap<String, NumericPatch>,
+    pub patches: HashMap<String, NumericPatch>,
 }
 
 impl LinkedHashMap {
@@ -37,7 +37,7 @@ impl LinkedHashMap {
         LinkedHashMap {
             raw_list: Vec::new(),
             raw_hashmap: HashMap::new(),
-            patchs: HashMap::new(),
+            patches: HashMap::new(),
         }
     }
 
@@ -45,7 +45,7 @@ impl LinkedHashMap {
         LinkedHashMap {
             raw_list: Vec::with_capacity(capacity),
             raw_hashmap: HashMap::with_capacity(capacity),
-            patchs: HashMap::new(),
+            patches: HashMap::new(),
         }
     }
 

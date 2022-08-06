@@ -15,7 +15,7 @@ impl Versio {
         root.push_back("data_header", DataHeader::template());
         root.push_back("message", Message::template());
         root.push_back("cinematics", Cinematics::template());
-        root.push_back("backgroud_image", Background::template());
+        root.push_back("background_image", Background::template());
         root.push_back("player_data_two", PlayerDataTwo::template());
         root.push_back("global_victory", GlobalVictory::template());
         root.push_back("diplomacy", Diplomacy::template());

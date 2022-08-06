@@ -49,7 +49,7 @@ impl Scenario {
                     version,
                 }
             }
-            _ => panic!("Unsupport version!"),
+            _ => panic!("Unsupported version!"),
         }
     }
 

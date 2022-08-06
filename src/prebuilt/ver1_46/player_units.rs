@@ -9,7 +9,7 @@ impl PlayerUnits {
         let mut root = LinkedHashMap::with_capacity(2);
         root.push_back("unit_count", 0_u32);
         root.push_back("units", vec![Unit::template(); 1]);
-        root.patchs.insert(
+        root.patches.insert(
             "units".to_string(),
             NumericPatch {
                 source: vec!["unit_count".to_string()],

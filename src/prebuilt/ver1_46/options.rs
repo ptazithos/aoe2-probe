@@ -22,7 +22,7 @@ impl Options {
                 &format!("{}{}", "disabled_tech_ids_player_", &fix),
                 vec![0_u32.into()],
             );
-            root.patchs.insert(
+            root.patches.insert(
                 format!("{}{}", "disabled_tech_ids_player_", &fix),
                 NumericPatch {
                     source: vec![format!("{}{}", "number_of_disabled_techs_player_", &fix)],
@@ -48,7 +48,7 @@ impl Options {
                 &format!("{}{}", "disabled_unit_ids_player_", &fix),
                 vec![0_u32.into()],
             );
-            root.patchs.insert(
+            root.patches.insert(
                 format!("{}{}", "disabled_unit_ids_player_", &fix),
                 NumericPatch {
                     source: vec![format!("{}{}", "number_of_disabled_units_player_", &fix)],
@@ -74,7 +74,7 @@ impl Options {
                 &format!("{}{}", "disabled_building_ids_player_", &fix),
                 vec![0_u32.into()],
             );
-            root.patchs.insert(
+            root.patches.insert(
                 format!("{}{}", "disabled_building_ids_player_", &fix),
                 NumericPatch {
                     source: vec![format!(

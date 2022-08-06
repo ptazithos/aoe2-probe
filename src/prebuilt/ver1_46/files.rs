@@ -15,7 +15,7 @@ impl Files {
         root.push_back("ai_files_present", 0_u32);
         root.push_back("unknown", vec![0_u8.into(); 4]);
         root.push_back("number_of_ai_files", vec![0_u32.into()]);
-        root.patchs.insert(
+        root.patches.insert(
             "number_of_ai_files".to_string(),
             NumericPatch {
                 source: vec!["ai_files_present".to_string()],
@@ -25,7 +25,7 @@ impl Files {
         );
 
         root.push_back("ai_files", vec![AI2::template(); 1]);
-        root.patchs.insert(
+        root.patches.insert(
             "ai_files".to_string(),
             NumericPatch {
                 source: vec!["number_of_ai_files".to_string()],

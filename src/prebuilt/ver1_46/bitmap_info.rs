@@ -18,7 +18,7 @@ impl BitmapInfo {
         root.push_back("important_colors", 0_u32);
 
         root.push_back("colors_used", vec![0_u32.into()]);
-        root.patchs.insert(
+        root.patches.insert(
             "colors_used".to_string(),
             NumericPatch {
                 source: vec!["number_of_colors_used".to_string()],
@@ -28,7 +28,7 @@ impl BitmapInfo {
         );
 
         root.push_back("image", vec![0_u8.into()]);
-        root.patchs.insert(
+        root.patches.insert(
             "image".to_string(),
             NumericPatch {
                 source: vec!["width".to_string(), "height".to_string()],
