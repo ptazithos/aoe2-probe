@@ -16,6 +16,9 @@ exclude = [
     ".circleci"
 ]
 
+[lib]
+bench = false
+
 
 [dependencies]
 log = "0.4.17"
@@ -23,6 +26,11 @@ miniz_oxide ="0.5.3"
 
 [dev-dependencies]
 env_logger = "0.9.0"
+criterion = {version = "0.3.6",features = ["html_reports"]}
+
+[[bench]]
+name = "parsing"
+harness = false
 
 
 [[example]]
