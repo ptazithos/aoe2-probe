@@ -6,7 +6,9 @@ orbs:
 workflows:
   production:
     jobs:
-      - rust/lint-test-build
+      - rust/lint-test-build:
+          release: true
+          version: 1.62.0
 
 
 
