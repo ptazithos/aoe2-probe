@@ -41,7 +41,7 @@ author.try_mut_str32().set_content("Arian");
 **customize a structure:**
 ```rust
 //Define a score record
-let mut root = LinkedHashMap::new();
+let mut root = PatchedMap::new();
 root.push_back("score", Token::Int16(100));
 root.push_back("name", Token::Str32(DynString::with_capacity(12, "anonymous")));
 

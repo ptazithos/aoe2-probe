@@ -20,6 +20,7 @@ exclude = [
 [dependencies]
 log = "0.4.17"
 miniz_oxide ="0.5.3"
+linked-hash-map = "0.5.6"
 
 [dev-dependencies]
 env_logger = "0.9.0"

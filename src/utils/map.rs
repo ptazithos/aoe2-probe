@@ -4,6 +4,8 @@ use std::{
     ops::{Index, IndexMut},
 };
 
+use linked_hash_map::{Iter, LinkedHashMap};
+
 use crate::parse::{serde::Serialize, Token};
 
 #[derive(Clone)]
@@ -26,25 +28,22 @@ pub struct NumericPatch {
 }
 
 #[derive(Clone, Default)]
-pub struct LinkedHashMap {
-    raw_list: Vec<String>,
-    raw_hashmap: HashMap<String, Token>,
+pub struct PatchedMap {
+    raw_hashmap: LinkedHashMap<String, Token>,
     pub patches: HashMap<String, NumericPatch>,
 }
 
-impl LinkedHashMap {
+impl PatchedMap {
     pub fn new() -> Self {
-        LinkedHashMap {
-            raw_list: Vec::new(),
-            raw_hashmap: HashMap::new(),
+        PatchedMap {
+            raw_hashmap: LinkedHashMap::new(),
             patches: HashMap::new(),
         }
     }
 
     pub fn with_capacity(capacity: usize) -> Self {
-        LinkedHashMap {
-            raw_list: Vec::with_capacity(capacity),
-            raw_hashmap: HashMap::with_capacity(capacity),
+        PatchedMap {
+            raw_hashmap: LinkedHashMap::with_capacity(capacity),
             patches: HashMap::new(),
         }
     }
@@ -56,7 +55,6 @@ impl LinkedHashMap {
             return false;
         }
 
-        self.raw_list.push(key.clone());
         self.raw_hashmap.insert(key, value.into());
         true
     }
@@ -73,29 +71,29 @@ impl LinkedHashMap {
     }
 
     pub fn contains(&self, key: &str) -> bool {
-        self.raw_list.contains(&key.to_string())
+        self.raw_hashmap.contains_key(&key.to_string())
     }
 
-    pub fn keys(&self) -> &Vec<String> {
-        &self.raw_list
+    pub fn keys(&self) -> linked_hash_map::Keys<String, Token> {
+        self.raw_hashmap.keys()
     }
 
     pub fn iter(&self) -> SeqIter {
         SeqIter {
             index: 0,
-            ele: self,
+            ele: self.raw_hashmap.iter(),
         }
     }
 }
 
-impl Index<&str> for LinkedHashMap {
+impl Index<&str> for PatchedMap {
     type Output = Token;
     fn index(&self, index: &str) -> &Self::Output {
         &self.raw_hashmap[&index.to_string()]
     }
 }
 
-impl IndexMut<&str> for LinkedHashMap {
+impl IndexMut<&str> for PatchedMap {
     fn index_mut(&mut self, index: &str) -> &mut Self::Output {
         self.raw_hashmap.get_mut(&index.to_string()).unwrap()
     }
@@ -103,41 +101,36 @@ impl IndexMut<&str> for LinkedHashMap {
 
 pub struct SeqIter<'a> {
     index: usize,
-    ele: &'a LinkedHashMap,
+    ele: Iter<'a, String, Token>,
 }
 
 impl<'a> Iterator for SeqIter<'a> {
-    type Item = &'a Token;
+    type Item = (&'a String, &'a Token);
 
     fn next(&mut self) -> Option<Self::Item> {
-        let index = self.index;
-        let keys = self.ele.keys();
-        if index < keys.len() {
-            self.index += 1;
-            let key = &keys[index];
-            let res = &self.ele[key];
-            Some(res)
-        } else {
-            None
+        match self.ele.next() {
+            Some((key, value)) => {
+                self.index = self.index + 1;
+                Some((key, value))
+            }
+            None => None,
         }
     }
 }
 
-impl Serialize for LinkedHashMap {
+impl Serialize for PatchedMap {
     fn to_le_vec(&self) -> Vec<u8> {
-        self.iter().flat_map(|token| token.to_le_vec()).collect()
+        self.iter()
+            .flat_map(|(_, token)| token.to_le_vec())
+            .collect()
     }
 }
 
-impl fmt::Debug for LinkedHashMap {
+impl fmt::Debug for PatchedMap {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str("LinkedHashMap")?;
+        f.write_str("PatchedMap")?;
         f.debug_map()
-            .entries(
-                self.iter()
-                    .enumerate()
-                    .map(|(index, token)| (&self.keys()[index], token)),
-            )
+            .entries(self.iter().map(|(key, value)| (key, value)))
             .finish()
     }
 }

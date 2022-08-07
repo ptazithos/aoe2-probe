@@ -1,13 +1,13 @@
 use crate::{
     parse::Token,
-    utils::{DynString, LinkedHashMap, C4},
+    utils::{DynString, PatchedMap, C4},
 };
 
 pub struct FileHeader {}
 
 impl FileHeader {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(12);
+        let mut root = PatchedMap::with_capacity(12);
         root.push_back("version", C4::new("1.46"));
         root.push_back("header_length", 0_u32);
         root.push_back("savable", 6_i32);

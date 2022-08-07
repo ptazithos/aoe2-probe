@@ -9,14 +9,11 @@ pub struct Map {}
 
 impl Map {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(19);
+        let mut root = PatchedMap::with_capacity(19);
         root.push_back("starter_1", 0_u16);
         root.push_back("water_definition", DynString::with_capacity(0_u16, ""));
         root.push_back("starter_2", 0_u16);
-        root.push_back(
-            "map_color_mood",
-            DynString::with_capacity(5_u16, "Empty"),
-        );
+        root.push_back("map_color_mood", DynString::with_capacity(5_u16, "Empty"));
         root.push_back("starter_3", 0_u16);
         root.push_back("script_name", DynString::with_capacity(0_u16, ""));
         root.push_back("collide_and_correct", 0_u8);

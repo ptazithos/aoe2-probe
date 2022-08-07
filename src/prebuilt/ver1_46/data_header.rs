@@ -1,6 +1,6 @@
 use crate::{
     parse::Token,
-    utils::{DynString, LinkedHashMap, C256},
+    utils::{DynString, PatchedMap, C256},
 };
 
 use super::PlayerDataOne;
@@ -9,7 +9,7 @@ pub struct DataHeader {}
 
 impl DataHeader {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(8);
+        let mut root = PatchedMap::with_capacity(8);
         root.push_back("next_unit_id_to_place", 0_u32);
         root.push_back("version", 1.42_f32);
         root.push_back("tribe_names", vec![C256::new("").into(); 16]);

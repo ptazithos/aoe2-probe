@@ -9,7 +9,7 @@ pub struct Background {}
 
 impl Background {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(6);
+        let mut root = PatchedMap::with_capacity(6);
         root.push_back("ascii_filename", DynString::with_capacity(0_u16, ""));
         root.push_back("picture_version", 3_u32);
         root.push_back("bitmap_width", 0_u32);

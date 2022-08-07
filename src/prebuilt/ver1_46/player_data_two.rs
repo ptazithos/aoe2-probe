@@ -1,6 +1,6 @@
 use crate::{
     parse::Token,
-    utils::{DynString, LinkedHashMap},
+    utils::{DynString, PatchedMap},
 };
 
 use super::{Resource, AI};
@@ -9,7 +9,7 @@ pub struct PlayerDataTwo {}
 
 impl PlayerDataTwo {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(6);
+        let mut root = PatchedMap::with_capacity(6);
         root.push_back(
             "strings",
             vec![DynString::with_capacity(0_u16, "").into(); 32],

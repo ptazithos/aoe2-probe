@@ -1,10 +1,10 @@
-use crate::{parse::Token, utils::LinkedHashMap};
+use crate::{parse::Token, utils::PatchedMap};
 
 pub struct GlobalVictory {}
 
 impl GlobalVictory {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(11);
+        let mut root = PatchedMap::with_capacity(11);
         root.push_back("separator", 4294967197_u32);
         root.push_back("conquest_required", 0_u32);
         root.push_back("ruins", 0_u32);

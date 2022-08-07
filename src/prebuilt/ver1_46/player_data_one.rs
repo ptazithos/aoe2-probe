@@ -1,9 +1,9 @@
-use crate::{parse::Token, utils::LinkedHashMap};
+use crate::{parse::Token, utils::PatchedMap};
 
 pub struct PlayerDataOne {}
 impl PlayerDataOne {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(5);
+        let mut root = PatchedMap::with_capacity(5);
         root.push_back("active", 0_u32);
         root.push_back("human", 0_u32);
         root.push_back("civilization", 40_u32);

@@ -7,7 +7,7 @@ pub struct Effect {}
 
 impl Effect {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(58);
+        let mut root = PatchedMap::with_capacity(58);
         root.push_back("effect_type", 0_i32);
         root.push_back("static_value_46", 53_i32);
         root.push_back("ai_script_goal", -1_i32);

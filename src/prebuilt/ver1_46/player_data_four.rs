@@ -7,7 +7,7 @@ pub struct PlayerDataFour {}
 
 impl PlayerDataFour {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(18);
+        let mut root = PatchedMap::with_capacity(18);
         root.push_back("constant_name", DynString::with_capacity(0_u16, ""));
         root.push_back("editor_camera_x", 72.0_f32);
         root.push_back("editor_camera_y", 72.0_f32);
