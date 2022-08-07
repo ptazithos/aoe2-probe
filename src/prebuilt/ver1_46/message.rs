@@ -1,13 +1,13 @@
 use crate::{
     parse::Token,
-    utils::{DynString, LinkedHashMap},
+    utils::{DynString, PatchedMap},
 };
 
 pub struct Message {}
 
 impl Message {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(12);
+        let mut root = PatchedMap::with_capacity(12);
         root.push_back("instructions", 4294967294_u32);
         root.push_back("hints", 4294967294_u32);
         root.push_back("victory", 4294967294_u32);

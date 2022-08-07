@@ -4,7 +4,7 @@ pub struct Options {}
 
 impl Options {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(56);
+        let mut root = PatchedMap::with_capacity(56);
 
         for index in 1..9 {
             let fix = index.to_string();

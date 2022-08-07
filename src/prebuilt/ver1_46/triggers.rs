@@ -6,7 +6,7 @@ pub struct Triggers {}
 
 impl Triggers {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(9);
+        let mut root = PatchedMap::with_capacity(9);
         root.push_back("trigger_version", 2.6_f64);
         root.push_back("trigger_instruction_start", 0_i8);
         root.push_back("number_of_triggers", 0_u32);

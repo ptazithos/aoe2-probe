@@ -1,4 +1,4 @@
-use crate::utils::{DynString, LinkedHashMap, C256, C4};
+use crate::utils::{DynString, PatchedMap, C256, C4};
 
 use super::serde::Serialize;
 
@@ -21,7 +21,7 @@ pub enum Token {
     Str16(DynString<u16>),
     Str32(DynString<u32>),
 
-    Union(LinkedHashMap),
+    Union(PatchedMap),
     Vector(Vec<Token>),
 }
 
@@ -212,14 +212,14 @@ impl Token {
         }
     }
 
-    pub fn try_map(&self) -> &LinkedHashMap {
+    pub fn try_map(&self) -> &PatchedMap {
         match self {
             Token::Union(value) => value,
             _ => panic!("Not a union element!"),
         }
     }
 
-    pub fn try_mut_map(&mut self) -> &mut LinkedHashMap {
+    pub fn try_mut_map(&mut self) -> &mut PatchedMap {
         match self {
             Token::Union(value) => value,
             _ => panic!("Not a union element!"),
@@ -406,8 +406,8 @@ impl From<DynString<u32>> for Token {
     }
 }
 
-impl From<LinkedHashMap> for Token {
-    fn from(map: LinkedHashMap) -> Self {
+impl From<PatchedMap> for Token {
+    fn from(map: PatchedMap) -> Self {
         Token::Union(map)
     }
 }

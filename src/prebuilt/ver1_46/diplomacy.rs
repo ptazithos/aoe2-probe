@@ -1,4 +1,4 @@
-use crate::{parse::Token, utils::LinkedHashMap};
+use crate::{parse::Token, utils::PatchedMap};
 
 use super::PlayerDiplomacy;
 
@@ -6,7 +6,7 @@ pub struct Diplomacy {}
 
 impl Diplomacy {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(8);
+        let mut root = PatchedMap::with_capacity(8);
         root.push_back(
             "per_player_diplomacy",
             vec![PlayerDiplomacy::template(); 16],

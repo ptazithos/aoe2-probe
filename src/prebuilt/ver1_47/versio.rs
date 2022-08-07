@@ -1,12 +1,12 @@
 use crate::prebuilt::ver1_47;
-use crate::{parse::Token, utils::LinkedHashMap};
+use crate::{parse::Token, utils::PatchedMap};
 
 pub struct Versio {}
 
 #[allow(dead_code)]
 impl Versio {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::new();
+        let mut root = PatchedMap::new();
         root.push_back("file_header", ver1_47::FileHeader::template());
         root.push_back("data_header", ver1_47::DataHeader::template());
         root.push_back("message", ver1_47::Message::template());

@@ -4,7 +4,7 @@ pub struct BitmapInfo {}
 
 impl BitmapInfo {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(13);
+        let mut root = PatchedMap::with_capacity(13);
         root.push_back("size", 0_i32);
         root.push_back("width", 0_u32);
         root.push_back("height", 0_u32);

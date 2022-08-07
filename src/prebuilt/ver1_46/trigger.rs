@@ -9,7 +9,7 @@ pub struct Trigger {}
 
 impl Trigger {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(19);
+        let mut root = PatchedMap::with_capacity(19);
         root.push_back("enabled", 1_u32);
         root.push_back("looping", 0_i8);
         root.push_back("description_string_table_id", 0_i32);
