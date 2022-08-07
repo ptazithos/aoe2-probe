@@ -9,7 +9,7 @@ pub struct Files {}
 
 impl Files {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(7);
+        let mut root = PatchedMap::with_capacity(7);
         root.push_back("script_file_path", DynString::with_capacity(0_u16, ""));
         root.push_back("script_file_content", DynString::with_capacity(0_u32, ""));
         root.push_back("ai_files_present", 0_u32);

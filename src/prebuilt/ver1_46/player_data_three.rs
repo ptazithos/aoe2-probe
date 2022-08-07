@@ -1,10 +1,10 @@
-use crate::{parse::Token, utils::LinkedHashMap};
+use crate::{parse::Token, utils::PatchedMap};
 
 pub struct PlayerDataThree {}
 
 impl PlayerDataThree {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(7);
+        let mut root = PatchedMap::with_capacity(7);
         root.push_back("food_duplicate", 0.0_f32);
         root.push_back("wood_duplicate", 0.0_f32);
         root.push_back("gold_duplicate", 0.0_f32);

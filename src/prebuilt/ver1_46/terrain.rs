@@ -1,10 +1,10 @@
-use crate::{parse::Token, utils::LinkedHashMap};
+use crate::{parse::Token, utils::PatchedMap};
 
 pub struct Terrain {}
 
 impl Terrain {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(4);
+        let mut root = PatchedMap::with_capacity(4);
         root.push_back("terrain_id", 0_u8);
         root.push_back("elevation", 0_u8);
         root.push_back("unused", vec![0_u8.into(); 3]);

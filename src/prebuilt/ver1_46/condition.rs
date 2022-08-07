@@ -1,13 +1,13 @@
 use crate::{
     parse::Token,
-    utils::{DynString, LinkedHashMap},
+    utils::{DynString, PatchedMap},
 };
 
 pub struct Condition {}
 
 impl Condition {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(30);
+        let mut root = PatchedMap::with_capacity(30);
         root.push_back("condition_type", 0_i32);
         root.push_back("static_value_21", 27_i32);
         root.push_back("quantity", -1_i32);

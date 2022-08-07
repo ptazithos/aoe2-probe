@@ -1,6 +1,6 @@
 use super::serde::Deserialize;
 use crate::io::Source;
-use crate::utils::{DynString, LinkedHashMap, C256, C4};
+use crate::utils::{DynString, PatchedMap, C256, C4};
 
 use super::Token;
 
@@ -22,11 +22,9 @@ impl TokenBuilder {
             Token::Str16(_) => DynString::<u16>::from_le_vec(source).into(),
             Token::Str32(_) => DynString::<u32>::from_le_vec(source).into(),
             Token::Union(map) => {
-                let mut mock = LinkedHashMap::new();
-                let keys = map.keys();
+                let mut mock = PatchedMap::new();
                 let patches = &map.patches;
-                for (index, token) in map.iter().enumerate() {
-                    let key = &keys[index];
+                for (key, token) in map.iter() {
                     let mut template = token.clone();
                     if patches.contains_key(key) {
                         let patch = &patches[key];

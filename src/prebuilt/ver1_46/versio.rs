@@ -1,4 +1,4 @@
-use crate::{parse::Token, utils::LinkedHashMap};
+use crate::{parse::Token, utils::PatchedMap};
 
 use super::{
     Background, Cinematics, DataHeader, Diplomacy, FileHeader, Files, GlobalVictory, Map, Message,
@@ -10,7 +10,7 @@ pub struct Versio {}
 #[allow(dead_code)]
 impl Versio {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::new();
+        let mut root = PatchedMap::new();
         root.push_back("file_header", FileHeader::template());
         root.push_back("data_header", DataHeader::template());
         root.push_back("message", Message::template());

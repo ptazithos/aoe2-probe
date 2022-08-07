@@ -1,4 +1,4 @@
-use crate::{parse::Token, utils::LinkedHashMap};
+use crate::{parse::Token, utils::PatchedMap};
 
 pub struct Censor {}
 
@@ -15,13 +15,11 @@ impl Censor {
 
                     let contains_key = template_map
                         .keys()
-                        .iter()
                         .map(|key| map.contains(key))
                         .fold(true, |acc, current| acc & current);
                     if contains_key {
                         let value_equal = template_map
                             .keys()
-                            .iter()
                             .map(|key| Self::is_template(&map[key], &template_map[key], depth - 1))
                             .fold(true, |acc, current| acc & current);
                         return value_equal;
@@ -34,7 +32,7 @@ impl Censor {
     }
 
     pub fn is_map(token: &Token) -> bool {
-        let map: Token = LinkedHashMap::new().into();
+        let map: Token = PatchedMap::new().into();
         map.eq(token)
     }
 }

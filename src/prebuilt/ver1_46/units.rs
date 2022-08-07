@@ -6,7 +6,7 @@ pub struct Units {}
 
 impl Units {
     pub fn template() -> Token {
-        let mut root = LinkedHashMap::with_capacity(5);
+        let mut root = PatchedMap::with_capacity(5);
         root.push_back("number_of_unit_sections", 9_u32);
         root.push_back("player_data_3", vec![PlayerDataThree::template(); 8]);
         root.push_back("number_of_players", 9_u32);
