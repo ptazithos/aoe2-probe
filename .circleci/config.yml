@@ -1,14 +1,27 @@
 version: 2.1
 
-orbs: 
-  rust: circleci/rust@1.6.0
+jobs:
+  lint-test-build:
+    docker:
+      - image: cimg/rust:1.62.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - cargo-{{ checksum "Cargo.toml" }}      
+      - run: cargo --version
+      - run: cargo clippy
+      - run: cargo test
+      - run: cargo build --verbose
+      - save_cache:
+          key: cargo-{{ checksum "Cargo.lock" }}
+          paths: 
+            - ~/.cargo
 
 workflows:
-  production:
+  build_and_test:
     jobs:
-      - rust/lint-test-build:
-          release: true
-          version: 1.62.0
+      - lint-test-build
 
 
 
