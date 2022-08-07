@@ -6,10 +6,17 @@ jobs:
       - image: cimg/rust:1.62.0
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - cargo-{{ checksum "Cargo.toml" }}      
       - run: cargo --version
       - run: cargo clippy
       - run: cargo test
       - run: cargo build --verbose
+      - save_cache:
+          key: cargo-{{ checksum "Cargo.toml" }}
+          paths: 
+            - ~/.cargo
 
 workflows:
   build_and_test:
