@@ -52,6 +52,13 @@ root.to_le_vec();
 root.from_le_vec();
 ```
 
+**Parse to any formats that serde support:**
+```rust
+let scenario = Scenario::from_file("./resources/chapter_3.aoe2scenario");
+let json = serde_json::to_string(&scenario.versio).unwrap();
+println!("{}", json);
+```
+
 Run examples with the following command:
 ```shell
 cargo run --example read_write
