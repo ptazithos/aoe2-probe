@@ -138,7 +138,6 @@ impl Scenario {
     ///
     /// ```
     /// use aoe2_probe::Scenario;
-    /// //Serialize a scenario to a little endian vector of uint8
     /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
     /// let buffer = source_scenario.to_file("./resources/temp.aoe2scenario");
     /// ```

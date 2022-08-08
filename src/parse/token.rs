@@ -26,6 +26,22 @@ pub enum Token {
 }
 
 impl Token {
+    /// Retrieve value by the given path.
+    /// The return value will be a Token enum.
+    /// using token.try_[type] function to get the actual data.
+    /// # Examples
+    ///
+    /// ```
+    /// use aoe2_probe::Scenario;
+    ///
+    /// //Mutable borrow author string.
+    /// let mut scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    /// let author = scenario.versio.get_by_path_mut("/file_header/creator_name").try_mut_str32();
+    /// author.set_content("Arian");
+    ///
+    /// //Immutable borrow author string.
+    /// let author = scenario.versio.get_by_path("/file_header/creator_name").try_str32();
+    /// ```
     pub fn get_by_path(&self, path: &str) -> &Token {
         let keys: Vec<&str> = path.split('/').filter(|str| !str.is_empty()).collect();
         let mut value = self;
