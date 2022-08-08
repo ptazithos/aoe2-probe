@@ -7,6 +7,7 @@ use super::Token;
 pub struct TokenBuilder {}
 
 impl TokenBuilder {
+    /// Build a token tree according to the given one.
     pub fn create_from_template(template: &Token, source: &mut Source) -> Token {
         match template {
             Token::UInt8(_) => u8::from_le_vec(source).into(),
