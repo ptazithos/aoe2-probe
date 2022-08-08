@@ -17,6 +17,15 @@ pub struct Scenario {
 }
 
 impl Scenario {
+    /// Read scenario data from the given file.
+    /// Please check the github homepage for the version support status.
+    /// Generally, ver.1.46 and above are well supported.
+    /// # Examples
+    ///
+    /// ```
+    /// use aoe2_probe::Scenario;
+    /// let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    /// ```
     pub fn from_file(filename: &str) -> Self {
         let mut file = File::open(&filename).expect("File not found");
         let metadata = fs::metadata(&filename).expect("Unable to read metadata");
@@ -26,6 +35,18 @@ impl Scenario {
         Self::from_le_vec(buffer)
     }
 
+    /// Read scenario data from the given little endian buffer.
+    /// # Examples
+    ///
+    /// ```
+    /// use aoe2_probe::Scenario;
+    /// //Serialize a scenario to a little endian vector of uint8
+    /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    /// let buffer = source_scenario.to_le_vec();
+    /// 
+    /// //Deserialize a scenario from a little endian vector of uint8
+    /// let scenario = Scenario::from_le_vec(buffer);
+    /// ```
     pub fn from_le_vec(buffer: Vec<u8>) -> Self {
         let version = Self::get_scenario_version(&buffer);
         let mut source = Source::new(buffer);
