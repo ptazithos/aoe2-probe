@@ -79,8 +79,9 @@ Currently, only version 1.46 and newer will be firstly supported.
 
 ## Libraries Used
 * [miniz_oxide](https://github.com/Frommi/miniz_oxide): Pure rust Rust replacement for the miniz deflate/zlib encoder/decoder using no unsafe code.
+* [serde](https://github.com/serde-rs/serde): Serde is a framework for serializing and deserializing Rust data structures efficiently and generically.
 * [log](https://github.com/rust-lang/log): A lightweight logging facade.
-* [env_logger](https://github.com/env-logger-rs/env_logger/): Implements a logger that can be configured via environment variables.
+
 
 ## Acknowledgment
 This library is inspired by [AoE2ScenarioParser](https://github.com/KSneijders/AoE2ScenarioParser) and [Trigger Craft](https://github.com/MegaDusknoir/AoE2TriggerCraft)
