@@ -166,8 +166,8 @@ impl Scenario {
     /// ```
     /// use aoe2_probe::Scenario;
     /// //Serialize a scenario to a little endian vector of uint8
-    /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
-    /// let triggers_proxy = source_scenario.triggers_proxy;
+    /// let mut source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    /// let triggers_proxy = source_scenario.triggers_proxy();
     /// ```
     pub fn triggers_proxy(&mut self) -> TriggersProxy {
         TriggersProxy::new(&self.version, &mut self.versio)
