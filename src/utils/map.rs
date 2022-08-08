@@ -6,7 +6,7 @@ use std::{
 
 use linked_hash_map::{Iter, LinkedHashMap};
 
-use crate::parse::{serde::Serialize, Token};
+use crate::parse::{Encode, Token};
 
 #[derive(Clone)]
 pub enum DepType {
@@ -118,7 +118,7 @@ impl<'a> Iterator for SeqIter<'a> {
     }
 }
 
-impl Serialize for PatchedMap {
+impl Encode for PatchedMap {
     fn to_le_vec(&self) -> Vec<u8> {
         self.iter()
             .flat_map(|(_, token)| token.to_le_vec())

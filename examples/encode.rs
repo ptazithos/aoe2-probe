@@ -1,4 +1,4 @@
-use aoe2_probe::parse::serde::Serialize;
+use aoe2_probe::parse::Encode;
 use aoe2_probe::parse::Token;
 use aoe2_probe::utils::{DynString, PatchedMap};
 

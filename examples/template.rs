@@ -1,5 +1,5 @@
 use aoe2_probe::io::Source;
-use aoe2_probe::parse::serde::Serialize;
+use aoe2_probe::parse::Encode;
 use aoe2_probe::parse::TokenBuilder;
 use aoe2_probe::ver1_46::FileHeader;
 

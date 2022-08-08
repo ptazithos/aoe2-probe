@@ -31,8 +31,8 @@ name = "read_write"
 path = "examples/read_write.rs"
 
 [[example]]
-name = "serialize"
-path = "examples/serialize.rs"
+name = "encode"
+path = "examples/encode.rs"
 
 [[example]]
 name = "template"

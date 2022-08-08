@@ -2,7 +2,7 @@ use std::fmt;
 
 use crate::{
     io::Source,
-    parse::serde::{Deserialize, Serialize},
+    parse::{Decode, Encode},
 };
 
 #[derive(Clone, Debug)]
@@ -45,7 +45,7 @@ where
     }
 }
 
-impl<T> Serialize for DynString<T>
+impl<T> Encode for DynString<T>
 where
     T: Numeric,
 {
@@ -63,7 +63,7 @@ where
     }
 }
 
-impl Deserialize for DynString<u16> {
+impl Decode for DynString<u16> {
     fn from_le_vec(source: &mut Source) -> Self {
         let capacity = u16::from_le_vec(source);
         let raw = String::from_utf8_lossy(&source.get_vec(capacity as usize)[..]).to_string();
@@ -72,7 +72,7 @@ impl Deserialize for DynString<u16> {
     }
 }
 
-impl Deserialize for DynString<u32> {
+impl Decode for DynString<u32> {
     fn from_le_vec(source: &mut Source) -> Self {
         let capacity = u32::from_le_vec(source);
         let raw = String::from_utf8_lossy(&source.get_vec(capacity as usize)[..]).to_string();
@@ -81,7 +81,7 @@ impl Deserialize for DynString<u32> {
     }
 }
 
-pub trait Numeric: Copy + Serialize {
+pub trait Numeric: Copy + Encode {
     fn to_usize(&self) -> usize;
     fn from_usize(num: usize) -> Self;
 }
@@ -133,7 +133,7 @@ impl C4 {
     }
 }
 
-impl Deserialize for C4 {
+impl Decode for C4 {
     fn from_le_vec(source: &mut Source) -> Self {
         let raw = String::from_utf8_lossy(&source.get_vec(4_usize)[..]).to_string();
 
@@ -141,7 +141,7 @@ impl Deserialize for C4 {
     }
 }
 
-impl Serialize for C4 {
+impl Encode for C4 {
     fn to_le_vec(&self) -> Vec<u8> {
         let content = self.raw.clone().into_bytes();
         let mut container = vec![0; 4];
@@ -180,14 +180,14 @@ impl C256 {
     }
 }
 
-impl Deserialize for C256 {
+impl Decode for C256 {
     fn from_le_vec(source: &mut Source) -> Self {
         let raw = String::from_utf8_lossy(&source.get_vec(256_usize)[..]).to_string();
         C256::new(&raw)
     }
 }
 
-impl Serialize for C256 {
+impl Encode for C256 {
     fn to_le_vec(&self) -> Vec<u8> {
         let content = self.raw.clone().into_bytes();
         let mut container = vec![0; 256];

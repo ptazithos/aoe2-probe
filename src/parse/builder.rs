@@ -1,4 +1,4 @@
-use super::serde::Deserialize;
+use super::code::Decode;
 use crate::io::Source;
 use crate::utils::{DynString, PatchedMap, C256, C4};
 

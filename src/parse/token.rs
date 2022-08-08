@@ -1,6 +1,6 @@
 use crate::utils::{DynString, PatchedMap, C256, C4};
 
-use super::serde::Serialize;
+use super::code::Encode;
 
 #[derive(Clone, Debug)]
 pub enum Token {
@@ -333,7 +333,7 @@ impl PartialEq for Token {
     }
 }
 
-impl Serialize for Token {
+impl Encode for Token {
     fn to_le_vec(&self) -> Vec<u8> {
         match self {
             Token::UInt8(value) => value.to_le_bytes().to_vec(),
