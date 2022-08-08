@@ -61,6 +61,7 @@ Every member of **versio** and itself implements fmt::Debug trait. Print them if
 let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
 println!("{:?}", &scenario.versio())
 ```
+More detailed information can be found in [Docs](https://docs.rs/aoe2-probe/latest/aoe2_probe/).
 ## Supports
 |Version|Support|
 |----|----|
