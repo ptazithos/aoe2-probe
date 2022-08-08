@@ -38,7 +38,7 @@ let author = scenario.versio.get_by_path_mut("/file_header/creator_name");
 author.try_mut_str32().set_content("Arian");
 ```
 
-**customize a structure:**
+**Customize a structure:**
 ```rust
 //Define a score record
 let mut root = PatchedMap::new();
@@ -52,7 +52,7 @@ root.to_le_vec();
 root.from_le_vec();
 ```
 
-**Parse to any formats that serde support:**
+**Serialize/Deserialize to any formats that serde support:**
 ```rust
 let scenario = Scenario::from_file("./resources/chapter_3.aoe2scenario");
 let json = serde_json::to_string(&scenario.versio).unwrap();
