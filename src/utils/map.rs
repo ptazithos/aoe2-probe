@@ -5,29 +5,30 @@ use std::{
 };
 
 use linked_hash_map::{Iter, LinkedHashMap};
+use serde::{Deserialize, Serialize};
 
 use crate::parse::{Encode, Token};
 
-#[derive(Clone)]
+#[derive(Clone, Serialize, Deserialize)]
 pub enum DepType {
     Exist,
     Calculate,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Serialize, Deserialize)]
 pub enum Manipulation {
     Equal,
     Multiple,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct NumericPatch {
     pub source: Vec<String>,
     pub dep_type: DepType,
     pub manipulation: Manipulation,
 }
 
-#[derive(Clone, Default)]
+#[derive(Clone, Default, Serialize, Deserialize)]
 pub struct PatchedMap {
     raw_hashmap: LinkedHashMap<String, Token>,
     pub patches: HashMap<String, NumericPatch>,

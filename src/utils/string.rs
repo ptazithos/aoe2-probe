@@ -1,11 +1,13 @@
 use std::fmt;
 
+use serde::{Deserialize, Serialize};
+
 use crate::{
     io::Source,
     parse::{Decode, Encode},
 };
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct DynString<T: Numeric> {
     capacity: T,
     raw: String,
@@ -105,7 +107,7 @@ impl Numeric for u32 {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct C4 {
     raw: String,
 }
@@ -152,7 +154,7 @@ impl Encode for C4 {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct C256 {
     raw: String,
 }
