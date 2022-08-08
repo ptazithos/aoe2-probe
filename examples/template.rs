@@ -1,7 +1,7 @@
 use aoe2_probe::io::Source;
 use aoe2_probe::parse::serde::Serialize;
 use aoe2_probe::parse::TokenBuilder;
-use aoe2_probe::prebuilt::ver1_46::FileHeader;
+use aoe2_probe::ver1_46::FileHeader;
 
 fn main() {
     let template = FileHeader::template();
