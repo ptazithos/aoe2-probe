@@ -1,7 +1,7 @@
 mod builder;
 mod censor;
 pub mod serde;
-pub mod token;
+mod token;
 
 pub use builder::TokenBuilder;
 pub use censor::Censor;
