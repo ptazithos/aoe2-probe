@@ -111,7 +111,7 @@ impl<'a> Iterator for SeqIter<'a> {
     fn next(&mut self) -> Option<Self::Item> {
         match self.ele.next() {
             Some((key, value)) => {
-                self.index = self.index + 1;
+                self.index += 1;
                 Some((key, value))
             }
             None => None,

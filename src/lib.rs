@@ -5,7 +5,7 @@
 //! ```
 //! use aoe2_probe::Scenario;
 //!
-//! let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+//! let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
 //! println!("{:?}", &scenario.versio);
 //! scenario.to_file("./resources/temp.aoe2scenario");
 //!

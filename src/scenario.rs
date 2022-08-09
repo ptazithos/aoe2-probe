@@ -26,7 +26,7 @@ impl Scenario {
     /// use aoe2_probe::Scenario;
     /// let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
     /// ```
-    pub fn from_file(filename: &str) -> Self {
+    pub fn from_file(filename: &str) -> Result<Self, String> {
         let mut file = File::open(&filename).expect("File not found");
         let metadata = fs::metadata(&filename).expect("Unable to read metadata");
         let mut buffer = vec![0; metadata.len() as usize];
@@ -41,13 +41,13 @@ impl Scenario {
     /// ```
     /// use aoe2_probe::Scenario;
     /// //Encode a scenario to a little endian vector of uint8
-    /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
     /// let buffer = source_scenario.to_le_export_vec();
     ///
     /// //Decode a scenario from a little endian vector of uint8
     /// let scenario = Scenario::from_le_vec(buffer);
     /// ```
-    pub fn from_le_vec(buffer: Vec<u8>) -> Self {
+    pub fn from_le_vec(buffer: Vec<u8>) -> Result<Self, String> {
         let version = Self::get_scenario_version(&buffer);
         let mut source = Source::new(buffer);
         match version.as_str() {
@@ -62,13 +62,13 @@ impl Scenario {
                 uncompressed.extend(content);
 
                 let mut source = Source::new(uncompressed);
-                Scenario {
+                Ok(Scenario {
                     versio: TokenBuilder::create_from_template(
                         &ver1_46::Versio::template(),
                         &mut source,
                     ),
                     version,
-                }
+                })
             }
             "1.47" => {
                 let header = TokenBuilder::create_from_template(
@@ -81,15 +81,15 @@ impl Scenario {
                 uncompressed.extend(content);
 
                 let mut source = Source::new(uncompressed);
-                Scenario {
+                Ok(Scenario {
                     versio: TokenBuilder::create_from_template(
                         &ver1_47::Versio::template(),
                         &mut source,
                     ),
                     version,
-                }
+                })
             }
-            _ => panic!("Unsupported version!"),
+            _ => Err("Unsupported version!".to_string()),
         }
     }
 
@@ -103,7 +103,7 @@ impl Scenario {
     /// ```
     /// use aoe2_probe::Scenario;
     /// //Encode a scenario to a little endian vector of uint8
-    /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
     /// let buffer = source_scenario.to_le_vec();
     /// ```
     pub fn to_le_vec(self) -> Vec<u8> {
@@ -116,7 +116,7 @@ impl Scenario {
     /// ```
     /// use aoe2_probe::Scenario;
     /// //Encode a scenario to a little endian vector of uint8
-    /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
     /// let buffer = source_scenario.to_le_export_vec();
     /// ```
     pub fn to_le_export_vec(self) -> Vec<u8> {
@@ -138,7 +138,7 @@ impl Scenario {
     ///
     /// ```
     /// use aoe2_probe::Scenario;
-    /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
     /// let buffer = source_scenario.to_file("./resources/temp.aoe2scenario");
     /// ```
     pub fn to_file(self, file_path: &str) {
@@ -165,7 +165,7 @@ impl Scenario {
     /// ```
     /// use aoe2_probe::Scenario;
     /// //Encode a scenario to a little endian vector of uint8
-    /// let mut source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    /// let mut source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
     /// let triggers_proxy = source_scenario.triggers_proxy();
     /// ```
     pub fn triggers_proxy(&mut self) -> TriggersProxy {

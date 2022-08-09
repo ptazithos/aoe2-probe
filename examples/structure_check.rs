@@ -1,7 +1,7 @@
 use aoe2_probe::{parse::Censor, ver1_46::Versio, Scenario};
 
 fn main() {
-    let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+    let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
     let versio = &scenario.versio;
     let mut template = Versio::template();
 
