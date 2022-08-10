@@ -4,6 +4,10 @@ pub struct Terrain {}
 
 impl Terrain {
     pub fn template() -> Token {
+        Self::default()
+    }
+
+    pub fn default() -> Token {
         let mut root = PatchedMap::with_capacity(4);
         root.push_back("terrain_id", 0_u8);
         root.push_back("elevation", 0_u8);

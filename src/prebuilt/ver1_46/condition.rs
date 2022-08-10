@@ -7,6 +7,10 @@ pub struct Condition {}
 
 impl Condition {
     pub fn template() -> Token {
+        Self::default()
+    }
+
+    pub fn default() -> Token {
         let mut root = PatchedMap::with_capacity(30);
         root.push_back("condition_type", 0_i32);
         root.push_back("static_value_21", 27_i32);

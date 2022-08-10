@@ -4,6 +4,10 @@ pub struct Unit {}
 
 impl Unit {
     pub fn template() -> Token {
+        Self::default()
+    }
+
+    pub fn default() -> Token {
         let mut root = PatchedMap::with_capacity(9);
         root.push_back("x", 0.5_f32);
         root.push_back("y", 0.5_f32);
