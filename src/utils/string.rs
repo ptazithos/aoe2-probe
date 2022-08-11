@@ -42,7 +42,15 @@ where
         &self.raw
     }
 
+    pub fn content_mut(&mut self) -> &mut String {
+        &mut self.raw
+    }
+
     pub fn set_content(&mut self, content: &str) {
+        if self.capacity.to_usize() < content.len() {
+            self.capacity = T::from_usize(content.len());
+        }
+
         self.raw = content.to_string();
     }
 }
@@ -52,10 +60,16 @@ where
     T: Numeric,
 {
     fn to_le_vec(&self) -> Vec<u8> {
+        let container_len: usize = if self.capacity.to_usize() < self.raw.len() {
+            self.capacity.to_usize()
+        } else {
+            self.raw.len()
+        };
+
         let mut vec = Vec::<u8>::new();
         let mut prefix = self.capacity.to_le_vec();
         let content = self.raw.clone().into_bytes();
-        let mut container = vec![0; self.capacity.to_usize()];
+        let mut container = vec![0; container_len];
         for (index, _) in content.iter().enumerate() {
             container[index] = content[index];
         }
