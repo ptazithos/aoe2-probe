@@ -60,15 +60,13 @@ impl PatchedMap {
         true
     }
 
-    pub fn update<T: Into<Token>>(&mut self, key_str: &str, value: T) -> bool {
-        let key = key_str.to_string();
-
-        if !self.raw_hashmap.contains_key(&key) {
-            return false;
+    pub fn update<T: Into<Token>>(&mut self, key: &str, value: T) -> Result<(), String> {
+        if !self.raw_hashmap.contains_key(key) {
+            return Err("Key doesn't exist!".to_string());
         }
 
-        self.raw_hashmap.insert(key, value.into());
-        true
+        self.raw_hashmap[key] = value.into();
+        Ok(())
     }
 
     pub fn contains(&self, key: &str) -> bool {

@@ -4,7 +4,6 @@ use crate::{
     io::Source,
     parse::{Encode, Token, TokenBuilder},
     prebuilt::{ver1_46, ver1_47},
-    proxy::TriggersProxy,
 };
 use std::{
     fs::{self, File, OpenOptions},
@@ -157,19 +156,8 @@ impl Scenario {
         file.write_all(&buffer).unwrap();
     }
 
-    /// Return a TriggerProxy struct that contains several helper functions for manipulating triggers.
-    /// This struct is version compatible.
-    /// You can expect a constant effect across different supported version.
-    /// # Examples
-    ///
-    /// ```
-    /// use aoe2_probe::Scenario;
-    /// //Encode a scenario to a little endian vector of uint8
-    /// let mut source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
-    /// let triggers_proxy = source_scenario.triggers_proxy();
-    /// ```
-    pub fn triggers_proxy(&mut self) -> TriggersProxy {
-        TriggersProxy::new(&self.version, &mut self.versio)
+    pub fn version(&self) -> &str {
+        &self.version
     }
 
     fn get_scenario_version(buffer: &[u8]) -> String {

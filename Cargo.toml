@@ -57,11 +57,11 @@ name = "structure_check"
 path = "examples/structure_check.rs"
 
 [[example]]
-name = "append_trigger"
-path = "examples/append_trigger.rs"
-
-[[example]]
 name = "serde_json"
 path = "examples/serde_json.rs"
+
+[[example]]
+name = "triggers"
+path = "examples/triggers.rs"
 
 

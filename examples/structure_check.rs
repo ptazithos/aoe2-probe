@@ -5,7 +5,7 @@ fn main() {
     let versio = &scenario.versio;
     let mut template = Versio::template();
 
-    template.try_mut_map().update("file_header", 1_u32);
+    template.try_mut_map().update("file_header", 1_u32).unwrap();
 
     let layer_1 = Censor::is_template(versio, &template, 1);
     let layer_2 = Censor::is_template(versio, &template, 2);
