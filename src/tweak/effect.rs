@@ -45,7 +45,7 @@ impl EffectTweak {
         }
     }
 
-    pub fn translate_effect_type(effect_type: i32) -> String {}
+    pub fn translate_effect_type(effect_type: i32) {}
 
     pub fn is_effect(effect: &Token, version: &str) -> Result<(), String> {
         match version {
