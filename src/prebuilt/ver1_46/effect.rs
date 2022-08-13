@@ -3,7 +3,7 @@ use crate::{
     utils::{map::*, DynString},
 };
 
-pub struct Effect {}
+pub struct Effect;
 
 impl Effect {
     pub fn template() -> Token {

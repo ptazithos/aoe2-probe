@@ -5,7 +5,7 @@ use crate::{
 
 use super::AI2;
 
-pub struct Files {}
+pub struct Files;
 
 impl Files {
     pub fn template() -> Token {

@@ -3,7 +3,7 @@ use crate::{
     utils::{DynString, PatchedMap},
 };
 
-pub struct Message {}
+pub struct Message;
 
 impl Message {
     pub fn template() -> Token {

@@ -1,6 +1,6 @@
 use crate::{parse::Token, utils::PatchedMap};
 
-pub struct PlayerDiplomacy {}
+pub struct PlayerDiplomacy;
 
 impl PlayerDiplomacy {
     pub fn template() -> Token {

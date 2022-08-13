@@ -1,6 +1,6 @@
 use crate::{parse::Token, utils::map::*};
 
-pub struct BitmapInfo {}
+pub struct BitmapInfo;
 
 impl BitmapInfo {
     pub fn template() -> Token {

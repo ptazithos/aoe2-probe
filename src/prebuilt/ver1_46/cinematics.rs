@@ -3,7 +3,7 @@ use crate::{
     utils::{DynString, PatchedMap},
 };
 
-pub struct Cinematics {}
+pub struct Cinematics;
 
 impl Cinematics {
     pub fn template() -> Token {

@@ -1,6 +1,6 @@
 use crate::{parse::Token, utils::map::*};
 
-pub struct Options {}
+pub struct Options;
 
 impl Options {
     pub fn template() -> Token {

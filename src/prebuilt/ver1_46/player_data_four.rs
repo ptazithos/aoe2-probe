@@ -3,7 +3,7 @@ use crate::{
     utils::{map::*, DynString},
 };
 
-pub struct PlayerDataFour {}
+pub struct PlayerDataFour;
 
 impl PlayerDataFour {
     pub fn template() -> Token {

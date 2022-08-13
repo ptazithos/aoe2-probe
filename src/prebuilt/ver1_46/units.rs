@@ -2,7 +2,7 @@ use crate::{parse::Token, utils::map::*};
 
 use super::{PlayerDataFour, PlayerDataThree, PlayerUnits};
 
-pub struct Units {}
+pub struct Units;
 
 impl Units {
     pub fn template() -> Token {

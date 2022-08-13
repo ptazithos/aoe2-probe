@@ -2,7 +2,7 @@ use crate::{parse::Token, utils::map::*};
 
 use super::{Trigger, Variable};
 
-pub struct Triggers {}
+pub struct Triggers;
 
 impl Triggers {
     pub fn template() -> Token {

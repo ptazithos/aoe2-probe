@@ -5,7 +5,7 @@ use crate::{
 
 use super::PlayerDataOne;
 
-pub struct DataHeader {}
+pub struct DataHeader;
 
 impl DataHeader {
     pub fn template() -> Token {

@@ -1,6 +1,6 @@
 use crate::{parse::Token, utils::PatchedMap};
 
-pub struct PlayerDataOne {}
+pub struct PlayerDataOne;
 impl PlayerDataOne {
     pub fn template() -> Token {
         let mut root = PatchedMap::with_capacity(5);

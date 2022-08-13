@@ -1,6 +1,6 @@
 use crate::{parse::Token, utils::PatchedMap};
 
-pub struct Terrain {}
+pub struct Terrain;
 
 impl Terrain {
     pub fn template() -> Token {

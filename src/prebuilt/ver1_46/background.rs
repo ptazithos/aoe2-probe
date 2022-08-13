@@ -5,7 +5,7 @@ use crate::{
 
 use super::BitmapInfo;
 
-pub struct Background {}
+pub struct Background;
 
 impl Background {
     pub fn template() -> Token {

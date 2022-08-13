@@ -5,7 +5,7 @@ use super::{
     Options, PlayerDataTwo, Triggers, Units,
 };
 
-pub struct Versio {}
+pub struct Versio;
 
 #[allow(dead_code)]
 impl Versio {

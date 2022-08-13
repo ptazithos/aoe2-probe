@@ -1,7 +1,7 @@
 use crate::prebuilt::ver1_47;
 use crate::{parse::Token, utils::PatchedMap};
 
-pub struct Versio {}
+pub struct Versio;
 
 #[allow(dead_code)]
 impl Versio {

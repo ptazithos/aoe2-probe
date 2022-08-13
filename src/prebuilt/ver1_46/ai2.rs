@@ -3,7 +3,7 @@ use crate::{
     utils::{DynString, PatchedMap},
 };
 
-pub struct AI2 {}
+pub struct AI2;
 
 impl AI2 {
     pub fn template() -> Token {

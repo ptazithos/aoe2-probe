@@ -3,7 +3,7 @@ use crate::{
     utils::{DynString, PatchedMap},
 };
 
-pub struct Condition {}
+pub struct Condition;
 
 impl Condition {
     pub fn template() -> Token {

@@ -5,7 +5,7 @@ use crate::{
 
 use super::Terrain;
 
-pub struct Map {}
+pub struct Map;
 
 impl Map {
     pub fn template() -> Token {

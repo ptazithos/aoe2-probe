@@ -3,7 +3,7 @@ use crate::{
     utils::{DynString, PatchedMap, C4},
 };
 
-pub struct FileHeader {}
+pub struct FileHeader;
 
 impl FileHeader {
     pub fn template() -> Token {

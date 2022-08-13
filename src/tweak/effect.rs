@@ -3,9 +3,7 @@ use crate::{
     ver1_46, Scenario,
 };
 
-//static effect_type_names: [&str; 3] = ["AI Script Goal", "Play Sound", "Create Object"];
-
-pub struct EffectTweak {}
+pub struct EffectTweak;
 
 impl EffectTweak {
     pub fn translate(scenario: &Scenario, effect: &Token) -> Result<String, String> {
@@ -44,8 +42,6 @@ impl EffectTweak {
             _ => Err("Incompatible version!".to_string()),
         }
     }
-
-    pub fn translate_effect_type(effect_type: i32) {}
 
     pub fn is_effect(effect: &Token, version: &str) -> Result<(), String> {
         match version {

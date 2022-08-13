@@ -1,6 +1,6 @@
 use crate::{parse::Token, utils::PatchedMap};
 
-pub struct GlobalVictory {}
+pub struct GlobalVictory;
 
 impl GlobalVictory {
     pub fn template() -> Token {

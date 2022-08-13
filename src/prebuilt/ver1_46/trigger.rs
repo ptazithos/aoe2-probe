@@ -5,7 +5,7 @@ use crate::{
 
 use super::{Condition, Effect};
 
-pub struct Trigger {}
+pub struct Trigger;
 
 impl Trigger {
     pub fn template() -> Token {

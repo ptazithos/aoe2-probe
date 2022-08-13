@@ -5,7 +5,7 @@ use crate::{
 
 use super::{Resource, AI};
 
-pub struct PlayerDataTwo {}
+pub struct PlayerDataTwo;
 
 impl PlayerDataTwo {
     pub fn template() -> Token {

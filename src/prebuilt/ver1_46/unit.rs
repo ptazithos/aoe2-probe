@@ -1,6 +1,6 @@
 use crate::{parse::Token, utils::PatchedMap};
 
-pub struct Unit {}
+pub struct Unit;
 
 impl Unit {
     pub fn template() -> Token {

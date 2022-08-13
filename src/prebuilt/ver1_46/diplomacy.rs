@@ -2,7 +2,7 @@ use crate::{parse::Token, utils::PatchedMap};
 
 use super::PlayerDiplomacy;
 
-pub struct Diplomacy {}
+pub struct Diplomacy;
 
 impl Diplomacy {
     pub fn template() -> Token {
