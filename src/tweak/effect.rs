@@ -1,49 +1,51 @@
 use crate::{
     parse::{Censor, Token},
+    prebuilt::EFFECT_SCHEME,
     ver1_46, Scenario,
 };
 
 pub struct EffectTweak;
 
 impl EffectTweak {
-    pub fn translate(scenario: &Scenario, effect: &Token) -> Result<String, String> {
+    pub fn translate(
+        scenario: &Scenario,
+        effect: &Token,
+    ) -> Result<(String, String), &'static str> {
         match scenario.version() {
             "1.46" | "1.47" => {
                 Self::is_effect(effect, scenario.version())?;
-                let mut effect_statement = vec![];
-                let map = effect.try_map();
 
-                for (key, value) in map.iter() {
-                    match key.as_str() {
-                        "static_value_46" => {}
-                        "message" | "sound_name" => {
-                            let content = value.try_str32().content();
-                            if content.len() > 0 {
-                                effect_statement.push(format!("{}: {:?}", key, content));
+                let type_id = *effect.get_by_path("/effect_type").try_i32();
+                if type_id >= 0 && type_id < EFFECT_SCHEME.len() as i32 {
+                    let scheme = &EFFECT_SCHEME[type_id as usize];
+                    let name = scheme.name.to_string();
+                    let attrs: Vec<String> = scheme
+                        .attrs
+                        .iter()
+                        .map(|&path| match path {
+                            "message" | "sound_name" => {
+                                format!(
+                                    "{}: {:?}",
+                                    path,
+                                    effect.get_by_path(path).try_str32().content()
+                                )
                             }
-                        }
-                        "selected_object_ids" => {
-                            let ids = value.try_vec();
-                            if ids.len() > 0 {
-                                effect_statement.push(format!("{}: {:?}", key, ids));
+                            _ => {
+                                format!("{}: {:?}", path, effect.get_by_path(path).try_i32())
                             }
-                        }
-                        _ => {
-                            let value = *value.try_i32();
-                            if value >= 0 {
-                                effect_statement.push(format!("{}: {}", key, value));
-                            }
-                        }
-                    }
+                        })
+                        .collect();
+
+                    Ok((name, attrs.join(" ")))
+                } else {
+                    Err("Unknown Effect!")
                 }
-
-                Ok(effect_statement.join(" "))
             }
-            _ => Err("Incompatible version!".to_string()),
+            _ => Err("Incompatible version!"),
         }
     }
 
-    pub fn is_effect(effect: &Token, version: &str) -> Result<(), String> {
+    pub fn is_effect(effect: &Token, version: &str) -> Result<(), &'static str> {
         match version {
             "1.46" | "1.47" => {
                 let template = ver1_46::Effect::template();
@@ -52,10 +54,10 @@ impl EffectTweak {
                 if res {
                     Ok(())
                 } else {
-                    Err("Not a effect!".to_string())
+                    Err("Not a effect!")
                 }
             }
-            _ => Err("Incompatible version!".to_string()),
+            _ => Err("Incompatible version!"),
         }
     }
 }
