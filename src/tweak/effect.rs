@@ -32,7 +32,7 @@ impl EffectTweak {
                     }
                 }
 
-                Ok(String::from("Some statement"))
+                Ok(effect_statement.join(" "))
             }
             _ => Err("Incompatible version!".to_string()),
         }
