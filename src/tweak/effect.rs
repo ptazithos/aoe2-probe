@@ -17,14 +17,16 @@ impl EffectTweak {
                     match key.as_str() {
                         "static_value_46" => {}
                         "message" | "sound_name" => {
-                            effect_statement.push(format!(
-                                "{}: {}",
-                                key,
-                                value.try_str32().content()
-                            ));
+                            let content = value.try_str32().content();
+                            if content.len() > 0 {
+                                effect_statement.push(format!("{}: {}", key, content));
+                            }
                         }
                         "selected_object_ids" => {
-                            effect_statement.push(format!("{}: {:?}", key, value.try_vec()));
+                            let ids = value.try_vec();
+                            if ids.len() > 0 {
+                                effect_statement.push(format!("{}: {:?}", key, ids));
+                            }
                         }
                         _ => {
                             let value = *value.try_i32();
