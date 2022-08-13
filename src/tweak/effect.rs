@@ -6,10 +6,10 @@ use crate::{
 pub struct EffectTweak {}
 
 impl EffectTweak {
-    pub fn translate(scenario: &Scenario, effect: &Token, version: &str) -> Result<String, String> {
-        match version {
+    pub fn translate(scenario: &Scenario, effect: &Token) -> Result<String, String> {
+        match scenario.version() {
             "1.46" | "1.47" => {
-                Self::is_effect(effect, version)?;
+                Self::is_effect(effect, scenario.version())?;
                 let mut effect_statement = vec![];
                 let map = effect.try_map();
 
