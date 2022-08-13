@@ -27,7 +27,10 @@ impl EffectTweak {
                             effect_statement.push(format!("{}: {:?}", key, value.try_vec()));
                         }
                         _ => {
-                            effect_statement.push(format!("{}: {}", key, *value.try_i32()));
+                            let value = *value.try_i32();
+                            if value >= 0 {
+                                effect_statement.push(format!("{}: {}", key, value));
+                            }
                         }
                     }
                 }
