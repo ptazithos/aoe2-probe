@@ -1,9 +1,6 @@
 use std::collections::HashMap;
 
-use crate::{
-    parse::{Censor, Token},
-    ver1_46, Scenario,
-};
+use crate::{parse::Token, Scenario, TriggerTweak};
 
 pub struct TriggersTweak {}
 
@@ -25,10 +22,7 @@ impl TriggersTweak {
         let version = scenario.version().to_string();
         match version.as_str() {
             "1.46" | "1.47" => {
-                let template = ver1_46::Trigger::template();
-                if !Censor::is_template(&trigger, &template, 2) {
-                    return Err("The given trigger doesn't have a correct format".to_string());
-                }
+                TriggerTweak::is_trigger(&trigger, &version)?;
 
                 let trigger_data = scenario
                     .versio
@@ -63,10 +57,7 @@ impl TriggersTweak {
         let version = scenario.version().to_string();
         match version.as_str() {
             "1.46" | "1.47" => {
-                let template = ver1_46::Trigger::template();
-                if !Censor::is_template(&trigger, &template, 2) {
-                    return Err("The given trigger doesn't have a correct format".to_string());
-                }
+                TriggerTweak::is_trigger(&trigger, &version)?;
 
                 let trigger_display_order_array = scenario
                     .versio

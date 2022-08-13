@@ -1,3 +1,7 @@
-mod triggers_tweak;
+mod effect;
+mod trigger;
+mod triggers;
 
-pub use triggers_tweak::TriggersTweak;
+pub use effect::EffectTweak;
+pub use trigger::TriggerTweak;
+pub use triggers::TriggersTweak;
