@@ -3,6 +3,8 @@ use crate::{
     ver1_46, Scenario,
 };
 
+static effect_type_names: [&str; _] = ["AI Script Goal", "Play Sound", "Create Object"];
+
 pub struct EffectTweak {}
 
 impl EffectTweak {
@@ -19,7 +21,7 @@ impl EffectTweak {
                         "message" | "sound_name" => {
                             let content = value.try_str32().content();
                             if content.len() > 0 {
-                                effect_statement.push(format!("{}: {}", key, content));
+                                effect_statement.push(format!("{}: {:?}", key, content));
                             }
                         }
                         "selected_object_ids" => {
@@ -42,6 +44,8 @@ impl EffectTweak {
             _ => Err("Incompatible version!".to_string()),
         }
     }
+
+    pub fn translate_effect_type(effect_type: i32) -> String {}
 
     pub fn is_effect(effect: &Token, version: &str) -> Result<(), String> {
         match version {
