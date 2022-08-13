@@ -3,7 +3,7 @@ use crate::{
     ver1_46, Scenario,
 };
 
-static effect_type_names: [&str; _] = ["AI Script Goal", "Play Sound", "Create Object"];
+//static effect_type_names: [&str; 3] = ["AI Script Goal", "Play Sound", "Create Object"];
 
 pub struct EffectTweak {}
 
