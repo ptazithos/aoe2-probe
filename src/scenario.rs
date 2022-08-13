@@ -54,7 +54,7 @@ impl Scenario {
                 let header = TokenBuilder::create_from_template(
                     &ver1_46::FileHeader::template(),
                     &mut source,
-                );
+                )?;
 
                 let mut uncompressed = header.to_le_vec();
                 let content = decompress_to_vec(&source.get_rest_vec()).unwrap();
@@ -65,7 +65,7 @@ impl Scenario {
                     versio: TokenBuilder::create_from_template(
                         &ver1_46::Versio::template(),
                         &mut source,
-                    ),
+                    )?,
                     version,
                 })
             }
@@ -73,7 +73,7 @@ impl Scenario {
                 let header = TokenBuilder::create_from_template(
                     &ver1_46::FileHeader::template(),
                     &mut source,
-                );
+                )?;
 
                 let mut uncompressed = header.to_le_vec();
                 let content = decompress_to_vec(&source.get_rest_vec()).unwrap();
@@ -84,7 +84,7 @@ impl Scenario {
                     versio: TokenBuilder::create_from_template(
                         &ver1_47::Versio::template(),
                         &mut source,
-                    ),
+                    )?,
                     version,
                 })
             }

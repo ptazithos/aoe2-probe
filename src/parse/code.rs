@@ -30,69 +30,71 @@ impl Encode for Vec<Token> {
 }
 
 pub trait Decode {
-    fn from_le_vec(source: &mut Source) -> Self;
+    fn from_le_vec(source: &mut Source) -> Result<Self, String>
+    where
+        Self: Sized;
 }
 
 impl Decode for u8 {
-    fn from_le_vec(source: &mut Source) -> Self {
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
         let mut temp: [u8; BYTE_LEN_FOR_8] = [0; BYTE_LEN_FOR_8];
-        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_8)[..]);
-        u8::from_le_bytes(temp)
+        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_8)?[..]);
+        Ok(u8::from_le_bytes(temp))
     }
 }
 
 impl Decode for u16 {
-    fn from_le_vec(source: &mut Source) -> Self {
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
         let mut temp: [u8; BYTE_LEN_FOR_16] = [0; BYTE_LEN_FOR_16];
-        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_16)[..]);
-        u16::from_le_bytes(temp)
+        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_16)?[..]);
+        Ok(u16::from_le_bytes(temp))
     }
 }
 
 impl Decode for u32 {
-    fn from_le_vec(source: &mut Source) -> Self {
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
         let mut temp: [u8; BYTE_LEN_FOR_32] = [0; BYTE_LEN_FOR_32];
-        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_32)[..]);
-        u32::from_le_bytes(temp)
+        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_32)?[..]);
+        Ok(u32::from_le_bytes(temp))
     }
 }
 
 impl Decode for i8 {
-    fn from_le_vec(source: &mut Source) -> Self {
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
         let mut temp: [u8; BYTE_LEN_FOR_8] = [0; BYTE_LEN_FOR_8];
-        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_8)[..]);
-        i8::from_le_bytes(temp)
+        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_8)?[..]);
+        Ok(i8::from_le_bytes(temp))
     }
 }
 
 impl Decode for i16 {
-    fn from_le_vec(source: &mut Source) -> Self {
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
         let mut temp: [u8; BYTE_LEN_FOR_16] = [0; BYTE_LEN_FOR_16];
-        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_16)[..]);
-        i16::from_le_bytes(temp)
+        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_16)?[..]);
+        Ok(i16::from_le_bytes(temp))
     }
 }
 
 impl Decode for i32 {
-    fn from_le_vec(source: &mut Source) -> Self {
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
         let mut temp: [u8; BYTE_LEN_FOR_32] = [0; BYTE_LEN_FOR_32];
-        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_32)[..]);
-        i32::from_le_bytes(temp)
+        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_32)?[..]);
+        Ok(i32::from_le_bytes(temp))
     }
 }
 
 impl Decode for f32 {
-    fn from_le_vec(source: &mut Source) -> Self {
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
         let mut temp: [u8; BYTE_LEN_FOR_32] = [0; BYTE_LEN_FOR_32];
-        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_32)[..]);
-        f32::from_le_bytes(temp)
+        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_32)?[..]);
+        Ok(f32::from_le_bytes(temp))
     }
 }
 
 impl Decode for f64 {
-    fn from_le_vec(source: &mut Source) -> Self {
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
         let mut temp: [u8; BYTE_LEN_FOR_64] = [0; BYTE_LEN_FOR_64];
-        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_64)[..]);
-        f64::from_le_bytes(temp)
+        temp.copy_from_slice(&source.get_vec(BYTE_LEN_FOR_64)?[..]);
+        Ok(f64::from_le_bytes(temp))
     }
 }

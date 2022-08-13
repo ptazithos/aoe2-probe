@@ -80,20 +80,20 @@ where
 }
 
 impl Decode for DynString<u16> {
-    fn from_le_vec(source: &mut Source) -> Self {
-        let capacity = u16::from_le_vec(source);
-        let raw = String::from_utf8_lossy(&source.get_vec(capacity as usize)[..]).to_string();
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
+        let capacity = u16::from_le_vec(source)?;
+        let raw = String::from_utf8_lossy(&source.get_vec(capacity as usize)?[..]).to_string();
 
-        DynString::with_capacity(capacity, &raw)
+        Ok(DynString::with_capacity(capacity, &raw))
     }
 }
 
 impl Decode for DynString<u32> {
-    fn from_le_vec(source: &mut Source) -> Self {
-        let capacity = u32::from_le_vec(source);
-        let raw = String::from_utf8_lossy(&source.get_vec(capacity as usize)[..]).to_string();
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
+        let capacity = u32::from_le_vec(source)?;
+        let raw = String::from_utf8_lossy(&source.get_vec(capacity as usize)?[..]).to_string();
 
-        DynString::with_capacity(capacity, &raw)
+        Ok(DynString::with_capacity(capacity, &raw))
     }
 }
 
@@ -150,10 +150,10 @@ impl C4 {
 }
 
 impl Decode for C4 {
-    fn from_le_vec(source: &mut Source) -> Self {
-        let raw = String::from_utf8_lossy(&source.get_vec(4_usize)[..]).to_string();
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
+        let raw = String::from_utf8_lossy(&source.get_vec(4_usize)?[..]).to_string();
 
-        C4::new(&raw)
+        Ok(C4::new(&raw))
     }
 }
 
@@ -197,9 +197,9 @@ impl C256 {
 }
 
 impl Decode for C256 {
-    fn from_le_vec(source: &mut Source) -> Self {
-        let raw = String::from_utf8_lossy(&source.get_vec(256_usize)[..]).to_string();
-        C256::new(&raw)
+    fn from_le_vec(source: &mut Source) -> Result<Self, String> {
+        let raw = String::from_utf8_lossy(&source.get_vec(256_usize)?[..]).to_string();
+        Ok(C256::new(&raw))
     }
 }
 
