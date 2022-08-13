@@ -30,6 +30,9 @@ impl EffectTweak {
                                     effect.get_by_path(path).try_str32().content()
                                 )
                             }
+                            "selected_object_ids" => {
+                                format!("{}: {:?}", path, effect.get_by_path(path).try_vec())
+                            }
                             _ => {
                                 format!("{}: {:?}", path, effect.get_by_path(path).try_i32())
                             }
