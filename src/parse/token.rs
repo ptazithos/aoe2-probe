@@ -144,14 +144,14 @@ impl Token {
     pub fn try_i32(&self) -> &i32 {
         match self {
             Token::Int32(value) => value,
-            _ => panic!("Not a u32 element!"),
+            _ => panic!("Not a i32 element!"),
         }
     }
 
     pub fn try_mut_i32(&mut self) -> &mut i32 {
         match self {
             Token::Int32(value) => value,
-            _ => panic!("Not a u32 element!"),
+            _ => panic!("Not a i32 element!"),
         }
     }
 
