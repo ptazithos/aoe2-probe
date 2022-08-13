@@ -21,7 +21,7 @@ Under the directory **./examples/**, you can find several simple showcases.
 use aoe2_probe::scenario::Scenario;
 
 //Reading scenario content from the .aoe2scenario file
-let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
 //saving content to a new .aoe2scenario file
 scenario.to_file("./resources/temp.aoe2scenario");
 ```
@@ -31,7 +31,7 @@ scenario.to_file("./resources/temp.aoe2scenario");
 use aoe2_probe::scenario::Scenario;
 
 //versio's structure definition can be found in the folder /src/prebuilt/ver1_46/versio.rs
-let mut scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+let mut scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
 
 let author = scenario.versio.get_by_path_mut("/file_header/creator_name");
 //Update the creator name.
@@ -54,7 +54,7 @@ root.from_le_vec();
 
 **Serialize/Deserialize to any formats that serde support:**
 ```rust
-let scenario = Scenario::from_file("./resources/chapter_3.aoe2scenario");
+let scenario = Scenario::from_file("./resources/chapter_3.aoe2scenario").unwrap();
 let json = serde_json::to_string(&scenario.versio).unwrap();
 println!("{}", json);
 ```
@@ -65,7 +65,7 @@ cargo run --example read_write
 ```
 Every member of **versio** and itself implements fmt::Debug trait. Print them if you want to know more.
 ```rust
-let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario");
+let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
 println!("{:?}", &scenario.versio())
 ```
 More detailed information can be found in [Docs](https://docs.rs/aoe2-probe/latest/aoe2_probe/).
