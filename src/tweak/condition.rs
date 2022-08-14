@@ -38,7 +38,7 @@ impl ConditionTweak {
 
                     Ok((name, attrs.join(" ")))
                 } else {
-                    Err("Unknown Condition!")
+                    Ok(("Unknown Condition!".to_string(), "".to_string()))
                 }
             }
             _ => Err("Incompatible version!"),

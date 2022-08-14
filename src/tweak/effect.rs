@@ -22,26 +22,29 @@ impl EffectTweak {
                     let attrs: Vec<String> = scheme
                         .attrs
                         .iter()
-                        .map(|&path| match path {
-                            "message" | "sound_name" => {
-                                format!(
-                                    "{}: {:?}",
-                                    path,
-                                    effect.get_by_path(path).try_str32().content()
-                                )
-                            }
-                            "selected_object_ids" => {
-                                format!("{}: {:?}", path, effect.get_by_path(path).try_vec())
-                            }
-                            _ => {
-                                format!("{}: {:?}", path, effect.get_by_path(path).try_i32())
+                        .map(|&path| {
+                            println!("attr: {}", path);
+                            match path {
+                                "message" | "sound_name" => {
+                                    format!(
+                                        "{}: {:?}",
+                                        path,
+                                        effect.get_by_path(path).try_str32().content()
+                                    )
+                                }
+                                "selected_object_ids" => {
+                                    format!("{}: {:?}", path, effect.get_by_path(path).try_vec())
+                                }
+                                _ => {
+                                    format!("{}: {:?}", path, effect.get_by_path(path).try_i32())
+                                }
                             }
                         })
                         .collect();
 
                     Ok((name, attrs.join(" ")))
                 } else {
-                    Err("Unknown Effect!")
+                    Ok(("Unknown Effect!".to_string(), "".to_string()))
                 }
             }
             _ => Err("Incompatible version!"),
