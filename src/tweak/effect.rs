@@ -1,6 +1,6 @@
 use crate::{
     parse::{Censor, Token},
-    prebuilt::EFFECT_SCHEME,
+    prebuilt::{EffectConfig, EFFECT_SCHEME},
     ver1_46, Scenario,
 };
 
@@ -42,6 +42,24 @@ impl EffectTweak {
                     Ok((name, attrs.join(" ")))
                 } else {
                     Err("Unknown Effect!")
+                }
+            }
+            _ => Err("Incompatible version!"),
+        }
+    }
+
+    pub fn scheme(version: &str, effect: &Token) -> Result<&'static EffectConfig, &'static str> {
+        match version {
+            "1.46" | "1.47" => {
+                Self::is_effect(effect, version)?;
+
+                let type_id = *effect.get_by_path("/effect_type").try_i32();
+                if type_id >= 0 && type_id < EFFECT_SCHEME.len() as i32 {
+                    let scheme = &EFFECT_SCHEME[type_id as usize];
+
+                    return Ok(scheme);
+                } else {
+                    return Err("Unknown Effect!");
                 }
             }
             _ => Err("Incompatible version!"),
