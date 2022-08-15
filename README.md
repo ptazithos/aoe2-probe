@@ -18,12 +18,12 @@ Under the directory **./examples/**, you can find several simple showcases.
 
 **Import and export files:**
 ```rust
-use aoe2_probe::scenario::Scenario;
+use aoe2_probe::scenario::{Scenario, ExportFormat};
 
 //Reading scenario content from the .aoe2scenario file
 let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
 //saving content to a new .aoe2scenario file
-scenario.to_file("./resources/temp.aoe2scenario");
+scenario.to_file("./resources/temp.aoe2scenario", ExportFormat::AoE2Scenario);
 ```
 
 **Update attributes:**

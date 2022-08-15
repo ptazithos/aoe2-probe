@@ -1,4 +1,4 @@
-use aoe2_probe::{ver1_46::Trigger, Scenario, TriggersTweak};
+use aoe2_probe::{ver1_46::Trigger, ExportFormat, Scenario, TriggersTweak};
 
 fn main() {
     let mut scenario = Scenario::from_file("./resources/disorder_2.aoe2scenario").unwrap();
@@ -7,5 +7,7 @@ fn main() {
 
     //TriggersTweak::sort_by_display_order(&mut scenario).unwrap();
 
-    scenario.to_file("./resources/temp.aoe2scenario");
+    scenario
+        .to_file("./resources/temp.aoe2scenario", ExportFormat::AoE2Scenario)
+        .unwrap();
 }

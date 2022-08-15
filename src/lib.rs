@@ -3,11 +3,11 @@
 //! # Examples
 //!
 //! ```
-//! use aoe2_probe::Scenario;
+//! use aoe2_probe::{Scenario, ExportFormat};
 //!
 //! let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
 //! println!("{:?}", &scenario.versio);
-//! scenario.to_file("./resources/temp.aoe2scenario");
+//! scenario.to_file("./resources/temp.aoe2scenario", ExportFormat::AoE2Scenario);
 //!
 //! ```
 
@@ -21,5 +21,5 @@ pub mod utils;
 pub use io::Source;
 pub use prebuilt::ver1_46;
 pub use prebuilt::ver1_47;
-pub use scenario::Scenario;
+pub use scenario::{ExportFormat, Scenario};
 pub use tweak::*;

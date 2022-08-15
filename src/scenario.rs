@@ -118,7 +118,7 @@ impl Scenario {
     /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
     /// let buffer = source_scenario.to_le_export_vec();
     /// ```
-    pub fn to_le_export_vec(self) -> Vec<u8> {
+    pub fn to_le_export_vec(&self) -> Vec<u8> {
         let file_header = &self.versio.try_map()["file_header"];
         let mut content = file_header.to_le_vec();
         let header_size = content.len();
@@ -136,16 +136,23 @@ impl Scenario {
     /// # Examples
     ///
     /// ```
-    /// use aoe2_probe::Scenario;
+    /// use aoe2_probe::{Scenario, ExportFormat};
     /// let source_scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
-    /// let buffer = source_scenario.to_file("./resources/temp.aoe2scenario");
+    /// let buffer = source_scenario.to_file("./resources/temp.aoe2scenario", ExportFormat::AoE2Scenario);
     /// ```
-    pub fn to_file(self, file_path: &str) {
+    pub fn to_file(&self, file_path: &str, format: ExportFormat) -> Result<(), String> {
+        match format {
+            ExportFormat::AoE2Scenario => self.to_aoe2scenario(file_path),
+            ExportFormat::JSON => self.to_json_file(file_path),
+        }
+    }
+
+    pub fn to_aoe2scenario(&self, file_path: &str) -> Result<(), String> {
         let buffer = self.to_le_export_vec();
 
         let path = std::path::Path::new(file_path);
-        let prefix = path.parent().unwrap();
-        std::fs::create_dir_all(prefix).unwrap();
+        let prefix = path.parent().expect("Fail to get parent path!");
+        std::fs::create_dir_all(prefix).expect("Fail to create directory!");
 
         let mut file = OpenOptions::new()
             .create(true)
@@ -153,7 +160,26 @@ impl Scenario {
             .open(file_path)
             .unwrap();
 
-        file.write_all(&buffer).unwrap();
+        file.write_all(&buffer).expect("Fail to write content!");
+        return Ok(());
+    }
+
+    pub fn to_json_file(&self, file_path: &str) -> Result<(), String> {
+        let buffer = serde_json::to_string(&self.versio).expect("Fail to convert to json format");
+
+        let path = std::path::Path::new(file_path);
+        let prefix = path.parent().expect("Fail to get parent path!");
+        std::fs::create_dir_all(prefix).expect("Fail to create directory!");
+
+        let mut file = OpenOptions::new()
+            .create(true)
+            .write(true)
+            .open(file_path)
+            .unwrap();
+
+        file.write_all(buffer.as_bytes())
+            .expect("Fail to write content!");
+        return Ok(());
     }
 
     pub fn version(&self) -> &str {
@@ -163,4 +189,10 @@ impl Scenario {
     fn get_scenario_version(buffer: &[u8]) -> String {
         std::str::from_utf8(&buffer[0..4]).unwrap().to_string()
     }
+}
+
+#[derive(PartialEq)]
+pub enum ExportFormat {
+    AoE2Scenario,
+    JSON,
 }
