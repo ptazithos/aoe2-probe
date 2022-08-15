@@ -11,7 +11,8 @@ impl Effect {
         root.push_back("effect_type", 0_i32);
         root.push_back("static_value_46", 53_i32);
         root.push_back("ai_script_goal", -1_i32);
-        root.push_back("quantity", -1_i32);
+        root.push_back("quantity", -1_i16);
+        root.push_back("class", -1_i16);
         root.push_back("tribute_list", -1_i32);
         root.push_back("diplomacy", -1_i32);
         root.push_back("number_of_units_selected", -1_i32);

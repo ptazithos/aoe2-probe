@@ -253,8 +253,8 @@ lazy_static! {
         mapping.push(EffectConfig::new(
             "CHANGE_OBJECT_ATTACK",
             vec![
-                "armour_attack_quantity",
-                "armour_attack_class",
+                "quantity",
+                "class",
                 "object_list_unit_id",
                 "source_player",
                 "area_x1",
@@ -301,8 +301,8 @@ lazy_static! {
         mapping.push(EffectConfig::new(
             "CHANGE_OBJECT_ARMOR",
             vec![
-                "armour_attack_quantity",
-                "armour_attack_class",
+                "quantity",
+                "class",
                 "object_list_unit_id",
                 "source_player",
                 "area_x1",
