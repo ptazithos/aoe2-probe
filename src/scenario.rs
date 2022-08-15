@@ -191,7 +191,7 @@ impl Scenario {
     }
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone)]
 pub enum ExportFormat {
     AoE2Scenario,
     JSON,
