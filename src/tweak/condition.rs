@@ -1,6 +1,6 @@
 use crate::{
     parse::{Censor, Token},
-    prebuilt::CONDITION_SCHEME,
+    prebuilt::{ConditionConfig, CONDITION_SCHEME},
     ver1_46, Scenario,
 };
 
@@ -39,6 +39,27 @@ impl ConditionTweak {
                     Ok((name, attrs.join(" ")))
                 } else {
                     Ok(("Unknown Condition!".to_string(), "".to_string()))
+                }
+            }
+            _ => Err("Incompatible version!"),
+        }
+    }
+
+    pub fn scheme(version: &str, condition: &Token) -> Result<ConditionConfig, &'static str> {
+        match version {
+            "1.46" | "1.47" => {
+                Self::is_condition(condition, version)?;
+
+                let type_id = *condition.get_by_path("/condition_type").try_i32();
+                if CONDITION_SCHEME.contains_key(&type_id) {
+                    let scheme = CONDITION_SCHEME[&type_id].clone();
+
+                    return Ok(scheme);
+                } else {
+                    return Ok(ConditionConfig {
+                        name: "Unknown",
+                        attrs: vec![],
+                    });
                 }
             }
             _ => Err("Incompatible version!"),

@@ -1,6 +1,7 @@
 use lazy_static::lazy_static;
 use linked_hash_map::LinkedHashMap;
 
+#[derive(Clone)]
 pub struct ConditionConfig {
     pub name: &'static str,
     pub attrs: Vec<&'static str>,
