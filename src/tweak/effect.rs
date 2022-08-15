@@ -22,25 +22,22 @@ impl EffectTweak {
                     let attrs: Vec<String> = scheme
                         .attrs
                         .iter()
-                        .map(|&path| {
-                            println!("attr: {}", path);
-                            match path {
-                                "message" | "sound_name" => {
-                                    format!(
-                                        "{}: {:?}",
-                                        path,
-                                        effect.get_by_path(path).try_str32().content()
-                                    )
-                                }
-                                "class" | "quantity" => {
-                                    format!("{}: {:?}", path, effect.get_by_path(path).try_i16())
-                                }
-                                "selected_object_ids" => {
-                                    format!("{}: {:?}", path, effect.get_by_path(path).try_vec())
-                                }
-                                _ => {
-                                    format!("{}: {:?}", path, effect.get_by_path(path).try_i32())
-                                }
+                        .map(|&path| match path {
+                            "message" | "sound_name" => {
+                                format!(
+                                    "{}: {:?}",
+                                    path,
+                                    effect.get_by_path(path).try_str32().content()
+                                )
+                            }
+                            "class" | "quantity" => {
+                                format!("{}: {:?}", path, effect.get_by_path(path).try_i16())
+                            }
+                            "selected_object_ids" => {
+                                format!("{}: {:?}", path, effect.get_by_path(path).try_vec())
+                            }
+                            _ => {
+                                format!("{}: {:?}", path, effect.get_by_path(path).try_i32())
                             }
                         })
                         .collect();
