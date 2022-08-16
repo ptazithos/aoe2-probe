@@ -511,6 +511,7 @@ lazy_static! {
         mapping.push(EffectConfig::new(
             "MODIFY_ATTRIBUTE",
             vec![
+                "class",
                 "quantity",
                 "object_list_unit_id",
                 "source_player",
