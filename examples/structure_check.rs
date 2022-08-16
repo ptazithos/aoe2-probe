@@ -1,4 +1,4 @@
-use aoe2_probe::{parse::Censor, ver1_46::Versio, Scenario};
+use aoe2_probe::{parse::Censor, prebuilt::ver1_46::Versio, Scenario};
 
 fn main() {
     let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();

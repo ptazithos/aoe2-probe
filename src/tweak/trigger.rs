@@ -1,6 +1,6 @@
 use crate::{
     parse::{Censor, Token},
-    ver1_46,
+    prebuilt::ver1_46,
 };
 
 pub struct TriggerTweak {}

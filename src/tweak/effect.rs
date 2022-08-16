@@ -1,7 +1,7 @@
 use crate::{
     parse::{Censor, Token},
-    prebuilt::{EffectConfig, EFFECT_SCHEME},
-    ver1_46, Scenario,
+    prebuilt::{ver1_46, EffectConfig, EFFECT_SCHEME},
+    AttrTweak, Scenario,
 };
 
 pub struct EffectTweak;
@@ -11,9 +11,10 @@ impl EffectTweak {
         scenario: &Scenario,
         effect: &Token,
     ) -> Result<(String, String), &'static str> {
-        match scenario.version() {
+        let version = scenario.version();
+        match version {
             "1.46" | "1.47" => {
-                Self::is_effect(effect, scenario.version())?;
+                Self::is_effect(effect, version)?;
 
                 let type_id = *effect.get_by_path("/effect_type").try_i32();
                 if type_id >= 0 && type_id < EFFECT_SCHEME.len() as i32 {
@@ -25,19 +26,24 @@ impl EffectTweak {
                         .map(|&path| match path {
                             "message" | "sound_name" => {
                                 format!(
-                                    "{}: {:?}",
+                                    "{}: {}",
                                     path,
                                     effect.get_by_path(path).try_str32().content()
                                 )
                             }
                             "class" | "quantity" => {
-                                format!("{}: {:?}", path, effect.get_by_path(path).try_i16())
+                                format!("{}: {}", path, effect.get_by_path(path).try_i16())
                             }
                             "selected_object_ids" => {
                                 format!("{}: {:?}", path, effect.get_by_path(path).try_vec())
                             }
+                            "object_attributes" => {
+                                let attr_id = effect.get_by_path(path).try_i32();
+                                let content = AttrTweak::translate(attr_id, version).unwrap();
+                                format!("{}: {}", path, content)
+                            }
                             _ => {
-                                format!("{}: {:?}", path, effect.get_by_path(path).try_i32())
+                                format!("{}: {}", path, effect.get_by_path(path).try_i32())
                             }
                         })
                         .collect();

@@ -1,4 +1,4 @@
-use aoe2_probe::{ver1_46::Trigger, ExportFormat, Scenario, TriggersTweak};
+use aoe2_probe::{prebuilt::ver1_46::Trigger, ExportFormat, Scenario, TriggersTweak};
 
 fn main() {
     let mut scenario = Scenario::from_file("./resources/disorder_2.aoe2scenario").unwrap();

@@ -1,7 +1,7 @@
 use crate::{
     parse::{Censor, Token},
-    prebuilt::{ConditionConfig, CONDITION_SCHEME},
-    ver1_46, Scenario,
+    prebuilt::{ver1_46, ConditionConfig, CONDITION_SCHEME},
+    Scenario,
 };
 
 pub struct ConditionTweak;

@@ -13,13 +13,11 @@
 
 pub mod io;
 pub mod parse;
-mod prebuilt;
+pub mod prebuilt;
 mod scenario;
 mod tweak;
 
 pub mod utils;
 pub use io::Source;
-pub use prebuilt::ver1_46;
-pub use prebuilt::ver1_47;
 pub use scenario::{ExportFormat, Scenario};
 pub use tweak::*;
