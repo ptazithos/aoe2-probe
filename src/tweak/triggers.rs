@@ -11,7 +11,7 @@ impl TriggersTweak {
     ///
     /// ```
     /// use aoe2_probe::{Scenario, TriggersTweak};
-    /// use aoe2_probe::ver1_46::Trigger;
+    /// use aoe2_probe::prebuilt::ver1_46::Trigger;
     ///
     /// let mut scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
     /// let trigger = Trigger::default();
@@ -109,7 +109,7 @@ impl TriggersTweak {
     ///
     /// ```
     /// use aoe2_probe::{Scenario, TriggersTweak};
-    /// use aoe2_probe::ver1_46::Trigger;
+    /// use aoe2_probe::prebuilt::ver1_46::Trigger;
     ///
     /// let mut scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
     ///
