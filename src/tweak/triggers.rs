@@ -42,7 +42,7 @@ impl TriggersTweak {
                     .try_u32();
                 Self::set_trigger_count(scenario, &version, *trigger_count + 1).unwrap();
 
-                return Ok(());
+                Ok(())
             }
             _ => Err("Incompatible version!".to_string()),
         }
@@ -97,7 +97,7 @@ impl TriggersTweak {
                     .try_u32();
                 Self::set_trigger_count(scenario, &version, *trigger_count + 1)?;
 
-                return Ok(());
+                Ok(())
             }
             _ => Err("Incompatible version!".to_string()),
         }
@@ -163,7 +163,7 @@ impl TriggersTweak {
                     .update("trigger_display_order_array", order)
                     .unwrap();
 
-                return Ok(());
+                Ok(())
             }
             _ => Err("Incompatible version!".to_string()),
         }
@@ -189,7 +189,7 @@ impl TriggersTweak {
                     .get_by_path_mut("/triggers/number_of_triggers")
                     .try_mut_u32();
                 *number_of_triggers = count;
-                return Ok(());
+                Ok(())
             }
             _ => Err("Incompatible version!".to_string()),
         }

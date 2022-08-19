@@ -29,46 +29,7 @@ impl TokenBuilder {
                     let mut template = token.clone();
                     if patches.contains_key(key) {
                         let patch = &patches[key];
-                        match patch.dep_type {
-                            crate::utils::map::DepType::Exist => {
-                                let flag = patch
-                                    .source
-                                    .iter()
-                                    .map(|key| mock[key].try_compatible_u64() > 0)
-                                    .fold(true, |sum, val| sum & val);
-
-                                if !flag {
-                                    template.try_mut_vec().clear();
-                                }
-                            }
-                            crate::utils::map::DepType::Calculate => match patch.manipulation {
-                                crate::utils::map::Manipulation::Equal => {
-                                    let dep_key = &patch.source[0];
-                                    let num = mock[dep_key].try_compatible_u64();
-                                    let vec = template.try_mut_vec();
-                                    let unit = vec[0].clone();
-                                    vec.clear();
-                                    for _ in 0..num {
-                                        vec.push(unit.clone());
-                                    }
-                                }
-                                crate::utils::map::Manipulation::Multiple => {
-                                    let rkey = &patch.source[0];
-                                    let lkey = &patch.source[1];
-
-                                    let rnum = mock[rkey].try_compatible_u64();
-                                    let lnum = mock[lkey].try_compatible_u64();
-
-                                    let vec = template.try_mut_vec();
-                                    let unit = vec[0].clone();
-                                    vec.clear();
-
-                                    for _ in 0..lnum * rnum {
-                                        vec.push(unit.clone());
-                                    }
-                                }
-                            },
-                        }
+                        patch(&mut mock, &mut template);
                     }
                     mock.push_back(key, TokenBuilder::create_from_template(&template, source)?);
                 }

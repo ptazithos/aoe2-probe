@@ -1,3 +1,5 @@
+use std::rc::Rc;
+
 use crate::{
     parse::Token,
     utils::{map::*, DynString},
@@ -15,23 +17,39 @@ impl Files {
         root.push_back("ai_files_present", 0_u32);
         root.push_back("unknown", vec![0_u8.into(); 4]);
         root.push_back("number_of_ai_files", vec![0_u32.into()]);
+
         root.patches.insert(
             "number_of_ai_files".to_string(),
-            NumericPatch {
-                source: vec!["ai_files_present".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("ai_files_present") {
+                    let count = *map["ai_files_present"].try_u32();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.push_back("ai_files", vec![AI2::template(); 1]);
+
         root.patches.insert(
             "ai_files".to_string(),
-            NumericPatch {
-                source: vec!["number_of_ai_files".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("number_of_ai_files") {
+                    let count = *map["number_of_ai_files"].try_vec()[0].try_u32();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.into()

@@ -161,7 +161,7 @@ impl Scenario {
             .unwrap();
 
         file.write_all(&buffer).expect("Fail to write content!");
-        return Ok(());
+        Ok(())
     }
 
     pub fn to_json_file(&self, file_path: &str) -> Result<(), String> {
@@ -179,7 +179,7 @@ impl Scenario {
 
         file.write_all(buffer.as_bytes())
             .expect("Fail to write content!");
-        return Ok(());
+        Ok(())
     }
 
     pub fn version(&self) -> &str {

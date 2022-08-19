@@ -1,3 +1,5 @@
+use std::rc::Rc;
+
 use crate::{parse::Token, utils::map::*};
 
 pub struct BitmapInfo;
@@ -18,23 +20,38 @@ impl BitmapInfo {
         root.push_back("important_colors", 0_u32);
 
         root.push_back("colors_used", vec![0_u32.into()]);
+
         root.patches.insert(
             "colors_used".to_string(),
-            NumericPatch {
-                source: vec!["number_of_colors_used".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("number_of_colors_used") {
+                    let count = *map["number_of_colors_used"].try_u32();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.push_back("image", vec![0_u8.into()]);
         root.patches.insert(
             "image".to_string(),
-            NumericPatch {
-                source: vec!["width".to_string(), "height".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Multiple,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("width") && map.contains("height") {
+                    let count = *map["width"].try_u32() * *map["height"].try_u32();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.into()

@@ -1,3 +1,5 @@
+use std::rc::Rc;
+
 use crate::{
     parse::Token,
     utils::{map::*, DynString},
@@ -29,13 +31,21 @@ impl PlayerDataFour {
                 3_u8.into(),
             ],
         );
+
         root.patches.insert(
             "diplomacy_for_interaction".to_string(),
-            NumericPatch {
-                source: vec!["player_count_for_diplomacy".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("player_count_for_diplomacy") {
+                    let count = *map["player_count_for_diplomacy"].try_u16();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.push_back(
@@ -59,11 +69,11 @@ impl PlayerDataFour {
         root.push_back("unknown_2", vec![0_u8.into(); 7]);
         root.patches.insert(
             "unknown_2".to_string(),
-            NumericPatch {
-                source: vec!["victory_version".to_string()],
-                dep_type: DepType::Exist,
-                manipulation: Manipulation::Multiple,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if *map["victory_version"].try_f32() != 2.0 {
+                    template.try_mut_vec().clear();
+                }
+            }),
         );
 
         root.push_back(
@@ -73,21 +83,29 @@ impl PlayerDataFour {
 
         root.patches.insert(
             "unknown_structure_grand_theft_empires".to_string(),
-            NumericPatch {
-                source: vec!["unknown_1".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("unknown_1") {
+                    let count = *map["unknown_1"].try_u16();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.push_back("unknown_3", vec![0_u8.into(); 1]);
+
         root.patches.insert(
             "unknown_3".to_string(),
-            NumericPatch {
-                source: vec!["victory_version".to_string()],
-                dep_type: DepType::Exist,
-                manipulation: Manipulation::Multiple,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if *map["victory_version"].try_f32() != 2.0 {
+                    template.try_mut_vec().clear();
+                }
+            }),
         );
 
         root.push_back("unknown_4", vec![0_u8.into(); 7]);
@@ -99,11 +117,18 @@ impl PlayerDataFour {
 
         root.patches.insert(
             "unknown_structure_ww_campaign_2".to_string(),
-            NumericPatch {
-                source: vec!["unknown_3".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("unknown_3") {
+                    let count = *map["unknown_3"].try_vec()[0].try_u8();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.push_back("unknown_5", -1_i32);

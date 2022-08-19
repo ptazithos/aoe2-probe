@@ -1,3 +1,5 @@
+use std::rc::Rc;
+
 use crate::{
     parse::Token,
     utils::{map::*, DynString},
@@ -66,13 +68,21 @@ impl Effect {
         root.push_back("message", DynString::with_capacity(0_u32, ""));
         root.push_back("sound_name", DynString::with_capacity(0_u32, ""));
         root.push_back("selected_object_ids", vec![0_i32.into()]);
+
         root.patches.insert(
             "selected_object_ids".to_string(),
-            NumericPatch {
-                source: vec!["number_of_units_selected".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("number_of_units_selected") {
+                    let count = *map["number_of_units_selected"].try_i32();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.into()

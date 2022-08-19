@@ -2,6 +2,7 @@ use std::{
     collections::HashMap,
     fmt,
     ops::{Index, IndexMut},
+    rc::Rc,
 };
 
 use linked_hash_map::{Iter, LinkedHashMap};
@@ -28,10 +29,12 @@ pub struct NumericPatch {
     pub manipulation: Manipulation,
 }
 
+type Patch = Rc<dyn Fn(&mut PatchedMap, &mut Token)>;
 #[derive(Clone, Default, Serialize, Deserialize)]
 pub struct PatchedMap {
     raw_hashmap: LinkedHashMap<String, Token>,
-    pub patches: HashMap<String, NumericPatch>,
+    #[serde(skip)]
+    pub patches: HashMap<String, Patch>,
 }
 
 impl PatchedMap {

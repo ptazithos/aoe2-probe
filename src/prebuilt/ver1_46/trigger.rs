@@ -1,3 +1,5 @@
+use std::rc::Rc;
+
 use crate::{
     parse::Token,
     utils::{map::*, DynString},
@@ -25,48 +27,81 @@ impl Trigger {
         root.push_back("short_description", DynString::with_capacity(0_u32, ""));
         root.push_back("number_of_effects", 0_i32);
         root.push_back("effect_data", vec![Effect::template(); 1]);
+
         root.patches.insert(
             "effect_data".to_string(),
-            NumericPatch {
-                source: vec!["number_of_effects".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("number_of_effects") {
+                    let count = *map["number_of_effects"].try_i32();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
+
         root.push_back("effect_display_order_array", vec![0_i32.into()]);
+
         root.patches.insert(
             "effect_display_order_array".to_string(),
-            NumericPatch {
-                source: vec!["number_of_effects".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("number_of_effects") {
+                    let count = *map["number_of_effects"].try_i32();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.push_back("number_of_conditions", 0_i32);
         root.push_back("condition_data", vec![Condition::template(); 1]);
+
         root.patches.insert(
             "condition_data".to_string(),
-            NumericPatch {
-                source: vec!["number_of_conditions".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("number_of_conditions") {
+                    let count = *map["number_of_conditions"].try_i32();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.push_back("condition_display_order_array", vec![0_i32.into()]);
+
         root.patches.insert(
             "condition_display_order_array".to_string(),
-            NumericPatch {
-                source: vec!["number_of_conditions".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Equal,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("number_of_conditions") {
+                    let count = *map["number_of_conditions"].try_i32();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.into()
     }
-    
+
     pub fn default() -> Token {
         let mut root = PatchedMap::with_capacity(19);
         root.push_back("enabled", 1_u32);

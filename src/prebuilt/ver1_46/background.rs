@@ -1,3 +1,5 @@
+use std::rc::Rc;
+
 use crate::{
     parse::Token,
     utils::{map::*, DynString},
@@ -17,13 +19,14 @@ impl Background {
         root.push_back("picture_orientation", 0_i16);
 
         root.push_back("bitmap_info", vec![BitmapInfo::template()]);
+
         root.patches.insert(
             "bitmap_info".to_string(),
-            NumericPatch {
-                source: vec!["bitmap_width".to_string(), "bitmap_height".to_string()],
-                dep_type: DepType::Exist,
-                manipulation: Manipulation::Multiple,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if *map["bitmap_width"].try_u32() == 0 || *map["bitmap_height"].try_u32() == 0 {
+                    template.try_mut_vec().clear();
+                }
+            }),
         );
 
         root.into()

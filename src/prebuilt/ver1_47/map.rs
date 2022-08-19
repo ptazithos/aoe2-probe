@@ -1,3 +1,5 @@
+use std::rc::Rc;
+
 use crate::{
     parse::Token,
     utils::{map::*, DynString},
@@ -29,13 +31,21 @@ impl Map {
         root.push_back("map_width", 120_u32);
         root.push_back("map_height", 120_u32);
         root.push_back("terrain_data", vec![Terrain::template(); 1]);
+
         root.patches.insert(
             "terrain_data".to_string(),
-            NumericPatch {
-                source: vec!["map_width".to_string(), "map_height".to_string()],
-                dep_type: DepType::Calculate,
-                manipulation: Manipulation::Multiple,
-            },
+            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+                if map.contains("map_width") && map.contains("map_height") {
+                    let count = *map["map_width"].try_u32() * *map["map_width"].try_u32();
+                    let unit = template.try_vec()[0].clone();
+                    let vec = template.try_mut_vec();
+                    vec.clear();
+
+                    for _ in 0..count {
+                        vec.push(unit.clone());
+                    }
+                }
+            }),
         );
 
         root.into()

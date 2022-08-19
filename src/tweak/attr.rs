@@ -7,9 +7,9 @@ impl AttrTweak {
         match version {
             "1.46" | "1.47" => {
                 if ATTR_MAP.contains_key(object_attr) {
-                    return Ok(&ATTR_MAP[object_attr]);
+                    Ok(ATTR_MAP[object_attr])
                 } else {
-                    return Ok("Unknown");
+                    Ok("Unknown")
                 }
             }
             _ => Err("Incompatible version!"),

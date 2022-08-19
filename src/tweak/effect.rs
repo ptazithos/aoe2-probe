@@ -66,9 +66,9 @@ impl EffectTweak {
                 if type_id >= 0 && type_id < EFFECT_SCHEME.len() as i32 {
                     let scheme = &EFFECT_SCHEME[type_id as usize];
 
-                    return Ok(scheme);
+                    Ok(scheme)
                 } else {
-                    return Err("Unknown Effect!");
+                    Err("Unknown Effect!")
                 }
             }
             _ => Err("Incompatible version!"),

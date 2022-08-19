@@ -54,12 +54,12 @@ impl ConditionTweak {
                 if CONDITION_SCHEME.contains_key(&type_id) {
                     let scheme = CONDITION_SCHEME[&type_id].clone();
 
-                    return Ok(scheme);
+                    Ok(scheme)
                 } else {
-                    return Ok(ConditionConfig {
+                    Ok(ConditionConfig {
                         name: "Unknown",
                         attrs: vec![],
-                    });
+                    })
                 }
             }
             _ => Err("Incompatible version!"),
