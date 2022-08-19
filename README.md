@@ -81,6 +81,8 @@ Currently, only version 1.46 and newer will be firstly supported.
 ## Libraries Used
 * [miniz_oxide](https://github.com/Frommi/miniz_oxide): Pure rust Rust replacement for the miniz deflate/zlib encoder/decoder using no unsafe code.
 * [serde](https://github.com/serde-rs/serde): Serde is a framework for serializing and deserializing Rust data structures efficiently and generically.
+* [linked-hash-map](https://github.com/contain-rs/linked-hash-map): A HashMap wrapper that holds key-value pairs in insertion order.
+* [lazy-static](https://github.com/rust-lang-nursery/lazy-static.rs): A macro for declaring lazily evaluated statics in Rust.
 * [log](https://github.com/rust-lang/log): A lightweight logging facade.
 
 
