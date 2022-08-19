@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{parse::Token, utils::map::*};
 
@@ -16,7 +16,7 @@ impl Triggers {
 
         root.patches.insert(
             "trigger_data".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_triggers") {
                     let count = *map["number_of_triggers"].try_u32();
                     let unit = template.try_vec()[0].clone();
@@ -33,7 +33,7 @@ impl Triggers {
         root.push_back("trigger_display_order_array", vec![0_u32.into()]);
         root.patches.insert(
             "trigger_display_order_array".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_triggers") {
                     let count = *map["number_of_triggers"].try_u32();
                     let unit = template.try_vec()[0].clone();
@@ -53,7 +53,7 @@ impl Triggers {
 
         root.patches.insert(
             "variable_data".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_variables") {
                     let count = *map["number_of_variables"].try_u32();
                     let unit = template.try_vec()[0].clone();

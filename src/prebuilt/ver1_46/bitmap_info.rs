@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{parse::Token, utils::map::*};
 
@@ -23,7 +23,7 @@ impl BitmapInfo {
 
         root.patches.insert(
             "colors_used".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_colors_used") {
                     let count = *map["number_of_colors_used"].try_u32();
                     let unit = template.try_vec()[0].clone();
@@ -40,7 +40,7 @@ impl BitmapInfo {
         root.push_back("image", vec![0_u8.into()]);
         root.patches.insert(
             "image".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("width") && map.contains("height") {
                     let count = *map["width"].try_u32() * *map["height"].try_u32();
                     let unit = template.try_vec()[0].clone();

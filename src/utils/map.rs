@@ -2,7 +2,7 @@ use std::{
     collections::HashMap,
     fmt,
     ops::{Index, IndexMut},
-    rc::Rc,
+    sync::Arc,
 };
 
 use linked_hash_map::{Iter, LinkedHashMap};
@@ -10,26 +10,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::parse::{Encode, Token};
 
-#[derive(Clone, Serialize, Deserialize)]
-pub enum DepType {
-    Exist,
-    Calculate,
-}
-
-#[derive(Clone, Serialize, Deserialize)]
-pub enum Manipulation {
-    Equal,
-    Multiple,
-}
-
-#[derive(Clone, Serialize, Deserialize)]
-pub struct NumericPatch {
-    pub source: Vec<String>,
-    pub dep_type: DepType,
-    pub manipulation: Manipulation,
-}
-
-type Patch = Rc<dyn Fn(&mut PatchedMap, &mut Token)>;
+type Patch = Arc<dyn Fn(&mut PatchedMap, &mut Token)>;
 #[derive(Clone, Default, Serialize, Deserialize)]
 pub struct PatchedMap {
     raw_hashmap: LinkedHashMap<String, Token>,

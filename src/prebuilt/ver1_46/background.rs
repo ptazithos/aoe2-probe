@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{
     parse::Token,
@@ -22,7 +22,7 @@ impl Background {
 
         root.patches.insert(
             "bitmap_info".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if *map["bitmap_width"].try_u32() == 0 || *map["bitmap_height"].try_u32() == 0 {
                     template.try_mut_vec().clear();
                 }

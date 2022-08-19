@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{
     parse::Token,
@@ -34,7 +34,7 @@ impl Map {
 
         root.patches.insert(
             "terrain_data".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("map_width") && map.contains("map_height") {
                     let count = *map["map_width"].try_u32() * *map["map_width"].try_u32();
                     let unit = template.try_vec()[0].clone();

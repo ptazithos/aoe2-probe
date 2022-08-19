@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{
     parse::Token,
@@ -71,7 +71,7 @@ impl Effect {
 
         root.patches.insert(
             "selected_object_ids".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_units_selected") {
                     let count = *map["number_of_units_selected"].try_i32();
                     let unit = template.try_vec()[0].clone();

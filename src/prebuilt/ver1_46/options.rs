@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{parse::Token, utils::map::*};
 
@@ -24,7 +24,7 @@ impl Options {
 
             root.patches.insert(
                 format!("disabled_tech_ids_player_{}", &fix),
-                Rc::new(move |map: &mut PatchedMap, template: &mut Token| {
+                Arc::new(move |map: &mut PatchedMap, template: &mut Token| {
                     let key = format!("number_of_disabled_techs_player_{}", index);
                     if map.contains(&key) {
                         let count = *map[&key].try_u32();
@@ -56,7 +56,7 @@ impl Options {
 
             root.patches.insert(
                 format!("disabled_unit_ids_player_{}", &fix),
-                Rc::new(move |map: &mut PatchedMap, template: &mut Token| {
+                Arc::new(move |map: &mut PatchedMap, template: &mut Token| {
                     let key = format!("number_of_disabled_units_player_{}", &fix);
                     if map.contains(&key) {
                         let count = *map[&key].try_u32();
@@ -91,7 +91,7 @@ impl Options {
 
             root.patches.insert(
                 format!("disabled_building_ids_player_{}", &fix),
-                Rc::new(move |map: &mut PatchedMap, template: &mut Token| {
+                Arc::new(move |map: &mut PatchedMap, template: &mut Token| {
                     let key = format!("number_of_disabled_buildings_player_{}", &fix);
                     if map.contains(&key) {
                         let count = *map[&key].try_u32();

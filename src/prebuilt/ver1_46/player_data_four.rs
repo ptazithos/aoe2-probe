@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{
     parse::Token,
@@ -34,7 +34,7 @@ impl PlayerDataFour {
 
         root.patches.insert(
             "diplomacy_for_interaction".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("player_count_for_diplomacy") {
                     let count = *map["player_count_for_diplomacy"].try_u16();
                     let unit = template.try_vec()[0].clone();
@@ -69,7 +69,7 @@ impl PlayerDataFour {
         root.push_back("unknown_2", vec![0_u8.into(); 7]);
         root.patches.insert(
             "unknown_2".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if *map["victory_version"].try_f32() != 2.0 {
                     template.try_mut_vec().clear();
                 }
@@ -83,7 +83,7 @@ impl PlayerDataFour {
 
         root.patches.insert(
             "unknown_structure_grand_theft_empires".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("unknown_1") {
                     let count = *map["unknown_1"].try_u16();
                     let unit = template.try_vec()[0].clone();
@@ -101,7 +101,7 @@ impl PlayerDataFour {
 
         root.patches.insert(
             "unknown_3".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if *map["victory_version"].try_f32() != 2.0 {
                     template.try_mut_vec().clear();
                 }
@@ -117,7 +117,7 @@ impl PlayerDataFour {
 
         root.patches.insert(
             "unknown_structure_ww_campaign_2".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("unknown_3") {
                     let count = *map["unknown_3"].try_vec()[0].try_u8();
                     let unit = template.try_vec()[0].clone();

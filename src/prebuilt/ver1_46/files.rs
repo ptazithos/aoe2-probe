@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{
     parse::Token,
@@ -20,7 +20,7 @@ impl Files {
 
         root.patches.insert(
             "number_of_ai_files".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("ai_files_present") {
                     let count = *map["ai_files_present"].try_u32();
                     let unit = template.try_vec()[0].clone();
@@ -38,7 +38,7 @@ impl Files {
 
         root.patches.insert(
             "ai_files".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_ai_files") {
                     let count = *map["number_of_ai_files"].try_vec()[0].try_u32();
                     let unit = template.try_vec()[0].clone();

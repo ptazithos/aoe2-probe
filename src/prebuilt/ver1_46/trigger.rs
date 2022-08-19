@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{
     parse::Token,
@@ -30,7 +30,7 @@ impl Trigger {
 
         root.patches.insert(
             "effect_data".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_effects") {
                     let count = *map["number_of_effects"].try_i32();
                     let unit = template.try_vec()[0].clone();
@@ -48,7 +48,7 @@ impl Trigger {
 
         root.patches.insert(
             "effect_display_order_array".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_effects") {
                     let count = *map["number_of_effects"].try_i32();
                     let unit = template.try_vec()[0].clone();
@@ -67,7 +67,7 @@ impl Trigger {
 
         root.patches.insert(
             "condition_data".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_conditions") {
                     let count = *map["number_of_conditions"].try_i32();
                     let unit = template.try_vec()[0].clone();
@@ -85,7 +85,7 @@ impl Trigger {
 
         root.patches.insert(
             "condition_display_order_array".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_conditions") {
                     let count = *map["number_of_conditions"].try_i32();
                     let unit = template.try_vec()[0].clone();

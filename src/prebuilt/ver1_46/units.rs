@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{parse::Token, utils::map::*};
 
@@ -17,7 +17,7 @@ impl Units {
 
         root.patches.insert(
             "players_units".to_string(),
-            Rc::new(|map: &mut PatchedMap, template: &mut Token| {
+            Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_unit_sections") {
                     let count = *map["number_of_unit_sections"].try_u32();
                     let unit = template.try_vec()[0].clone();
