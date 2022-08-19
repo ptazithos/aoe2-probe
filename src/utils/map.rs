@@ -10,7 +10,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::parse::{Encode, Token};
 
-type Patch = Arc<dyn Fn(&mut PatchedMap, &mut Token) + Send>;
+type Patch = Arc<dyn Fn(&mut PatchedMap, &mut Token) + Send + Sync>;
 #[derive(Clone, Default, Serialize, Deserialize)]
 pub struct PatchedMap {
     raw_hashmap: LinkedHashMap<String, Token>,
