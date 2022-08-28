@@ -6,13 +6,12 @@
 This is a rust library for editing aoe2scenario files from AoE2 DE.
 
 ## WARNING
-* aoe2-probe is currently in the very early stage. APIs may change dramatically in following updates. Please don't use this project in serious development.
 * Due to the zlib implementation difference,  the exported file cannot be as same as the imported file, while the content of files is constant(Don't worry, AoE2 DE still understand it).Backing up the original is always recommended.
 
 ## Design Goals
 * Full ability to access every byte in aoe2scenario files.
 * Editing every bit with a reliable correctness check. todo!()
-* Provides constant API compatibility across game versions. todo!()
+* Provides constant API compatibility across game versions.
 
 ## Getting Started
 Under the directory **./examples/**, you can find several simple showcases.

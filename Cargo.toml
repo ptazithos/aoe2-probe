@@ -1,6 +1,6 @@
 [package]
 name = "aoe2-probe"
-version = "0.2.16"
+version = "0.2.17"
 edition = "2021"
 license = "GPL-3.0-or-later"
 description = "A rust library for editing aoe2scenario files from AoE2 DE."
