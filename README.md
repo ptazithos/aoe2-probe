@@ -2,6 +2,7 @@
 [![Crates.io](https://img.shields.io/crates/v/aoe2-probe.svg)](https://crates.io/crates/aoe2-probe)
 ![Crates.io](https://img.shields.io/crates/d/aoe2-probe)
 [![GPL-3.0 licensed](https://img.shields.io/badge/license-GPLv3-brightgreen.svg)](./LICENSE)
+**Moving to WASI right now**
 ## What is aoe2-probe?
 This is a rust library for editing aoe2scenario files from AoE2 DE.
 
