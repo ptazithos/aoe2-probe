@@ -10,23 +10,25 @@ readme = "README.md"
 keywords = ["gamedev", "AoE2DE", "parser"]
 categories = ["game-development", "parsing"]
 
-exclude = [
-    "resources",
-    "examples",
-    ".circleci"
-]
+exclude = ["resources", "examples", ".circleci"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
 
 
 [dependencies]
 log = "0.4.17"
-miniz_oxide ="0.5.3"
-linked-hash-map = {version = "0.5.6", features =["serde_impl"]}
+miniz_oxide = "0.6.2"
+linked-hash-map = { version = "0.5.6", features = ["serde_impl"] }
 serde = { version = "1.0.142", features = ["derive"] }
 lazy_static = "1.4.0"
 serde_json = "1.0.83"
 
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+
 [dev-dependencies]
-env_logger = "0.9.0"
+env_logger = "0.10.0"
 serde_json = "1.0.83"
 
 
@@ -65,5 +67,3 @@ path = "examples/serde_json.rs"
 [[example]]
 name = "triggers"
 path = "examples/triggers.rs"
-
-
