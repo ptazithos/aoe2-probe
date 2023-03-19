@@ -40,13 +40,18 @@ impl Files {
             "ai_files".to_string(),
             Arc::new(|map: &mut PatchedMap, template: &mut Token| {
                 if map.contains("number_of_ai_files") {
-                    let count = *map["number_of_ai_files"].try_vec()[0].try_u32();
-                    let unit = template.try_vec()[0].clone();
-                    let vec = template.try_mut_vec();
-                    vec.clear();
+                    if map["number_of_ai_files"].try_vec().len() > 0 {
+                        let count = *map["number_of_ai_files"].try_vec()[0].try_u32();
+                        let unit = template.try_vec()[0].clone();
+                        let vec = template.try_mut_vec();
+                        vec.clear();
 
-                    for _ in 0..count {
-                        vec.push(unit.clone());
+                        for _ in 0..count {
+                            vec.push(unit.clone());
+                        }
+                    } else {
+                        let vec = template.try_mut_vec();
+                        vec.clear();
                     }
                 }
             }),
