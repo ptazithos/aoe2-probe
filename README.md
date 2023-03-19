@@ -75,7 +75,7 @@ Detailed information can be found in [Docs](https://docs.rs/aoe2-probe/latest/ao
 |Version|Support|
 |----|----|
 |ver.1.46|Support|
-|ver.1.47|Experimental|
+|ver.1.47|Support|
 
 Currently, only version 1.46 and newer will be firstly supported.
 
