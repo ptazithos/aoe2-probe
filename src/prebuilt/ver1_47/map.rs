@@ -20,13 +20,12 @@ impl Map {
         root.push_back("script_name", DynString::with_capacity(0_u16, ""));
         root.push_back("collide_and_correct", 0_u8);
         root.push_back("villager_force_drop", 0_u8);
-        root.push_back("unknown_1", vec![255_u8.into(); 124]);
+        root.push_back("unknown_1", vec![255_u8.into(); 128]);
         root.push_back("lock_coop_alliances", 0_u8);
-        root.push_back("ai_map_type", 0_i32);
         root.push_back("per_player_population_cap", vec![(200_u32).into(); 16]);
-        root.push_back("secondary_game_mode", 0_u32);
         root.push_back("unknown_2", vec![0_u8.into(); 4]);
         root.push_back("unknown_3", vec![0_u8.into(); 4]);
+        root.push_back("unknown_4", vec![0_u8.into(); 4]);
         root.push_back("no_waves_on_shore", 0_i8);
         root.push_back("map_width", 120_u32);
         root.push_back("map_height", 120_u32);
