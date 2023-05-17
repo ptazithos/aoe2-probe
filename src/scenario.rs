@@ -3,7 +3,10 @@ use miniz_oxide::{deflate::compress_to_vec, inflate::decompress_to_vec};
 use crate::{
     io::Source,
     parse::{Encode, Token, TokenBuilder},
-    prebuilt::{ver1_46, ver1_47},
+    prebuilt::{
+        ver1_46::{self, Versio},
+        ver1_47,
+    },
 };
 use std::{
     fs::{self, File, OpenOptions},
@@ -90,6 +93,19 @@ impl Scenario {
             }
             _ => Err("Unsupported version!".to_string()),
         }
+    }
+
+    pub fn from_versio(versio: &Token) -> Result<Self, String> {
+        let version = versio
+            .get_by_path("/file_header/version")
+            .try_c4()
+            .content()
+            .clone();
+
+        return Ok(Scenario {
+            version,
+            versio: versio.clone(),
+        });
     }
 
     /// Encode a scenario struct to little endian vector of uint8
