@@ -1,5 +1,5 @@
 use miniz_oxide::{deflate::compress_to_vec, inflate::decompress_to_vec};
-use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 use crate::{
     io::Source,
@@ -205,8 +205,8 @@ impl Scenario {
     }
 }
 
-#[derive(PartialEq, Clone, Deserialize, Serialize)]
-#[serde(untagged)]
+#[derive(Serialize_repr, Deserialize_repr, PartialEq, Clone, Debug)]
+#[repr(u8)]
 pub enum ExportFormat {
     AoE2Scenario = 0,
     JSON = 1,
