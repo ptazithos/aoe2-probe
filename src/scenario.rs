@@ -206,6 +206,7 @@ impl Scenario {
 }
 
 #[derive(PartialEq, Clone, Deserialize, Serialize)]
+#[serde(untagged)]
 pub enum ExportFormat {
     AoE2Scenario = 0,
     JSON = 1,
