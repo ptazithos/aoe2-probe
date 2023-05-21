@@ -1,12 +1,10 @@
 use miniz_oxide::{deflate::compress_to_vec, inflate::decompress_to_vec};
+use serde::{Deserialize, Serialize};
 
 use crate::{
     io::Source,
     parse::{Encode, Token, TokenBuilder},
-    prebuilt::{
-        ver1_46::{self, Versio},
-        ver1_47,
-    },
+    prebuilt::{ver1_46, ver1_47},
 };
 use std::{
     fs::{self, File, OpenOptions},
@@ -207,8 +205,8 @@ impl Scenario {
     }
 }
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Deserialize, Serialize)]
 pub enum ExportFormat {
-    AoE2Scenario,
-    JSON,
+    AoE2Scenario = 0,
+    JSON = 1,
 }
