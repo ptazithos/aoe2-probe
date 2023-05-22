@@ -72,10 +72,13 @@ println!("{:?}", &scenario.versio())
 Advanced examples can be found in [misc-probe](https://github.com/ptazithos/misc-probe).
 Detailed information can be found in [Docs](https://docs.rs/aoe2-probe/latest/aoe2_probe/).
 ## Supports
-|Version|Support|
+
+|Game version|Supported status|
 |----|----|
-|ver.1.46|Support|
-|ver.1.47|Support|
+|ver.1.46|✓|
+|ver.1.47|✓|
+|ver.1.48|✓|
+|ver.1.49|Not yet|
 
 Currently, only version 1.46 and newer will be firstly supported.
 
