@@ -4,7 +4,7 @@ use serde_repr::{Deserialize_repr, Serialize_repr};
 use crate::{
     io::Source,
     parse::{Encode, Token, TokenBuilder},
-    prebuilt::{ver1_46, ver1_47, ver1_48},
+    prebuilt::{ver1_46, ver1_47, ver1_48, ver1_49},
 };
 use std::{
     fs::{self, File, OpenOptions},
@@ -103,6 +103,25 @@ impl Scenario {
                 Ok(Scenario {
                     versio: TokenBuilder::create_from_template(
                         &ver1_48::Versio::template(),
+                        &mut source,
+                    )?,
+                    version,
+                })
+            }
+            "1.49" => {
+                let header = TokenBuilder::create_from_template(
+                    &ver1_49::FileHeader::template(),
+                    &mut source,
+                )?;
+
+                let mut uncompressed = header.to_le_vec();
+                let content = decompress_to_vec(&source.get_rest_vec()).unwrap();
+                uncompressed.extend(content);
+
+                let mut source = Source::new(uncompressed);
+                Ok(Scenario {
+                    versio: TokenBuilder::create_from_template(
+                        &ver1_49::Versio::template(),
                         &mut source,
                     )?,
                     version,
