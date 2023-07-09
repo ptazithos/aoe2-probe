@@ -13,6 +13,7 @@ use crate::parse::{Encode, Token};
 type Patch = Arc<dyn Fn(&mut PatchedMap, &mut Token) + Send + Sync>;
 #[derive(Clone, Default, Serialize, Deserialize)]
 pub struct PatchedMap {
+    #[serde(flatten)]
     raw_hashmap: LinkedHashMap<String, Token>,
     #[serde(skip)]
     pub patches: HashMap<String, Patch>,

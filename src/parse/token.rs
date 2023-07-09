@@ -5,6 +5,7 @@ use crate::utils::{DynString, PatchedMap, C256, C4};
 use super::code::Encode;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(tag = "type", content = "value")]
 pub enum Token {
     UInt8(u8),
     UInt16(u16),
