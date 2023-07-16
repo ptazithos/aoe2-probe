@@ -69,7 +69,7 @@ Every member of **versio** and itself implements fmt::Debug trait. Print them if
 let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
 println!("{:?}", &scenario.versio())
 ```
-Advanced examples can be found in [misc-probe](https://github.com/ptazithos/misc-probe).
+Advanced examples can be found in [misc-probe](https://github.com/ptazithos/misc-probe), [unfold](https://github.com/ptazithos/unfold).
 Detailed information can be found in [Docs](https://docs.rs/aoe2-probe/latest/aoe2_probe/).
 ## Supports
 
