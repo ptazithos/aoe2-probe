@@ -23,8 +23,11 @@ use aoe2_probe::scenario::{Scenario, ExportFormat};
 
 //Reading scenario content from the .aoe2scenario file
 let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
+
 //saving content to a new .aoe2scenario file
 scenario.to_file("./resources/temp.aoe2scenario", ExportFormat::AoE2Scenario);
+//saving content to a new .json file
+scenario.to_file("./resources/temp.json", ExportFormat::JSON);
 ```
 
 **Update attributes:**
