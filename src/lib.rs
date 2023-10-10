@@ -14,10 +14,20 @@
 pub mod io;
 pub mod parse;
 pub mod prebuilt;
+pub mod utils;
+
 mod scenario;
 mod tweak;
+mod platform;
 
-pub mod utils;
 pub use io::Source;
 pub use scenario::{ExportFormat, Scenario};
 pub use tweak::*;
+
+#[cfg(target_arch="wasm32")]
+use wasm_bindgen::prelude::*;
+
+#[cfg_attr(target_arch="wasm32", wasm_bindgen(start))]
+pub fn init(){
+    platform::bind_console()
+}
