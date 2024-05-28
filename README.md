@@ -4,20 +4,26 @@
 [![GPL-3.0 licensed](https://img.shields.io/badge/license-GPLv3-brightgreen.svg)](./LICENSE)
 
 ## What is aoe2-probe?
+
 This is a rust library for editing aoe2scenario files from AoE2 DE.
 
 ## WARNING
-* Due to the zlib implementation difference,  the exported file cannot be as same as the imported file, while the content of files is constant(Don't worry, AoE2 DE still understand it).Backing up the original is always recommended.
+
+* Due to the zlib implementation difference, the exported file cannot be as same as the imported file, while the content
+  of files is constant(Don't worry, AoE2 DE still understand it).Backing up the original is always recommended.
 
 ## Design Goals
+
 * Full ability to access every byte in aoe2scenario files.
 * Editing every bit with a reliable correctness check. todo!()
 * Provides constant API compatibility across game versions.
 
 ## Getting Started
+
 Under the directory **./examples/**, you can find several simple showcases.
 
 **Import and export files:**
+
 ```rust
 use aoe2_probe::scenario::{Scenario, ExportFormat};
 
@@ -31,6 +37,7 @@ scenario.to_file("./resources/temp.json", ExportFormat::JSON);
 ```
 
 **Update attributes:**
+
 ```rust
 use aoe2_probe::scenario::Scenario;
 
@@ -43,6 +50,7 @@ author.try_mut_str32().set_content("Arian");
 ```
 
 **Customize a structure:**
+
 ```rust
 //Define a score record
 let mut root = PatchedMap::new();
@@ -57,45 +65,59 @@ root.from_le_vec();
 ```
 
 **Serialize/Deserialize to any formats that serde support:**
+
 ```rust
 let scenario = Scenario::from_file("./resources/chapter_3.aoe2scenario").unwrap();
-let json = serde_json::to_string(&scenario.versio).unwrap();
+let json = serde_json::to_string( & scenario.versio).unwrap();
 println!("{}", json);
 ```
 
 Run examples with the following command:
+
 ```shell
 cargo run --example read_write
 ```
+
 Every member of **versio** and itself implements fmt::Debug trait. Print them if you want to know more.
+
 ```rust
 let scenario = Scenario::from_file("./resources/chapter_1.aoe2scenario").unwrap();
 println!("{:?}", &scenario.versio())
 ```
+
 Advanced examples can be found in [misc-probe](https://github.com/ptazithos/misc-probe).
 Detailed information can be found in [Docs](https://docs.rs/aoe2-probe/latest/aoe2_probe/).
+
 ## Supports
 
 | Game version | Supported status |
-| ------------ | ---------------- |
+|--------------|------------------|
 | ver.1.46     | Supported        |
 | ver.1.47     | Supported        |
 | ver.1.48     | Supported        |
 | ver.1.49     | Supported        |
+| ver.1.51     | Experimental     |
+| ver.1.53     | Experimental     |
 
 Currently, only version 1.46 and newer will be firstly supported.
 
 ## Libraries Used
-* [miniz_oxide](https://github.com/Frommi/miniz_oxide): Pure rust Rust replacement for the miniz deflate/zlib encoder/decoder using no unsafe code.
-* [serde](https://github.com/serde-rs/serde): Serde is a framework for serializing and deserializing Rust data structures efficiently and generically.
-* [serde_repr](https://github.com/dtolnay/serde-repr): This crate provides a derive macro to derive Serde's Serialize and Deserialize traits in a way that delegates to the underlying repr of a C-like enum.
-* [linked-hash-map](https://github.com/contain-rs/linked-hash-map): A HashMap wrapper that holds key-value pairs in insertion order.
-* [lazy-static](https://github.com/rust-lang-nursery/lazy-static.rs): A macro for declaring lazily evaluated statics in Rust.
+
+* [miniz_oxide](https://github.com/Frommi/miniz_oxide): Pure rust Rust replacement for the miniz deflate/zlib
+  encoder/decoder using no unsafe code.
+* [serde](https://github.com/serde-rs/serde): Serde is a framework for serializing and deserializing Rust data
+  structures efficiently and generically.
+* [serde_repr](https://github.com/dtolnay/serde-repr): This crate provides a derive macro to derive Serde's Serialize
+  and Deserialize traits in a way that delegates to the underlying repr of a C-like enum.
+* [linked-hash-map](https://github.com/contain-rs/linked-hash-map): A HashMap wrapper that holds key-value pairs in
+  insertion order.
+* [lazy-static](https://github.com/rust-lang-nursery/lazy-static.rs): A macro for declaring lazily evaluated statics in
+  Rust.
 * [log](https://github.com/rust-lang/log): A lightweight logging facade.
 
-
-
 ## Acknowledgment
-This library is inspired by [AoE2ScenarioParser](https://github.com/KSneijders/AoE2ScenarioParser) and [Trigger Craft](https://github.com/MegaDusknoir/AoE2TriggerCraft)
+
+This library is inspired by [AoE2ScenarioParser](https://github.com/KSneijders/AoE2ScenarioParser)
+and [Trigger Craft](https://github.com/MegaDusknoir/AoE2TriggerCraft)
 
 
