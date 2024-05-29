@@ -17,17 +17,17 @@ crate-type = ["cdylib", "rlib"]
 
 
 [dependencies]
-log = "0.4.20"
-miniz_oxide = "0.7.1"
+log = "0.4.21"
+miniz_oxide = "0.7.3"
 linked-hash-map = { version = "0.5.6", features = ["serde_impl"] }
 lazy_static = "1.4.0"
-serde = { version = "1.0.188", features = ["derive"] }
-serde_json = "1.0.106"
-serde_repr = "0.1.16"
+serde = { version = "1.0.203", features = ["derive"] }
+serde_json = "1.0.117"
+serde_repr = "0.1.19"
 
 
 [dev-dependencies]
-env_logger = "0.10.0"
+env_logger = "0.11.3"
 
 
 [[example]]
