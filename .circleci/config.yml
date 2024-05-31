@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   lint-test-build:
     docker:
-      - image: cimg/rust:1.70.0
+      - image: cimg/rust:1.78.0
     steps:
       - checkout
       - restore_cache:
