@@ -1,7 +1,7 @@
 [![CircleCI](https://img.shields.io/circleci/build/github/ptazithos/aoe2-probe/main)](https://dl.circleci.com/status-badge/redirect/gh/ptazithos/aoe2-probe/tree/main)
 [![Crates.io](https://img.shields.io/crates/v/aoe2-probe.svg)](https://crates.io/crates/aoe2-probe)
 ![Crates.io](https://img.shields.io/crates/d/aoe2-probe)
-[![GPL-3.0 licensed](https://img.shields.io/badge/license-GPLv3-brightgreen.svg)](./LICENSE)
+![GitHub License](https://img.shields.io/github/license/ptazithos/aoe2-probe)
 
 ## What is aoe2-probe?
 
